@@ -1,0 +1,203 @@
+# HIV Connect Central NJ - Product Requirements Document
+
+## Project Overview
+HIV Connect Central NJ is a comprehensive web-based resource platform designed to connect individuals with HIV care, testing, treatment, and support services across Middlesex, Somerset, and Hunterdon counties in New Jersey. The website serves as a centralized hub for the Ryan White HIV/AIDS Program network, providing accessible, inclusive, and culturally competent information and service coordination.
+
+## Core Objectives
+
+### Primary Goals
+1. **Centralized Resource Access**: Create a single point of access for all HIV-related services across the three-county region
+2. **Service Coordination**: Improve coordination between Ryan White Parts A-D providers and community partners
+3. **Health Equity**: Eliminate barriers to care through accessible design, multilingual support, and inclusive messaging
+4. **Emergency Support**: Provide immediate access to crisis resources and emergency services
+5. **Community Engagement**: Foster connections between people living with HIV and available support networks
+
+### Target Audiences
+- **Primary**: People living with HIV/AIDS across all demographics
+- **Secondary**: At-risk individuals seeking prevention services (testing, PrEP)
+- **Tertiary**: Family members, caregivers, and support networks
+- **Quaternary**: Healthcare providers and case managers seeking referral resources
+
+## Technical Architecture
+
+### Framework Requirements
+- **Core Framework**: Astro 5.x with TypeScript for optimal performance and SEO
+- **Interactive Components**: React islands for search, mapping, and dynamic features
+- **Styling**: Tailwind CSS with accessibility-first design system
+- **Database**: Supabase for provider directory and content management
+- **Search**: Advanced filtering with Fuse.js or Algolia integration
+- **Maps**: Google Maps API for location services and provider mapping
+- **Performance**: Static site generation with CDN delivery targeting <2.5s LCP
+
+### Data Structure
+- **Provider Schema**: Comprehensive provider data including contact, services, eligibility, hours
+- **Service Taxonomy**: Standardized categorization across medical care, support services, and prevention
+- **Location Data**: GPS coordinates, accessibility features, transportation options
+- **Multilingual Content**: Translation framework supporting English and Spanish initially
+
+## Core Features & Functionality
+
+### 1. Provider Directory & Search
+- **Advanced Search**: Text search across provider names, services, and descriptions
+- **Multi-Filter System**: County, service type, language, insurance, urgency level
+- **Interactive Map**: Real-time provider locations with service-based color coding
+- **Provider Profiles**: Detailed pages with contact, services, hours, accessibility info
+- **Real-time Availability**: Integration with provider systems for appointment availability
+
+### 2. Service Categories
+
+#### HIV Testing & Prevention
+- **Testing Locations**: Comprehensive directory of testing sites with rapid testing options
+- **At-Home Testing**: Information and ordering for home test kits
+- **PrEP Services**: Pre-exposure prophylaxis counseling and medication access
+- **STD Testing**: Co-located sexually transmitted disease testing and treatment
+
+#### HIV Treatment & Medical Care
+- **Treatment Centers**: HIV specialty care and infectious disease providers
+- **Same-Day Initiation**: Providers offering immediate treatment start
+- **Telehealth Options**: Remote care services and virtual consultations
+- **Comprehensive Care**: Dental, vision, mental health, and specialty services
+
+#### Support Services
+- **Case Management**: Personal navigation and care coordination
+- **Mental Health**: Individual and group counseling, trauma-informed care
+- **Housing Assistance**: Emergency housing, rental assistance, transitional programs
+- **Financial Support**: Emergency financial aid, benefits enrollment, insurance help
+- **Transportation**: Medical appointment transportation and travel assistance
+- **Legal Services**: Discrimination, benefits appeals, advance directives
+
+### 3. Emergency & Crisis Support
+- **Crisis Hotlines**: One-click access to 988, HIV/AIDS hotline, local crisis services
+- **Quick Exit**: ESC key functionality for safety in unsafe browsing situations
+- **Emergency Services**: After-hours care, urgent medical needs, crisis intervention
+- **Safety Resources**: Domestic violence, substance abuse, mental health crisis support
+
+### 4. Resource Library
+- **Educational Materials**: HIV basics, treatment information, prevention resources
+- **Downloadable Resources**: Forms, benefit applications, educational handouts
+- **Video Content**: Testimonials, educational videos, provider introductions
+- **Multilingual Resources**: Spanish translations of key materials
+
+### 5. Community Features
+- **Support Groups**: Directory of peer support groups and meeting information
+- **Events Calendar**: Community events, health fairs, educational workshops
+- **Peer Navigation**: Connection to peer navigators and community health workers
+- **Success Stories**: Anonymous testimonials and inspiring community stories
+
+## Design & User Experience Requirements
+
+### Accessibility Standards
+- **WCAG 2.1 AA Compliance**: Full accessibility across all features and content
+- **Screen Reader Support**: Comprehensive ARIA labels and semantic markup
+- **Keyboard Navigation**: Complete site functionality via keyboard only
+- **Visual Accessibility**: High contrast mode, font scaling, color blind support
+- **Cognitive Accessibility**: Simple language, clear navigation, progress indicators
+
+### Inclusive Design Principles
+- **Person-First Language**: Respectful terminology throughout all content
+- **Cultural Competency**: Imagery and messaging inclusive of all communities
+- **Reading Level**: 8th grade maximum reading level for all public-facing content
+- **Language Support**: English and Spanish with framework for additional languages
+- **Mobile-First**: Responsive design optimized for all device types
+
+### Brand & Voice
+- **Empowering**: Focus on strength, resilience, and personal agency
+- **Welcoming**: Inclusive messaging that affirms all identities
+- **Trustworthy**: Professional credibility balanced with warmth
+- **Hopeful**: Emphasize health, wellness, and thriving communities
+- **Accessible**: Clear, jargon-free communication
+
+## Content Strategy
+
+### Key Messaging
+1. **HIV is manageable** - Modern treatment enables full, healthy lives
+2. **You belong here** - All people deserve quality care and respect
+3. **Your privacy matters** - Confidentiality and safety are paramount
+4. **Care is accessible** - Services exist regardless of ability to pay
+5. **Community strength** - Together we support each other's wellbeing
+
+### Content Requirements
+- **Provider Listings**: 20+ comprehensive provider profiles with complete service information
+- **Service Pages**: Detailed information on all major service categories
+- **FAQ Section**: Common questions with inclusive, informative answers
+- **Crisis Resources**: Comprehensive emergency and crisis support information
+- **Educational Content**: HIV basics, treatment information, prevention resources
+
+## Compliance & Security
+
+### Healthcare Compliance
+- **HIPAA Compliance**: All form submissions and user data handling meet healthcare privacy requirements
+- **Confidentiality**: Secure handling of all user inquiries and contact information
+- **Data Retention**: Appropriate policies for healthcare-related information
+
+### Accessibility Compliance
+- **Section 508**: Government accessibility standards compliance
+- **ADA Requirements**: Full compliance with Americans with Disabilities Act
+- **Regular Auditing**: Ongoing accessibility testing and improvement
+
+### Security Requirements
+- **SSL Encryption**: HTTPS throughout entire site
+- **Form Security**: Encrypted form submissions and secure data handling
+- **Privacy Protection**: Clear privacy policies and data usage transparency
+
+## Integration Requirements
+
+### External Systems
+- **Ryan White Database**: Integration with HRSA provider directory
+- **Google Maps**: Location services and directions integration
+- **Crisis Services**: Direct integration with 988 and local crisis lines
+- **EMR Systems**: Future integration for appointment scheduling
+
+### Analytics & Monitoring
+- **Privacy-Focused Analytics**: User behavior tracking without personal identification
+- **Performance Monitoring**: Site speed, uptime, and user experience metrics
+- **Accessibility Monitoring**: Ongoing compliance tracking and reporting
+
+## Geographic Coverage
+
+### Primary Service Area
+- **Middlesex County**: New Brunswick, Perth Amboy, Edison, Woodbridge
+- **Somerset County**: Somerville, Franklin Township, Bridgewater
+- **Hunterdon County**: Flemington, Clinton, Lambertville
+
+### Service Gaps to Address
+- **Somerset County**: Expand provider network beyond current limited coverage
+- **Hunterdon County**: Address severe gap in comprehensive HIV services
+- **Telehealth Integration**: Improve access through virtual care options
+- **Transportation**: Coordinate medical transportation across counties
+
+## Success Metrics
+
+### User Experience
+- **Page Load Speed**: <2.5 seconds Largest Contentful Paint
+- **Accessibility Score**: 100% WCAG 2.1 AA compliance
+- **Mobile Performance**: Optimal experience on all device types
+- **User Satisfaction**: Positive feedback on resource helpfulness
+
+### Service Connection
+- **Provider Engagement**: Increased contact with HIV service providers
+- **Service Utilization**: Higher connection rates to appropriate services
+- **Geographic Reach**: Improved service access across all three counties
+- **Crisis Response**: Effective emergency resource utilization
+
+### Community Impact
+- **Health Outcomes**: Improved linkage to and retention in HIV care
+- **Service Coordination**: Better collaboration between providers
+- **Barrier Reduction**: Decreased obstacles to accessing appropriate care
+- **Community Engagement**: Active participation in support services
+
+## Future Enhancements
+
+### Phase 2 Features
+- **Patient Portal**: Secure login for personalized service tracking
+- **Appointment Integration**: Direct appointment scheduling with providers
+- **Push Notifications**: Service updates and appointment reminders
+- **Advanced Analytics**: Service gap analysis and utilization reporting
+
+### Long-term Vision
+- **Regional Expansion**: Extension to additional New Jersey counties
+- **Provider Portal**: Professional interface for provider network management
+- **API Development**: Integration capabilities for external healthcare systems
+- **AI-Powered Matching**: Intelligent service recommendation based on individual needs
+
+This PRD serves as the comprehensive foundation for developing a world-class HIV resource website that serves the Central New Jersey community with dignity, accessibility, and technical excellence while meeting all industry standards and regulatory requirements.

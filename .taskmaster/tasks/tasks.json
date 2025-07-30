@@ -1,0 +1,281 @@
+{
+  "master": {
+    "tasks": [
+      {
+        "id": 1,
+        "title": "Setup Astro 5.x Project with TypeScript",
+        "description": "Initialize the project using Astro 5.x with TypeScript as the core framework, configure project structure, and set up development environment.",
+        "details": "1. Install Node.js and npm if not already installed\n2. Create a new Astro project: `npm create astro@latest`\n3. Select TypeScript configuration during setup\n4. Configure project structure:\n   - `/src/pages/` - For route-based pages\n   - `/src/components/` - For React islands and UI components\n   - `/src/layouts/` - For page layouts\n   - `/src/styles/` - For global styles\n   - `/src/utils/` - For utility functions\n   - `/public/` - For static assets\n5. Set up Git repository and initial commit\n6. Configure ESLint and Prettier for code quality\n7. Set up CI/CD pipeline for deployment\n8. Configure environment variables for development, staging, and production",
+        "testStrategy": "1. Verify Astro and TypeScript are correctly configured\n2. Run development server and confirm it starts without errors\n3. Test TypeScript compilation\n4. Verify project structure follows best practices\n5. Ensure hot module replacement works correctly\n6. Test build process produces optimized output",
+        "priority": "high",
+        "dependencies": [],
+        "status": "done",
+        "subtasks": []
+      },
+      {
+        "id": 2,
+        "title": "Implement Tailwind CSS with Accessibility-First Design System",
+        "description": "Set up Tailwind CSS and create an accessibility-first design system that meets WCAG 2.1 AA compliance standards.",
+        "details": "1. Install Tailwind CSS: `npm install -D tailwindcss postcss autoprefixer`\n2. Initialize Tailwind config: `npx tailwindcss init -p`\n3. Configure content paths in tailwind.config.js\n4. Create custom theme extending Tailwind defaults:\n   - Define color palette with sufficient contrast ratios\n   - Set up typography scale with accessible font sizes\n   - Configure spacing and layout variables\n5. Create accessibility-focused components:\n   - High contrast mode toggle\n   - Font scaling controls\n   - Focus state indicators\n6. Set up dark mode support\n7. Create utility classes for common accessibility patterns\n8. Implement design tokens for consistent styling\n9. Configure Tailwind plugins for forms and typography",
+        "testStrategy": "1. Validate color contrast ratios meet WCAG 2.1 AA standards\n2. Test with screen readers to ensure proper ARIA support\n3. Verify keyboard navigation works across all components\n4. Test responsive design across multiple device sizes\n5. Validate font scaling and high contrast mode functionality\n6. Run automated accessibility tests using axe or similar tools",
+        "priority": "high",
+        "dependencies": [
+          1
+        ],
+        "status": "done",
+        "subtasks": []
+      },
+      {
+        "id": 3,
+        "title": "Set Up Supabase Database and Provider Schema",
+        "description": "Configure Supabase as the database backend and implement the provider directory schema with comprehensive provider data structure.",
+        "status": "done",
+        "dependencies": [
+          1
+        ],
+        "priority": "high",
+        "details": "1. Create Supabase project\n2. Design and implement database tables:\n   - `providers` table with fields for:\n     - id (primary key)\n     - name\n     - description\n     - contact information (phone, email, website)\n     - address\n     - hours of operation\n     - eligibility requirements\n     - insurance accepted\n     - languages supported\n     - accessibility features\n   - `services` table with fields for:\n     - id (primary key)\n     - name\n     - description\n     - category\n     - urgency level\n   - `provider_services` junction table for many-to-many relationship\n   - `locations` table with GPS coordinates and transportation options\n   - `counties` table for geographic organization\n3. Set up Row Level Security (RLS) policies\n4. Create database indexes for optimized queries\n5. Implement database migrations\n6. Configure Supabase API endpoints\n7. Set up initial seed data for testing",
+        "testStrategy": "1. Verify all tables are created with proper relationships\n2. Test CRUD operations on all tables\n3. Validate data integrity constraints\n4. Test query performance with realistic data volumes\n5. Verify security policies work as expected\n6. Test API endpoints for correct data retrieval\n7. Validate schema against all required provider data points from PRD",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Implement Provider Schema in TypeScript",
+            "description": "Created comprehensive provider data structure in TypeScript with all required fields from the PRD.",
+            "status": "done",
+            "dependencies": [],
+            "details": "Implemented full provider schema in src/types/provider.ts with all required fields: contact info, locations, services, eligibility, languages, accessibility features, etc.",
+            "testStrategy": ""
+          },
+          {
+            "id": 2,
+            "title": "Create Sample Provider Data",
+            "description": "Created static provider data in TypeScript that matches the schema requirements.",
+            "status": "done",
+            "dependencies": [],
+            "details": "Implemented sample provider data in src/data/providers.ts that follows the schema defined in provider.ts.",
+            "testStrategy": ""
+          },
+          {
+            "id": 3,
+            "title": "Migrate to Supabase Database",
+            "description": "Transfer the existing TypeScript schema and data to Supabase database tables.",
+            "status": "done",
+            "dependencies": [],
+            "details": "Use the existing TypeScript schema as a blueprint to create corresponding Supabase tables and migrate the static data to the database.",
+            "testStrategy": ""
+          },
+          {
+            "id": 4,
+            "title": "Set up Supabase Project and Configuration",
+            "description": "Create and configure the Supabase project with proper security settings.",
+            "status": "done",
+            "dependencies": [],
+            "details": "Create Supabase project, configure authentication, and set up Row Level Security (RLS) policies.",
+            "testStrategy": ""
+          },
+          {
+            "id": 5,
+            "title": "Implement Database Indexes and Optimizations",
+            "description": "Create database indexes and optimize query performance.",
+            "status": "done",
+            "dependencies": [],
+            "details": "Identify key query patterns and create appropriate indexes to optimize performance.",
+            "testStrategy": ""
+          },
+          {
+            "id": 6,
+            "title": "Configure Supabase API Endpoints",
+            "description": "Set up and test API endpoints for accessing provider data.",
+            "status": "done",
+            "dependencies": [],
+            "details": "Configure Supabase API endpoints and create client-side functions to interact with the database.",
+            "testStrategy": ""
+          }
+        ]
+      },
+      {
+        "id": 4,
+        "title": "Implement Provider Directory Search and Filtering",
+        "description": "Create advanced search functionality for the provider directory with text search, multi-filter system, and real-time results.",
+        "details": "1. Install and configure Fuse.js for client-side search: `npm install fuse.js`\n2. Create search component with React:\n   - Text input for keyword search\n   - Filter controls for:\n     - County selection (Middlesex, Somerset, Hunterdon)\n     - Service type categories\n     - Language options\n     - Insurance filters\n     - Urgency level selector\n   - Results display with pagination\n3. Implement search logic:\n   - Text search across provider names, services, and descriptions\n   - Multi-filter combination logic\n   - Sorting options (distance, relevance, availability)\n4. Create Supabase queries for filtered data retrieval\n5. Implement debounced search for performance\n6. Add clear filters functionality\n7. Create mobile-friendly search interface\n8. Implement search history and recent searches",
+        "testStrategy": "1. Test search accuracy with various keywords and combinations\n2. Verify all filters work correctly individually and in combination\n3. Test performance with large dataset\n4. Validate mobile responsiveness of search interface\n5. Test keyboard accessibility of search controls\n6. Verify screen reader compatibility\n7. Test edge cases like empty results and partial matches",
+        "priority": "high",
+        "dependencies": [
+          2,
+          3
+        ],
+        "status": "done",
+        "subtasks": []
+      },
+      {
+        "id": 5,
+        "title": "Develop Interactive Map with Google Maps API",
+        "description": "Implement an interactive map showing provider locations with service-based color coding and location details.",
+        "details": "1. Set up Google Maps API integration:\n   - Create Google Cloud project\n   - Enable Maps JavaScript API\n   - Generate API key with appropriate restrictions\n2. Install required packages: `npm install @react-google-maps/api`\n3. Create Map component with React:\n   - Base map centered on Central NJ (Middlesex, Somerset, Hunterdon counties)\n   - Custom markers for provider locations\n   - Service-based color coding system\n   - Info windows with provider details\n   - Zoom and pan controls\n4. Implement map features:\n   - Clustering for dense provider areas\n   - Filter controls linked to main search filters\n   - Current location detection\n   - Directions functionality\n   - Accessibility information display\n5. Optimize for mobile devices\n6. Implement fallback for users without JavaScript\n7. Add print functionality for map views",
+        "testStrategy": "1. Test map loading and rendering across browsers\n2. Verify marker placement accuracy\n3. Test info window content and interactions\n4. Validate filter synchronization with main search\n5. Test directions functionality\n6. Verify mobile responsiveness and touch interactions\n7. Test keyboard accessibility\n8. Validate performance with many markers",
+        "priority": "medium",
+        "dependencies": [
+          3,
+          4
+        ],
+        "status": "done",
+        "subtasks": []
+      },
+      {
+        "id": 6,
+        "title": "Create Provider Profile Pages",
+        "description": "Develop detailed provider profile pages with comprehensive information including contact details, services, hours, and accessibility information.",
+        "details": "1. Design provider profile page template\n2. Create dynamic route generation in Astro for each provider\n3. Implement provider data fetching from Supabase\n4. Develop UI components for profile sections:\n   - Header with provider name and quick contact\n   - Services offered with detailed descriptions\n   - Hours of operation with visual calendar\n   - Contact information section\n   - Location with embedded mini-map\n   - Accessibility features list\n   - Insurance and payment information\n   - Languages supported\n   - Transportation options\n5. Add structured data markup (Schema.org) for SEO\n6. Implement print-friendly version\n7. Create mobile-optimized view\n8. Add share functionality for provider profiles",
+        "testStrategy": "1. Verify all provider data displays correctly\n2. Test dynamic routing for all providers\n3. Validate structured data with Google's Rich Results Test\n4. Test responsive design across device sizes\n5. Verify accessibility of all profile components\n6. Test print functionality\n7. Validate performance metrics (LCP < 2.5s)\n8. Test sharing functionality across platforms",
+        "priority": "high",
+        "dependencies": [
+          3,
+          5
+        ],
+        "status": "pending",
+        "subtasks": []
+      },
+      {
+        "id": 7,
+        "title": "Implement Multilingual Support Framework",
+        "description": "Create a translation framework supporting English and Spanish initially, with the ability to add more languages in the future.",
+        "details": "1. Research and select internationalization library (i18next recommended)\n2. Install required packages: `npm install i18next react-i18next`\n3. Set up translation infrastructure:\n   - Create translation files for English and Spanish\n   - Implement language detection\n   - Create language switcher component\n   - Set up fallback mechanisms\n4. Implement translation process:\n   - Extract text from components and pages\n   - Create translation keys with context\n   - Organize translations by feature area\n5. Develop content workflow for translations\n6. Implement RTL support for future language additions\n7. Create documentation for adding new languages\n8. Set up automated translation status reporting",
+        "testStrategy": "1. Verify all UI elements correctly display in both English and Spanish\n2. Test language switching functionality\n3. Validate special characters and accents display correctly\n4. Test language persistence across sessions\n5. Verify screen reader pronunciation in both languages\n6. Test with native speakers for natural language quality\n7. Validate SEO considerations for multilingual content",
+        "priority": "high",
+        "dependencies": [
+          2
+        ],
+        "status": "pending",
+        "subtasks": []
+      },
+      {
+        "id": 8,
+        "title": "Develop Service Category Pages",
+        "description": "Create comprehensive pages for each service category including HIV Testing & Prevention, Treatment & Medical Care, and Support Services with detailed information.",
+        "details": "1. Design service category page templates\n2. Implement pages for primary service categories:\n   - HIV Testing & Prevention\n     - Testing locations section\n     - At-home testing information\n     - PrEP services details\n     - STD testing resources\n   - HIV Treatment & Medical Care\n     - Treatment centers listing\n     - Same-day initiation providers\n     - Telehealth options\n     - Comprehensive care services\n   - Support Services\n     - Case management resources\n     - Mental health services\n     - Housing assistance programs\n     - Financial support options\n     - Transportation services\n     - Legal services information\n3. Create consistent navigation between service categories\n4. Implement filtering within category pages\n5. Add related resources and cross-linking between services\n6. Ensure all content meets 8th grade reading level requirement\n7. Implement print functionality for service listings",
+        "testStrategy": "1. Verify all service information is accurate and complete\n2. Test navigation between service categories\n3. Validate reading level using readability tools\n4. Test responsive design across devices\n5. Verify accessibility of all service pages\n6. Test print functionality\n7. Validate translations for all service content\n8. Test cross-linking between related services",
+        "priority": "medium",
+        "dependencies": [
+          3,
+          7
+        ],
+        "status": "in-progress",
+        "subtasks": []
+      },
+      {
+        "id": 9,
+        "title": "Implement Emergency & Crisis Support Features",
+        "description": "Develop emergency support features including crisis hotlines, quick exit functionality, and emergency service information.",
+        "details": "1. Create persistent emergency support component:\n   - Design always-visible emergency button\n   - Implement modal with crisis resources\n   - Add one-click access to 988, HIV/AIDS hotline, local crisis services\n2. Implement Quick Exit functionality:\n   - ESC key listener for immediate redirect\n   - Exit button in header\n   - Redirect to neutral website (e.g., weather.com)\n   - Clear browsing history option\n3. Develop emergency services section:\n   - After-hours care listings\n   - Urgent medical needs resources\n   - Crisis intervention services\n4. Create safety resources page:\n   - Domestic violence resources\n   - Substance abuse emergency services\n   - Mental health crisis support\n5. Implement geolocation-based emergency service finder\n6. Add offline access to critical emergency information",
+        "testStrategy": "1. Test ESC key functionality across browsers\n2. Verify crisis hotline links work correctly\n3. Test emergency modal on all device types\n4. Validate accessibility of emergency features\n5. Test geolocation accuracy for emergency services\n6. Verify offline functionality\n7. Test with screen readers and keyboard navigation\n8. Validate performance of emergency features",
+        "priority": "high",
+        "dependencies": [
+          2
+        ],
+        "status": "done",
+        "subtasks": []
+      },
+      {
+        "id": 10,
+        "title": "Create Resource Library and Educational Content",
+        "description": "Develop a comprehensive resource library with educational materials, downloadable resources, video content, and multilingual materials.",
+        "details": "1. Design resource library architecture:\n   - Categorization system for resources\n   - Tagging and metadata structure\n   - Search and filter functionality\n2. Implement resource types:\n   - Educational articles on HIV basics, treatment, prevention\n   - Downloadable PDFs for forms and applications\n   - Video embedding for testimonials and education\n   - Infographics and visual resources\n3. Create content management workflow in Supabase\n4. Implement resource detail pages with:\n   - Resource preview\n   - Download/view options\n   - Related resources\n   - Print functionality\n5. Ensure all content available in English and Spanish\n6. Implement resource favoriting and sharing\n7. Create resource collections for common needs\n8. Add analytics for resource usage tracking",
+        "testStrategy": "1. Test resource upload and management\n2. Verify search and filtering functionality\n3. Test downloads across browsers and devices\n4. Validate video playback functionality\n5. Test multilingual content display\n6. Verify accessibility of all resource types\n7. Test print and sharing features\n8. Validate reading level of educational content",
+        "priority": "medium",
+        "dependencies": [
+          3,
+          7
+        ],
+        "status": "pending",
+        "subtasks": []
+      },
+      {
+        "id": 11,
+        "title": "Implement Community Features",
+        "description": "Develop community engagement features including support group directory, events calendar, peer navigation, and success stories.",
+        "details": "1. Create support group directory:\n   - Listing of peer support groups\n   - Meeting information and schedules\n   - Virtual and in-person options\n   - Contact details for group leaders\n2. Implement events calendar:\n   - Calendar view of community events\n   - Event detail pages\n   - Category filtering (health fairs, workshops, etc.)\n   - Add-to-calendar functionality\n3. Develop peer navigation section:\n   - Information about peer navigator programs\n   - Referral process\n   - Peer navigator profiles\n4. Create success stories feature:\n   - Anonymous testimonial submission\n   - Moderated story display\n   - Categorized success stories\n5. Implement community resource submission form\n6. Add social sharing for community events\n7. Create email notification option for upcoming events",
+        "testStrategy": "1. Test calendar functionality across date ranges\n2. Verify event filtering and search\n3. Test add-to-calendar across platforms\n4. Validate testimonial submission and moderation\n5. Test responsive design of community features\n6. Verify accessibility of calendar and events\n7. Test email notification system\n8. Validate privacy protections for testimonials",
+        "priority": "medium",
+        "dependencies": [
+          3,
+          7
+        ],
+        "status": "pending",
+        "subtasks": []
+      },
+      {
+        "id": 12,
+        "title": "Implement Comprehensive Accessibility Features",
+        "description": "Ensure full WCAG 2.1 AA compliance with screen reader support, keyboard navigation, visual accessibility features, and cognitive accessibility considerations.",
+        "details": "1. Implement core accessibility features:\n   - Proper semantic HTML structure\n   - Comprehensive ARIA labels\n   - Focus management\n   - Skip navigation links\n2. Create accessibility controls:\n   - High contrast mode toggle\n   - Font size adjustment\n   - Motion reduction option\n   - Line height adjustment\n3. Implement keyboard navigation:\n   - Logical tab order\n   - Keyboard shortcuts\n   - Focus indicators\n4. Ensure screen reader compatibility:\n   - Alt text for all images\n   - ARIA landmarks\n   - Screen reader announcements for dynamic content\n5. Address cognitive accessibility:\n   - Simple language throughout\n   - Progress indicators\n   - Consistent navigation\n   - Error prevention and recovery\n6. Create accessibility statement page\n7. Implement automated accessibility testing in CI/CD pipeline",
+        "testStrategy": "1. Conduct manual testing with screen readers (NVDA, JAWS, VoiceOver)\n2. Test keyboard-only navigation through entire site\n3. Validate with automated tools (axe, WAVE)\n4. Perform color contrast analysis\n5. Test with users who have disabilities\n6. Verify reading level across all content\n7. Validate against WCAG 2.1 AA checklist\n8. Test accessibility features across browsers and devices",
+        "priority": "high",
+        "dependencies": [
+          2,
+          7
+        ],
+        "status": "pending",
+        "subtasks": []
+      },
+      {
+        "id": 13,
+        "title": "Implement Analytics and Monitoring",
+        "description": "Set up privacy-focused analytics, performance monitoring, and accessibility tracking to measure site effectiveness and compliance.",
+        "details": "1. Research and select privacy-focused analytics solution\n2. Implement core analytics tracking:\n   - Page views and user flows\n   - Search and filter usage\n   - Resource access patterns\n   - Geographic usage data\n3. Set up performance monitoring:\n   - Core Web Vitals tracking\n   - Real User Monitoring (RUM)\n   - Error logging and alerting\n   - Uptime monitoring\n4. Implement accessibility monitoring:\n   - Automated accessibility scans\n   - Compliance reporting\n   - Issue tracking and remediation\n5. Create analytics dashboard for stakeholders\n6. Implement conversion tracking for key actions\n7. Set up regular reporting schedule\n8. Ensure all tracking is HIPAA compliant and privacy-preserving",
+        "testStrategy": "1. Verify analytics data collection accuracy\n2. Test performance monitoring across devices and connections\n3. Validate privacy protections in analytics implementation\n4. Test dashboard functionality and data visualization\n5. Verify compliance with privacy regulations\n6. Test error logging and alerting\n7. Validate accessibility monitoring accuracy",
+        "priority": "medium",
+        "dependencies": [
+          1,
+          12
+        ],
+        "status": "pending",
+        "subtasks": []
+      },
+      {
+        "id": 14,
+        "title": "Implement Security and Compliance Features",
+        "description": "Ensure the platform meets all healthcare compliance, accessibility standards, and security requirements including HIPAA, Section 508, and ADA compliance.",
+        "details": "1. Implement security features:\n   - SSL/TLS configuration\n   - Content Security Policy (CSP)\n   - Cross-Site Scripting (XSS) protection\n   - CSRF protection\n   - Rate limiting\n2. Create secure form handling:\n   - Encrypted form submissions\n   - Secure data storage\n   - Data minimization practices\n3. Implement privacy features:\n   - Privacy policy page\n   - Cookie consent\n   - Data retention policies\n   - User data request process\n4. Ensure HIPAA compliance:\n   - Business Associate Agreements\n   - Audit logging\n   - Access controls\n5. Address Section 508 and ADA requirements\n6. Create security documentation\n7. Implement security headers\n8. Set up regular security scanning",
+        "testStrategy": "1. Conduct security penetration testing\n2. Verify SSL/TLS implementation\n3. Test form submission security\n4. Validate privacy controls\n5. Perform HIPAA compliance audit\n6. Test Section 508 compliance\n7. Verify ADA requirements are met\n8. Conduct regular security scans",
+        "priority": "high",
+        "dependencies": [
+          1,
+          3
+        ],
+        "status": "pending",
+        "subtasks": []
+      },
+      {
+        "id": 15,
+        "title": "Optimize Performance and Deploy",
+        "description": "Optimize site performance to meet <2.5s LCP target, implement CDN delivery, and deploy the production-ready application.",
+        "details": "1. Perform performance optimization:\n   - Image optimization and lazy loading\n   - Font optimization with font-display\n   - Code splitting and tree shaking\n   - Critical CSS extraction\n   - Preloading of critical assets\n2. Implement caching strategy:\n   - Browser caching headers\n   - Service Worker for offline support\n   - CDN caching configuration\n3. Set up CDN deployment:\n   - Configure CDN provider\n   - Set up edge caching\n   - Implement global distribution\n4. Optimize for Core Web Vitals:\n   - LCP optimization\n   - FID/INP improvements\n   - CLS minimization\n5. Implement progressive enhancement\n6. Create deployment pipeline:\n   - Staging environment\n   - Production deployment\n   - Rollback capability\n7. Set up monitoring and alerting\n8. Create deployment documentation",
+        "testStrategy": "1. Measure Core Web Vitals across devices and connections\n2. Test performance in low-bandwidth conditions\n3. Verify CDN distribution and caching\n4. Test offline functionality\n5. Validate performance budget (<2.5s LCP)\n6. Perform load testing\n7. Test deployment and rollback procedures\n8. Verify monitoring and alerting functionality",
+        "priority": "high",
+        "dependencies": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14
+        ],
+        "status": "pending",
+        "subtasks": []
+      }
+    ],
+    "metadata": {
+      "created": "2025-07-30T15:52:14.667Z",
+      "updated": "2025-07-30T15:53:21.933Z",
+      "description": "Tasks for master context"
+    }
+  }
+}
