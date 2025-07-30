@@ -1,0 +1,490 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/ui/Header.astro';
+import Footer from '../../components/ui/Footer.astro';
+import ProviderCard from '../../components/providers/ProviderCard.astro';
+import { providers } from '../../data/providers';
+
+// Filter providers that offer support services
+const caseManagementProviders = providers.filter(provider => provider.services.support_services.case_management);
+const mentalHealthProviders = providers.filter(provider => provider.services.support_services.mental_health);
+const housingProviders = providers.filter(provider => provider.services.support_services.housing_assistance);
+
+const title = "Support & Resources";
+const description = "Comprehensive support services including case management, mental health counseling, housing assistance, and financial support across Central New Jersey.";
+---
+
+<BaseLayout title={title} description={description}>
+  <Header />
+  
+  <main id="main-content" class="flex-1">
+    <!-- Hero Section -->
+    <section class="bg-gradient-to-br from-primary-50 to-secondary-50 py-16">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-4xl mx-auto">
+          <h1 class="text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
+            You're Not Alone
+          </h1>
+          <p class="text-xl lg:text-2xl text-gray-700 mb-8">
+            Comprehensive support services, community connections, and practical resources 
+            to help you navigate every step of your journey.
+          </p>
+          <p class="text-lg text-gray-600 mb-10">
+            From case management to housing assistance, mental health support to financial aid - 
+            caring professionals are here to help you access the resources you need.
+          </p>
+          
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 max-w-4xl mx-auto">
+            <a href="#case-management" class="btn-primary flex items-center justify-center space-x-2 min-h-[60px]">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+              </svg>
+              <span>Get a Case Manager</span>
+            </a>
+            <a href="#mental-health" class="btn-secondary flex items-center justify-center space-x-2 min-h-[60px]">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+              </svg>
+              <span>Mental Health Support</span>
+            </a>
+            <a href="#housing-financial" class="btn-outline flex items-center justify-center space-x-2 min-h-[60px]">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2H5a2 2 0 00-2-2z" />
+              </svg>
+              <span>Housing & Financial Aid</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Support Services Overview -->
+    <section class="py-16 bg-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
+            Comprehensive Support Services
+          </h2>
+          <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+            Our network provides wraparound services to address all aspects of your health and wellbeing.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <!-- Case Management -->
+          <div class="card text-center hover:shadow-xl transition-all duration-300">
+            <div class="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-4">
+              <svg class="w-8 h-8 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+              </svg>
+            </div>
+            <h3 class="text-xl font-semibold text-gray-900 mb-3">Case Management</h3>
+            <p class="text-gray-600 mb-4">Personal support to help you navigate healthcare systems, access services, and achieve your health goals.</p>
+            <ul class="text-sm text-gray-600 text-left space-y-1 mb-4">
+              <li>• Help finding medical care</li>
+              <li>• Insurance enrollment assistance</li>
+              <li>• Medication adherence support</li>
+              <li>• Benefits and entitlement programs</li>
+            </ul>
+            <a href="#case-management" class="btn-outline text-sm">Find Case Managers</a>
+          </div>
+
+          <!-- Mental Health -->
+          <div class="card text-center hover:shadow-xl transition-all duration-300">
+            <div class="w-16 h-16 bg-secondary-100 rounded-full flex items-center justify-center mx-auto mb-4">
+              <svg class="w-8 h-8 text-secondary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+              </svg>
+            </div>
+            <h3 class="text-xl font-semibold text-gray-900 mb-3">Mental Health & Counseling</h3>
+            <p class="text-gray-600 mb-4">Professional counseling and mental health support from therapists experienced in HIV care.</p>
+            <ul class="text-sm text-gray-600 text-left space-y-1 mb-4">
+              <li>• Individual counseling</li>
+              <li>• Support groups</li>
+              <li>• Couples and family therapy</li>
+              <li>• Grief and loss support</li>
+            </ul>
+            <a href="#mental-health" class="btn-outline text-sm">Find Counseling</a>
+          </div>
+
+          <!-- Housing & Financial -->
+          <div class="card text-center hover:shadow-xl transition-all duration-300">
+            <div class="w-16 h-16 bg-success-100 rounded-full flex items-center justify-center mx-auto mb-4">
+              <svg class="w-8 h-8 text-success-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2H5a2 2 0 00-2-2z" />
+              </svg>
+            </div>
+            <h3 class="text-xl font-semibold text-gray-900 mb-3">Housing & Financial Support</h3>
+            <p class="text-gray-600 mb-4">Emergency assistance and long-term support for housing, utilities, and basic needs.</p>
+            <ul class="text-sm text-gray-600 text-left space-y-1 mb-4">
+              <li>• Emergency housing assistance</li>
+              <li>• Rent and utility assistance</li>
+              <li>• Emergency financial aid</li>
+              <li>• Benefits enrollment</li>
+            </ul>
+            <a href="#housing-financial" class="btn-outline text-sm">Get Financial Help</a>
+          </div>
+
+          <!-- Transportation -->
+          <div class="card text-center hover:shadow-xl transition-all duration-300">
+            <div class="w-16 h-16 bg-warning-100 rounded-full flex items-center justify-center mx-auto mb-4">
+              <svg class="w-8 h-8 text-warning-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
+              </svg>
+            </div>
+            <h3 class="text-xl font-semibold text-gray-900 mb-3">Transportation Services</h3>
+            <p class="text-gray-600 mb-4">Help getting to medical appointments and accessing essential services.</p>
+            <ul class="text-sm text-gray-600 text-left space-y-1 mb-4">
+              <li>• Medical appointment transportation</li>
+              <li>• Bus passes and vouchers</li>
+              <li>• Ride coordination services</li>
+              <li>• Emergency transportation</li>
+            </ul>
+            <a href="#transportation" class="btn-outline text-sm">Transportation Help</a>
+          </div>
+
+          <!-- Legal Services -->
+          <div class="card text-center hover:shadow-xl transition-all duration-300">
+            <div class="w-16 h-16 bg-error-100 rounded-full flex items-center justify-center mx-auto mb-4">
+              <svg class="w-8 h-8 text-error-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3" />
+              </svg>
+            </div>
+            <h3 class="text-xl font-semibold text-gray-900 mb-3">Legal Services</h3>
+            <p class="text-gray-600 mb-4">Legal advocacy and support for HIV-related discrimination and other legal issues.</p>
+            <ul class="text-sm text-gray-600 text-left space-y-1 mb-4">
+              <li>• Discrimination advocacy</li>
+              <li>• Benefits appeals</li>
+              <li>• Healthcare advocacy</li>
+              <li>• Legal referrals</li>
+            </ul>
+            <a href="#legal-services" class="btn-outline text-sm">Legal Support</a>
+          </div>
+
+          <!-- Substance Use Support -->
+          <div class="card text-center hover:shadow-xl transition-all duration-300">
+            <div class="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
+              <svg class="w-8 h-8 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+              </svg>
+            </div>
+            <h3 class="text-xl font-semibold text-gray-900 mb-3">Substance Use Support</h3>
+            <p class="text-gray-600 mb-4">Compassionate, non-judgmental support for substance use recovery and harm reduction.</p>
+            <ul class="text-sm text-gray-600 text-left space-y-1 mb-4">
+              <li>• Outpatient treatment programs</li>
+              <li>• Harm reduction services</li>
+              <li>• Recovery support groups</li>
+              <li>• Medication-assisted treatment</li>
+            </ul>
+            <a href="#substance-use" class="btn-outline text-sm">Recovery Support</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Case Management Providers -->
+    <section id="case-management" class="py-16 bg-gray-50">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
+            Case Management Services
+          </h2>
+          <p class="text-xl text-gray-600">
+            Your case manager is your advocate, helping you navigate systems and access the care you need
+          </p>
+        </div>
+
+        <div class="mb-8 bg-primary-50 border border-primary-200 rounded-lg p-6">
+          <h3 class="text-xl font-semibold text-primary-900 mb-3">What Does a Case Manager Do?</h3>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-primary-800">
+            <ul class="space-y-2">
+              <li class="flex items-start space-x-2">
+                <svg class="w-4 h-4 text-primary-600 mt-1" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                </svg>
+                <span>Help you find and access medical care</span>
+              </li>
+              <li class="flex items-start space-x-2">
+                <svg class="w-4 h-4 text-primary-600 mt-1" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                </svg>
+                <span>Assist with insurance enrollment</span>
+              </li>
+              <li class="flex items-start space-x-2">
+                <svg class="w-4 h-4 text-primary-600 mt-1" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                </svg>
+                <span>Connect you with support services</span>
+              </li>
+            </ul>
+            <ul class="space-y-2">
+              <li class="flex items-start space-x-2">
+                <svg class="w-4 h-4 text-primary-600 mt-1" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                </svg>
+                <span>Provide medication adherence support</span>
+              </li>
+              <li class="flex items-start space-x-2">
+                <svg class="w-4 h-4 text-primary-600 mt-1" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                </svg>
+                <span>Help with benefits applications</span>
+              </li>
+              <li class="flex items-start space-x-2">
+                <svg class="w-4 h-4 text-primary-600 mt-1" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                </svg>
+                <span>Advocate for your needs</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          {caseManagementProviders.map(provider => (
+            <ProviderCard provider={provider} />
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Mental Health Support -->
+    <section id="mental-health" class="py-16 bg-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
+            Mental Health & Counseling
+          </h2>
+          <p class="text-xl text-gray-600">
+            Professional mental health support from therapists who understand the unique aspects of living with HIV
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-12">
+          <div>
+            <h3 class="text-2xl font-bold text-gray-900 mb-6">Your Mental Health Matters</h3>
+            <p class="text-lg text-gray-700 mb-6">
+              Living with HIV can bring unique emotional challenges. Professional counseling and peer support can help you process feelings, develop coping strategies, and build resilience.
+            </p>
+            
+            <div class="space-y-4">
+              <div class="flex items-start space-x-3">
+                <svg class="w-6 h-6 text-secondary-600 mt-1" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                </svg>
+                <div>
+                  <h4 class="font-semibold text-gray-900">Individual Counseling</h4>
+                  <p class="text-gray-600">One-on-one therapy with HIV-experienced counselors</p>
+                </div>
+              </div>
+              
+              <div class="flex items-start space-x-3">
+                <svg class="w-6 h-6 text-secondary-600 mt-1" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                </svg>
+                <div>
+                  <h4 class="font-semibold text-gray-900">Support Groups</h4>
+                  <p class="text-gray-600">Connect with others who understand your experience</p>
+                </div>
+              </div>
+              
+              <div class="flex items-start space-x-3">
+                <svg class="w-6 h-6 text-secondary-600 mt-1" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                </svg>
+                <div>
+                  <h4 class="font-semibold text-gray-900">Family & Couples Therapy</h4>
+                  <p class="text-gray-600">Support for relationships and family dynamics</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-gradient-to-br from-secondary-50 to-primary-50 rounded-2xl p-8">
+            <h3 class="text-2xl font-bold text-gray-900 mb-6">Crisis Support Available 24/7</h3>
+            <div class="space-y-4">
+              <a href="tel:988" class="block w-full emergency-button text-center">
+                Crisis Lifeline: 988
+              </a>
+              <a href="tel:18004484663" class="block w-full btn-primary text-center">
+                HIV/AIDS Hotline: 1-800-HIV-INFO
+              </a>
+              <a href="sms:741741" class="block w-full btn-secondary text-center">
+                Crisis Text: Text HOME to 741741
+              </a>
+            </div>
+            <p class="text-sm text-gray-600 mt-4 text-center">
+              You are not alone. Professional support is available 24/7.
+            </p>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          {mentalHealthProviders.map(provider => (
+            <ProviderCard provider={provider} />
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Housing & Financial Support -->
+    <section id="housing-financial" class="py-16 bg-gray-50">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
+            Housing & Financial Support
+          </h2>
+          <p class="text-xl text-gray-600">
+            Safe, stable housing is healthcare. Emergency assistance and long-term support are available.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+          <!-- Emergency Housing -->
+          <div class="card text-center">
+            <div class="w-16 h-16 bg-error-100 rounded-full flex items-center justify-center mx-auto mb-4">
+              <svg class="w-8 h-8 text-error-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2H5a2 2 0 00-2-2z" />
+              </svg>
+            </div>
+            <h3 class="text-xl font-semibold text-gray-900 mb-3">Emergency Housing</h3>
+            <p class="text-gray-600 mb-4">Immediate housing assistance for people experiencing homelessness or housing instability.</p>
+            <ul class="text-sm text-gray-600 text-left space-y-1 mb-4">
+              <li>• Emergency shelter placement</li>
+              <li>• Transitional housing programs</li>
+              <li>• Hotel/motel vouchers</li>
+              <li>• Rapid rehousing assistance</li>
+            </ul>
+            <a href="tel:211" class="btn-primary text-sm">Call 211 for Emergency Help</a>
+          </div>
+
+          <!-- Rent & Utilities -->
+          <div class="card text-center">
+            <div class="w-16 h-16 bg-warning-100 rounded-full flex items-center justify-center mx-auto mb-4">
+              <svg class="w-8 h-8 text-warning-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1" />
+              </svg>
+            </div>
+            <h3 class="text-xl font-semibold text-gray-900 mb-3">Rent & Utility Assistance</h3>
+            <p class="text-gray-600 mb-4">Help paying rent, utilities, and housing-related expenses to maintain stable housing.</p>
+            <ul class="text-sm text-gray-600 text-left space-y-1 mb-4">
+              <li>• Rent payment assistance</li>
+              <li>• Utility bill help</li>
+              <li>• Security deposit assistance</li>
+              <li>• Moving expense help</li>
+            </ul>
+            <a href="#housing-providers" class="btn-outline text-sm">Find Assistance</a>
+          </div>
+
+          <!-- Long-term Housing -->
+          <div class="card text-center">
+            <div class="w-16 h-16 bg-success-100 rounded-full flex items-center justify-center mx-auto mb-4">
+              <svg class="w-8 h-8 text-success-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2H5a2 2 0 00-2-2z" />
+              </svg>
+            </div>
+            <h3 class="text-xl font-semibold text-gray-900 mb-3">Long-term Housing</h3>
+            <p class="text-gray-600 mb-4">Permanent supportive housing and rental assistance for long-term stability.</p>
+            <ul class="text-sm text-gray-600 text-left space-y-1 mb-4">
+              <li>• Permanent supportive housing</li>
+              <li>• Housing choice vouchers</li>
+              <li>• Supportive services</li>
+              <li>• Housing navigation</li>
+            </ul>
+            <a href="#housing-providers" class="btn-outline text-sm">Learn More</a>
+          </div>
+        </div>
+
+        <div id="housing-providers" class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          {housingProviders.map(provider => (
+            <ProviderCard provider={provider} />
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Additional Resources -->
+    <section class="py-16 bg-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
+            Additional Resources
+          </h2>
+          <p class="text-xl text-gray-600">
+            Comprehensive support for all aspects of your health and wellbeing
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <!-- Food & Nutrition -->
+          <div class="bg-gray-50 rounded-lg p-6 text-center">
+            <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-3">
+              <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4m0 0L7 13m0 0l-2.5 5M7 13l2.5 5m6-5v6a2 2 0 01-2 2H9a2 2 0 01-2-2v-6m8 0V9a2 2 0 00-2-2H9a2 2 0 00-2 2v4.01" />
+              </svg>
+            </div>
+            <h3 class="font-semibold text-gray-900 mb-2">Food & Nutrition</h3>
+            <p class="text-sm text-gray-600">Food pantries, meal programs, and nutrition counseling</p>
+          </div>
+
+          <!-- Transportation -->
+          <div class="bg-gray-50 rounded-lg p-6 text-center">
+            <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-3">
+              <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
+              </svg>
+            </div>
+            <h3 class="font-semibold text-gray-900 mb-2">Transportation</h3>
+            <p class="text-sm text-gray-600">Medical transportation, bus passes, and ride assistance</p>
+          </div>
+
+          <!-- Benefits Enrollment -->
+          <div class="bg-gray-50 rounded-lg p-6 text-center">
+            <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-3">
+              <svg class="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+              </svg>
+            </div>
+            <h3 class="font-semibold text-gray-900 mb-2">Benefits Enrollment</h3>
+            <p class="text-sm text-gray-600">Help with Medicaid, SNAP, disability benefits, and more</p>
+          </div>
+
+          <!-- Peer Support -->
+          <div class="bg-gray-50 rounded-lg p-6 text-center">
+            <div class="w-12 h-12 bg-pink-100 rounded-full flex items-center justify-center mx-auto mb-3">
+              <svg class="w-6 h-6 text-pink-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+              </svg>
+            </div>
+            <h3 class="font-semibold text-gray-900 mb-2">Peer Support</h3>
+            <p class="text-sm text-gray-600">Connect with peer navigators and support groups</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact for Support -->
+    <section class="py-16 bg-primary-50">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center">
+          <h2 class="text-3xl lg:text-4xl font-bold text-gray-900 mb-6">
+            Ready to Get Connected?
+          </h2>
+          <p class="text-xl text-gray-700 mb-8 max-w-3xl mx-auto">
+            Don't navigate this alone. Our case managers and support staff are here to help you access the services and resources you need.
+          </p>
+          <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <a href="tel:18004484663" class="btn-primary">
+              Call HIV/AIDS Hotline: 1-800-HIV-INFO
+            </a>
+            <a href="/find-services" class="btn-outline">
+              Find Services Near You
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  
+  <Footer />
+</BaseLayout>

@@ -1,0 +1,392 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/ui/Header.astro';
+import Footer from '../../components/ui/Footer.astro';
+import { providers } from '../../data/providers';
+
+export async function getStaticPaths() {
+  return providers.map(provider => ({
+    params: { id: provider.id },
+    props: { provider }
+  }));
+}
+
+const { provider } = Astro.props;
+const primaryLocation = provider.locations[0];
+
+// Count available services
+const serviceCount = Object.values(provider.services).reduce((count, category) => {
+  return count + Object.values(category).filter(Boolean).length;
+}, 0);
+
+// Format hours for display
+function formatHours(hours: any) {
+  const days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'];
+  return days.map(day => {
+    const dayHours = hours[day];
+    if (!dayHours) return `${day.charAt(0).toUpperCase() + day.slice(1)}: Closed`;
+    return `${day.charAt(0).toUpperCase() + day.slice(1)}: ${dayHours.open} - ${dayHours.close}`;
+  });
+}
+
+const title = `${provider.name} - HIV Care Provider`;
+const description = provider.description || `Comprehensive HIV care and support services at ${provider.name} in ${primaryLocation.city}, ${primaryLocation.county} County.`;
+---
+
+<BaseLayout title={title} description={description}>
+  <Header />
+  
+  <main id="main-content" class="flex-1">
+    <!-- Provider Header -->
+    <section class="bg-gradient-to-br from-primary-50 to-secondary-50 py-12">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-4xl">
+          <div class="flex flex-wrap gap-2 mb-4">
+            <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-secondary-100 text-secondary-800">
+              {provider.type}
+            </span>
+            {provider.ryan_white_parts.map(part => (
+              <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-primary-100 text-primary-800">
+                Ryan White Part {part}
+              </span>
+            ))}
+            {provider.featured && (
+              <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-success-100 text-success-800">
+                Featured Provider
+              </span>
+            )}
+          </div>
+          
+          <h1 class="text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
+            {provider.name}
+          </h1>
+          
+          {provider.description && (
+            <p class="text-xl text-gray-700 mb-6">{provider.description}</p>
+          )}
+          
+          <div class="flex flex-col sm:flex-row gap-4">
+            <a href={`tel:${provider.contact.phone}`} class="btn-primary flex items-center justify-center space-x-2">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+              </svg>
+              <span>Call {provider.contact.phone}</span>
+            </a>
+            {provider.contact.website && (
+              <a href={provider.contact.website} target="_blank" rel="noopener noreferrer" class="btn-outline flex items-center justify-center space-x-2">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                </svg>
+                <span>Visit Website</span>
+              </a>
+            )}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Provider Details -->
+    <section class="py-12 bg-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
+          <!-- Main Content -->
+          <div class="lg:col-span-2">
+            <!-- Services -->
+            <div class="mb-12">
+              <h2 class="text-3xl font-bold text-gray-900 mb-6">Services Available</h2>
+              
+              <!-- Medical Care Services -->
+              <div class="mb-8">
+                <h3 class="text-xl font-semibold text-gray-900 mb-4">Medical Care & Treatment</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  {provider.services.medical_care.hiv_treatment && (
+                    <div class="flex items-center space-x-3 p-4 bg-primary-50 rounded-lg">
+                      <svg class="w-6 h-6 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                      </svg>
+                      <span class="font-medium text-gray-900">HIV Treatment & Care</span>
+                    </div>
+                  )}
+                  {provider.services.medical_care.prep_services && (
+                    <div class="flex items-center space-x-3 p-4 bg-secondary-50 rounded-lg">
+                      <svg class="w-6 h-6 text-secondary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                      </svg>
+                      <span class="font-medium text-gray-900">PrEP Services</span>
+                    </div>
+                  )}
+                  {provider.services.medical_care.std_testing && (
+                    <div class="flex items-center space-x-3 p-4 bg-success-50 rounded-lg">
+                      <svg class="w-6 h-6 text-success-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                      </svg>
+                      <span class="font-medium text-gray-900">STD Testing & Treatment</span>
+                    </div>
+                  )}
+                  {provider.services.medical_care.dental_care && (
+                    <div class="flex items-center space-x-3 p-4 bg-warning-50 rounded-lg">
+                      <svg class="w-6 h-6 text-warning-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h1.5a2.5 2.5 0 110 5H9V10z" />
+                      </svg>
+                      <span class="font-medium text-gray-900">Dental Services</span>
+                    </div>
+                  )}
+                </div>
+              </div>
+
+              <!-- Support Services -->
+              <div class="mb-8">
+                <h3 class="text-xl font-semibold text-gray-900 mb-4">Support Services</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  {provider.services.support_services.case_management && (
+                    <div class="flex items-center space-x-3 p-4 bg-primary-50 rounded-lg">
+                      <svg class="w-6 h-6 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                      </svg>
+                      <span class="font-medium text-gray-900">Case Management</span>
+                    </div>
+                  )}
+                  {provider.services.support_services.mental_health && (
+                    <div class="flex items-center space-x-3 p-4 bg-secondary-50 rounded-lg">
+                      <svg class="w-6 h-6 text-secondary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                      </svg>
+                      <span class="font-medium text-gray-900">Mental Health Support</span>
+                    </div>
+                  )}
+                  {provider.services.support_services.housing_assistance && (
+                    <div class="flex items-center space-x-3 p-4 bg-success-50 rounded-lg">
+                      <svg class="w-6 h-6 text-success-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2H5a2 2 0 00-2-2z" />
+                      </svg>
+                      <span class="font-medium text-gray-900">Housing Assistance</span>
+                    </div>
+                  )}
+                  {provider.services.support_services.transportation && (
+                    <div class="flex items-center space-x-3 p-4 bg-warning-50 rounded-lg">
+                      <svg class="w-6 h-6 text-warning-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
+                      </svg>
+                      <span class="font-medium text-gray-900">Transportation Services</span>
+                    </div>
+                  )}
+                </div>
+              </div>
+
+              <!-- Prevention Services -->
+              <div>
+                <h3 class="text-xl font-semibold text-gray-900 mb-4">Testing & Prevention</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  {provider.services.prevention.hiv_testing && (
+                    <div class="flex items-center space-x-3 p-4 bg-primary-50 rounded-lg">
+                      <svg class="w-6 h-6 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                      </svg>
+                      <span class="font-medium text-gray-900">HIV Testing</span>
+                    </div>
+                  )}
+                  {provider.services.prevention.counseling && (
+                    <div class="flex items-center space-x-3 p-4 bg-secondary-50 rounded-lg">
+                      <svg class="w-6 h-6 text-secondary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+                      </svg>
+                      <span class="font-medium text-gray-900">HIV Counseling</span>
+                    </div>
+                  )}
+                  {provider.services.prevention.prep_counseling && (
+                    <div class="flex items-center space-x-3 p-4 bg-success-50 rounded-lg">
+                      <svg class="w-6 h-6 text-success-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                      </svg>
+                      <span class="font-medium text-gray-900">PrEP Counseling</span>
+                    </div>
+                  )}
+                  {provider.services.prevention.education && (
+                    <div class="flex items-center space-x-3 p-4 bg-warning-50 rounded-lg">
+                      <svg class="w-6 h-6 text-warning-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                      </svg>
+                      <span class="font-medium text-gray-900">HIV Education</span>
+                    </div>
+                  )}
+                </div>
+              </div>
+            </div>
+
+            <!-- Eligibility & Insurance -->
+            <div class="mb-12">
+              <h2 class="text-3xl font-bold text-gray-900 mb-6">Eligibility & Insurance</h2>
+              <div class="bg-gray-50 rounded-lg p-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div>
+                    <h3 class="text-lg font-semibold text-gray-900 mb-3">Insurance Accepted</h3>
+                    <ul class="space-y-2">
+                      {provider.eligibility.insurance_accepted.map(insurance => (
+                        <li class="flex items-center space-x-2">
+                          <svg class="w-4 h-4 text-success-600" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                          </svg>
+                          <span class="capitalize">{insurance.replace('_', ' ')}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                  {provider.eligibility.special_populations && (
+                    <div>
+                      <h3 class="text-lg font-semibold text-gray-900 mb-3">Specialized Care For</h3>
+                      <ul class="space-y-2">
+                        {provider.eligibility.special_populations.map(population => (
+                          <li class="flex items-center space-x-2">
+                            <svg class="w-4 h-4 text-primary-600" fill="currentColor" viewBox="0 0 20 20">
+                              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                            </svg>
+                            <span class="capitalize">{population.replace('_', ' ')}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+                </div>
+                {provider.eligibility.income_requirements && (
+                  <div class="mt-6 p-4 bg-primary-50 rounded-lg">
+                    <p class="text-primary-800">
+                      <strong>Income Requirements:</strong> Services available for individuals up to {provider.eligibility.income_requirements.replace('_', ' ').toUpperCase()}
+                    </p>
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+
+          <!-- Sidebar -->
+          <div class="lg:col-span-1">
+            <!-- Contact Information -->
+            <div class="card mb-8">
+              <h3 class="text-xl font-semibold text-gray-900 mb-4">Contact Information</h3>
+              <div class="space-y-4">
+                <div class="flex items-start space-x-3">
+                  <svg class="w-5 h-5 text-gray-400 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                  </svg>
+                  <div>
+                    <p class="font-medium text-gray-900">Phone</p>
+                    <a href={`tel:${provider.contact.phone}`} class="text-primary-600 hover:text-primary-700">
+                      {provider.contact.phone}
+                    </a>
+                  </div>
+                </div>
+
+                {provider.contact.email && (
+                  <div class="flex items-start space-x-3">
+                    <svg class="w-5 h-5 text-gray-400 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                    </svg>
+                    <div>
+                      <p class="font-medium text-gray-900">Email</p>
+                      <a href={`mailto:${provider.contact.email}`} class="text-primary-600 hover:text-primary-700">
+                        {provider.contact.email}
+                      </a>
+                    </div>
+                  </div>
+                )}
+
+                {provider.contact.website && (
+                  <div class="flex items-start space-x-3">
+                    <svg class="w-5 h-5 text-gray-400 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                    </svg>
+                    <div>
+                      <p class="font-medium text-gray-900">Website</p>
+                      <a href={provider.contact.website} target="_blank" rel="noopener noreferrer" class="text-primary-600 hover:text-primary-700">
+                        Visit Website
+                      </a>
+                    </div>
+                  </div>
+                )}
+              </div>
+            </div>
+
+            <!-- Location & Hours -->
+            <div class="card mb-8">
+              <h3 class="text-xl font-semibold text-gray-900 mb-4">Location & Hours</h3>
+              <div class="space-y-4">
+                <div class="flex items-start space-x-3">
+                  <svg class="w-5 h-5 text-gray-400 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                  </svg>
+                  <div>
+                    <p class="font-medium text-gray-900">Address</p>
+                    <p class="text-gray-600">
+                      {primaryLocation.address}<br>
+                      {primaryLocation.city}, {primaryLocation.county.charAt(0).toUpperCase() + primaryLocation.county.slice(1)} County {primaryLocation.zip_code}
+                    </p>
+                  </div>
+                </div>
+
+                <div class="flex items-start space-x-3">
+                  <svg class="w-5 h-5 text-gray-400 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                  <div>
+                    <p class="font-medium text-gray-900">Hours</p>
+                    <div class="text-sm text-gray-600 space-y-1">
+                      {formatHours(primaryLocation.hours).map(hourString => (
+                        <p>{hourString}</p>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+
+                {primaryLocation.accessibility.length > 0 && (
+                  <div class="flex items-start space-x-3">
+                    <svg class="w-5 h-5 text-gray-400 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                    <div>
+                      <p class="font-medium text-gray-900">Accessibility</p>
+                      <div class="text-sm text-gray-600">
+                        {primaryLocation.accessibility.map(feature => (
+                          <span class="inline-block mr-2 capitalize">{feature.replace('_', ' ')}</span>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                )}
+              </div>
+            </div>
+
+            <!-- Languages -->
+            {provider.languages.length > 1 && (
+              <div class="card mb-8">
+                <h3 class="text-xl font-semibold text-gray-900 mb-4">Languages</h3>
+                <div class="flex flex-wrap gap-2">
+                  {provider.languages.map(language => (
+                    <span class="inline-flex items-center px-3 py-1 rounded-full text-sm bg-secondary-100 text-secondary-800 capitalize">
+                      {language}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            <!-- Emergency Contact -->
+            <div class="bg-error-50 border border-error-200 rounded-lg p-6">
+              <h3 class="text-lg font-semibold text-error-900 mb-4">Need Immediate Help?</h3>
+              <div class="space-y-3">
+                <a href="tel:988" class="block w-full emergency-button text-center text-sm">
+                  Crisis Support: 988
+                </a>
+                <a href="tel:18004484663" class="block w-full btn-primary text-center text-sm">
+                  HIV/AIDS Hotline: 1-800-HIV-INFO
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  
+  <Footer />
+</BaseLayout>

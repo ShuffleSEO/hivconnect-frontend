@@ -1,0 +1,139 @@
+---
+export interface Props {
+  title: string;
+  description: string;
+  type?: 'website' | 'article';
+  image?: string;
+}
+
+const { title, description, type = 'website', image } = Astro.props;
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+---
+
+<!DOCTYPE html>
+<html lang="en" class="h-full">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <meta name="generator" content={Astro.generator} />
+  
+  <!-- SEO Meta Tags -->
+  <title>{title} | HIV Connect Central NJ</title>
+  <meta name="description" content={description} />
+  <link rel="canonical" href={canonicalURL} />
+  
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content={type} />
+  <meta property="og:url" content={canonicalURL} />
+  <meta property="og:title" content={`${title} | HIV Connect Central NJ`} />
+  <meta property="og:description" content={description} />
+  <meta property="og:site_name" content="HIV Connect Central NJ" />
+  {image && <meta property="og:image" content={image} />}
+  
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image" />
+  <meta property="twitter:url" content={canonicalURL} />
+  <meta property="twitter:title" content={`${title} | HIV Connect Central NJ`} />
+  <meta property="twitter:description" content={description} />
+  {image && <meta property="twitter:image" content={image} />}
+  
+  <!-- Security Headers -->
+  <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+  <meta http-equiv="X-Frame-Options" content="DENY" />
+  <meta http-equiv="X-XSS-Protection" content="1; mode=block" />
+  
+  <!-- Accessibility -->
+  <meta name="theme-color" content="#dc2626" />
+  
+  <!-- Preload critical fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  
+  <!-- Global Styles -->
+  <link rel="stylesheet" href="/src/styles/global.css" />
+  
+  <!-- Schema.org structured data -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "MedicalOrganization",
+      "name": "HIV Connect Central NJ",
+      "description": "Comprehensive HIV care coordination and resources for Middlesex, Somerset, and Hunterdon counties in New Jersey",
+      "url": "https://hivconnectcnj.org",
+      "areaServed": [
+        {
+          "@type": "AdministrativeArea",
+          "name": "Middlesex County, NJ"
+        },
+        {
+          "@type": "AdministrativeArea", 
+          "name": "Somerset County, NJ"
+        },
+        {
+          "@type": "AdministrativeArea",
+          "name": "Hunterdon County, NJ"
+        }
+      ],
+      "medicalSpecialty": "HIV/AIDS Care",
+      "availableService": [
+        {
+          "@type": "MedicalService",
+          "name": "HIV Testing"
+        },
+        {
+          "@type": "MedicalService", 
+          "name": "HIV Treatment"
+        },
+        {
+          "@type": "MedicalService",
+          "name": "Case Management"
+        }
+      ]
+    }
+  </script>
+</head>
+<body class="h-full flex flex-col">
+  <!-- Skip to main content link for screen readers -->
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+  
+  <!-- Crisis/Emergency Quick Access -->
+  <div id="crisis-banner" class="bg-error-600 text-white text-center py-2 px-4 text-sm">
+    <span class="font-medium">Crisis Support:</span>
+    <a href="tel:988" class="underline hover:no-underline ml-2 font-bold">Call 988</a>
+    <span class="mx-2">|</span>
+    <a href="tel:18004484663" class="underline hover:no-underline">HIV/AIDS Hotline: 1-800-HIV-INFO</a>
+    <button id="quick-exit" class="ml-4 bg-error-700 hover:bg-error-800 px-3 py-1 rounded text-xs font-bold">
+      Quick Exit (ESC)
+    </button>
+  </div>
+  
+  <slot />
+  
+  <!-- Quick Exit Functionality -->
+  <script>
+    // Quick exit functionality
+    function quickExit() {
+      // Clear browsing data
+      if (typeof(Storage) !== "undefined") {
+        sessionStorage.clear();
+        localStorage.clear();
+      }
+      
+      // Replace current page in history and redirect
+      window.location.replace("https://www.weather.com");
+    }
+    
+    // ESC key listener
+    document.addEventListener('keydown', function(event) {
+      if (event.key === 'Escape') {
+        quickExit();
+      }
+    });
+    
+    // Quick exit button
+    document.getElementById('quick-exit')?.addEventListener('click', quickExit);
+  </script>
+</body>
+</html>

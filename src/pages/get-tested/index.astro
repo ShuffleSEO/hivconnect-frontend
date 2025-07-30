@@ -1,0 +1,348 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/ui/Header.astro';
+import Footer from '../../components/ui/Footer.astro';
+import ProviderCard from '../../components/providers/ProviderCard.astro';
+import { providers } from '../../data/providers';
+
+// Filter providers that offer HIV testing
+const testingProviders = providers.filter(provider => provider.services.prevention.hiv_testing);
+
+const title = "Get Tested for HIV";
+const description = "Find free, confidential HIV testing locations across Central New Jersey. Results in 20 minutes with caring, non-judgmental support.";
+---
+
+<BaseLayout title={title} description={description}>
+  <Header />
+  
+  <main id="main-content" class="flex-1">
+    <!-- Hero Section -->
+    <section class="bg-gradient-to-br from-primary-50 to-secondary-50 py-16">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-4xl mx-auto">
+          <h1 class="text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
+            Know Your Status
+          </h1>
+          <p class="text-xl lg:text-2xl text-gray-700 mb-8">
+            Free, confidential HIV testing with caring, non-judgmental support. 
+            Results in 20 minutes at locations across Central New Jersey.
+          </p>
+          <p class="text-lg text-gray-600 mb-10">
+            Testing is the first step to taking charge of your health. All testing is confidential and many locations don't require appointments.
+          </p>
+          
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 max-w-4xl mx-auto">
+            <a href="#testing-locations" class="btn-primary flex items-center justify-center space-x-2 min-h-[60px]">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+              </svg>
+              <span>Find Testing Near Me</span>
+            </a>
+            <a href="tel:18004484663" class="btn-secondary flex items-center justify-center space-x-2 min-h-[60px]">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+              </svg>
+              <span>Call HIV Hotline</span>
+            </a>
+            <a href="#at-home-testing" class="btn-outline flex items-center justify-center space-x-2 min-h-[60px]">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2H5a2 2 0 00-2-2z" />
+              </svg>
+              <span>At-Home Testing</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testing Information -->
+    <section class="py-16 bg-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
+            What to Expect
+          </h2>
+          <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+            HIV testing is quick, easy, and confidential. Here's what you need to know.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+          <!-- Quick & Easy -->
+          <div class="text-center">
+            <div class="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-4">
+              <svg class="w-8 h-8 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            </div>
+            <h3 class="text-xl font-semibold text-gray-900 mb-3">Quick & Easy</h3>
+            <p class="text-gray-600">Most tests take just a few minutes with results available in 20 minutes or less.</p>
+          </div>
+
+          <!-- Confidential -->
+          <div class="text-center">
+            <div class="w-16 h-16 bg-secondary-100 rounded-full flex items-center justify-center mx-auto mb-4">
+              <svg class="w-8 h-8 text-secondary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+              </svg>
+            </div>
+            <h3 class="text-xl font-semibold text-gray-900 mb-3">Completely Confidential</h3>
+            <p class="text-gray-600">Your privacy is protected by law. Results are only shared with your permission.</p>
+          </div>
+
+          <!-- Free -->
+          <div class="text-center">
+            <div class="w-16 h-16 bg-success-100 rounded-full flex items-center justify-center mx-auto mb-4">
+              <svg class="w-8 h-8 text-success-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1" />
+              </svg>
+            </div>
+            <h3 class="text-xl font-semibold text-gray-900 mb-3">Free Testing Available</h3>
+            <p class="text-gray-600">Many locations offer free HIV testing regardless of insurance status.</p>
+          </div>
+        </div>
+
+        <!-- Testing Process -->
+        <div class="bg-gray-50 rounded-lg p-8">
+          <h3 class="text-2xl font-bold text-gray-900 mb-6 text-center">The Testing Process</h3>
+          <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+            <div class="text-center">
+              <div class="w-12 h-12 bg-primary-600 text-white rounded-full flex items-center justify-center mx-auto mb-3 font-bold text-lg">1</div>
+              <h4 class="font-semibold text-gray-900 mb-2">Pre-Test Counseling</h4>
+              <p class="text-sm text-gray-600">Brief discussion about the test and your questions</p>
+            </div>
+            <div class="text-center">
+              <div class="w-12 h-12 bg-primary-600 text-white rounded-full flex items-center justify-center mx-auto mb-3 font-bold text-lg">2</div>
+              <h4 class="font-semibold text-gray-900 mb-2">Quick Test</h4>
+              <p class="text-sm text-gray-600">Simple oral swab or finger stick - takes just minutes</p>
+            </div>
+            <div class="text-center">
+              <div class="w-12 h-12 bg-primary-600 text-white rounded-full flex items-center justify-center mx-auto mb-3 font-bold text-lg">3</div>
+              <h4 class="font-semibold text-gray-900 mb-2">Wait for Results</h4>
+              <p class="text-sm text-gray-600">Results typically available in 20 minutes</p>
+            </div>
+            <div class="text-center">
+              <div class="w-12 h-12 bg-primary-600 text-white rounded-full flex items-center justify-center mx-auto mb-3 font-bold text-lg">4</div>
+              <h4 class="font-semibold text-gray-900 mb-2">Post-Test Support</h4>
+              <p class="text-sm text-gray-600">Counseling and next steps, regardless of results</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testing Locations -->
+    <section id="testing-locations" class="py-16 bg-gray-50">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
+            Testing Locations
+          </h2>
+          <p class="text-xl text-gray-600">
+            Find HIV testing at these trusted locations across Central New Jersey
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          {testingProviders.map(provider => (
+            <ProviderCard provider={provider} />
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- At-Home Testing -->
+    <section id="at-home-testing" class="py-16 bg-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          <div>
+            <h2 class="text-3xl lg:text-4xl font-bold text-gray-900 mb-6">
+              At-Home Testing Options
+            </h2>
+            <p class="text-xl text-gray-700 mb-6">
+              Prefer to test at home? FDA-approved at-home HIV tests are available and provide accurate results in the privacy of your home.
+            </p>
+            
+            <div class="space-y-4 mb-8">
+              <div class="flex items-start space-x-3">
+                <svg class="w-6 h-6 text-success-600 mt-1" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                </svg>
+                <div>
+                  <h3 class="font-semibold text-gray-900">FDA Approved</h3>
+                  <p class="text-gray-600">OraQuick and other approved tests available at pharmacies</p>
+                </div>
+              </div>
+              
+              <div class="flex items-start space-x-3">
+                <svg class="w-6 h-6 text-success-600 mt-1" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                </svg>
+                <div>
+                  <h3 class="font-semibold text-gray-900">Private & Convenient</h3>
+                  <p class="text-gray-600">Test in the comfort and privacy of your own home</p>
+                </div>
+              </div>
+              
+              <div class="flex items-start space-x-3">
+                <svg class="w-6 h-6 text-success-600 mt-1" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                </svg>
+                <div>
+                  <h3 class="font-semibold text-gray-900">Quick Results</h3>
+                  <p class="text-gray-600">Results in 20-40 minutes depending on test type</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="bg-warning-50 border border-warning-200 rounded-lg p-4 mb-6">
+              <p class="text-warning-800">
+                <strong>Important:</strong> At-home tests may not detect very recent infections. If you have a negative result but think you may have been exposed recently, consider getting tested again in 3 months or talk to a healthcare provider.
+              </p>
+            </div>
+
+            <a href="tel:18004484663" class="btn-primary">
+              Call for At-Home Testing Guidance
+            </a>
+          </div>
+
+          <div class="bg-gradient-to-br from-secondary-50 to-primary-50 rounded-2xl p-8">
+            <h3 class="text-2xl font-bold text-gray-900 mb-6">Where to Get At-Home Tests</h3>
+            <div class="space-y-4">
+              <div class="bg-white rounded-lg p-4 shadow-sm">
+                <h4 class="font-semibold text-gray-900 mb-2">Local Pharmacies</h4>
+                <p class="text-gray-600 text-sm">CVS, Walgreens, Rite Aid, and other pharmacies carry FDA-approved tests</p>
+              </div>
+              
+              <div class="bg-white rounded-lg p-4 shadow-sm">
+                <h4 class="font-semibold text-gray-900 mb-2">Online Ordering</h4>
+                <p class="text-gray-600 text-sm">Order directly from manufacturers or through online pharmacies</p>
+              </div>
+              
+              <div class="bg-white rounded-lg p-4 shadow-sm">
+                <h4 class="font-semibold text-gray-900 mb-2">Free Test Programs</h4>
+                <p class="text-gray-600 text-sm">Some organizations provide free at-home tests - call our hotline for information</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Next Steps -->
+    <section class="py-16 bg-gray-50">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
+            After Your Test
+          </h2>
+          <p class="text-xl text-gray-600">
+            Regardless of your results, support and next steps are available
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <!-- Negative Results -->
+          <div class="card">
+            <div class="w-16 h-16 bg-success-100 rounded-full flex items-center justify-center mx-auto mb-4">
+              <svg class="w-8 h-8 text-success-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            </div>
+            <h3 class="text-xl font-semibold text-gray-900 mb-4 text-center">If Your Test is Negative</h3>
+            <ul class="space-y-3 text-gray-600">
+              <li class="flex items-start space-x-2">
+                <svg class="w-5 h-5 text-success-600 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                </svg>
+                <span>Continue regular testing as recommended</span>
+              </li>
+              <li class="flex items-start space-x-2">
+                <svg class="w-5 h-5 text-success-600 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                </svg>
+                <span>Consider PrEP if you're at higher risk</span>
+              </li>
+              <li class="flex items-start space-x-2">
+                <svg class="w-5 h-5 text-success-600 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                </svg>
+                <span>Practice safer sex and harm reduction</span>
+              </li>
+              <li class="flex items-start space-x-2">
+                <svg class="w-5 h-5 text-success-600 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                </svg>
+                <span>Get tested for other STDs</span>
+              </li>
+            </ul>
+            <div class="mt-6">
+              <a href="/treatment-care#prep-services" class="btn-outline w-full text-center">
+                Learn About PrEP
+              </a>
+            </div>
+          </div>
+
+          <!-- Positive Results -->
+          <div class="card">
+            <div class="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-4">
+              <svg class="w-8 h-8 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+              </svg>
+            </div>
+            <h3 class="text-xl font-semibold text-gray-900 mb-4 text-center">If Your Test is Positive</h3>
+            <ul class="space-y-3 text-gray-600">
+              <li class="flex items-start space-x-2">
+                <svg class="w-5 h-5 text-primary-600 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                </svg>
+                <span>Connect with HIV care immediately</span>
+              </li>
+              <li class="flex items-start space-x-2">
+                <svg class="w-5 h-5 text-primary-600 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                </svg>
+                <span>Start treatment as soon as possible</span>
+              </li>
+              <li class="flex items-start space-x-2">
+                <svg class="w-5 h-5 text-primary-600 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                </svg>
+                <span>Get connected with case management</span>
+              </li>
+              <li class="flex items-start space-x-2">
+                <svg class="w-5 h-5 text-primary-600 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                </svg>
+                <span>Access support services and resources</span>
+              </li>
+            </ul>
+            <div class="mt-6">
+              <a href="/treatment-care" class="btn-primary w-full text-center">
+                Find HIV Treatment
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Important Message -->
+        <div class="mt-12 bg-primary-50 border border-primary-200 rounded-lg p-6 text-center">
+          <h3 class="text-xl font-semibold text-primary-900 mb-3">Remember: You Are Not Alone</h3>
+          <p class="text-primary-800 mb-4">
+            Regardless of your test results, caring support is available. HIV is a manageable condition, and with proper care, people with HIV live long, healthy lives.
+          </p>
+          <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <a href="tel:18004484663" class="btn-primary">
+              Call HIV/AIDS Hotline: 1-800-HIV-INFO
+            </a>
+            <a href="/support-resources" class="btn-outline">
+              Find Support Resources
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  
+  <Footer />
+</BaseLayout>

@@ -1,0 +1,176 @@
+---
+// Header component with accessible navigation
+---
+
+<header class="bg-white shadow-sm border-b border-gray-200 sticky top-0 z-40">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex justify-between items-center h-16">
+      <!-- Logo and Site Name -->
+      <div class="flex items-center">
+        <a href="/" class="flex items-center space-x-3 hover:opacity-80 transition-opacity">
+          <div class="w-10 h-10 bg-primary-600 rounded-lg flex items-center justify-center">
+            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+            </svg>
+          </div>
+          <div>
+            <h1 class="text-xl font-bold text-gray-900">HIV Connect</h1>
+            <p class="text-sm text-gray-600">Central New Jersey</p>
+          </div>
+        </a>
+      </div>
+      
+      <!-- Desktop Navigation -->
+      <nav class="hidden md:flex space-x-8" aria-label="Main navigation">
+        <a href="/find-services" class="text-gray-700 hover:text-primary-600 px-3 py-2 text-sm font-medium transition-colors">
+          Find Services
+        </a>
+        <a href="/get-tested" class="text-gray-700 hover:text-primary-600 px-3 py-2 text-sm font-medium transition-colors">
+          Get Tested
+        </a>
+        <a href="/treatment-care" class="text-gray-700 hover:text-primary-600 px-3 py-2 text-sm font-medium transition-colors">
+          Treatment & Care
+        </a>
+        <a href="/support-resources" class="text-gray-700 hover:text-primary-600 px-3 py-2 text-sm font-medium transition-colors">
+          Support & Resources
+        </a>
+        <a href="/about" class="text-gray-700 hover:text-primary-600 px-3 py-2 text-sm font-medium transition-colors">
+          About
+        </a>
+      </nav>
+      
+      <!-- Emergency Contact & Language Toggle -->
+      <div class="flex items-center space-x-4">
+        <!-- Language Toggle -->
+        <div class="relative">
+          <button id="language-toggle" class="text-gray-700 hover:text-primary-600 text-sm font-medium" aria-label="Change language">
+            EN | ES
+          </button>
+        </div>
+        
+        <!-- Emergency Contact -->
+        <a href="tel:988" class="emergency-button text-sm py-2 px-4 min-h-[44px] flex items-center">
+          Crisis: 988
+        </a>
+        
+        <!-- Mobile Menu Button -->
+        <button id="mobile-menu-button" class="md:hidden p-2 rounded-md text-gray-700 hover:text-primary-600 hover:bg-gray-100" aria-label="Open main menu">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <button id="language-toggle" class="text-gray-700 hover:text-primary-600 text-sm font-medium" aria-label="Change language" aria-expanded="false">
+          </svg>
+        </button>
+        <!-- Language Dropdown -->
+        <div id="language-dropdown" class="hidden absolute right-0 mt-2 w-32 bg-white rounded-md shadow-lg border border-gray-200 z-50">
+          <div class="py-1">
+            <button class="language-option block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" data-lang="en">
+              English
+            </button>
+            <button class="language-option block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" data-lang="es">
+              Español
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Mobile Navigation Menu -->
+  <div id="mobile-menu" class="md:hidden hidden bg-white border-t border-gray-200">
+    <div class="px-2 pt-2 pb-3 space-y-1">
+      <a href="/find-services" class="block px-3 py-2 text-base font-medium text-gray-700 hover:text-primary-600 hover:bg-gray-50 rounded-md">
+        Find Services
+      </a>
+      <a href="/get-tested" class="block px-3 py-2 text-base font-medium text-gray-700 hover:text-primary-600 hover:bg-gray-50 rounded-md">
+        Get Tested
+      </a>
+      <a href="/treatment-care" class="block px-3 py-2 text-base font-medium text-gray-700 hover:text-primary-600 hover:bg-gray-50 rounded-md">
+        Treatment & Care
+      </a>
+      <a href="/support-resources" class="block px-3 py-2 text-base font-medium text-gray-700 hover:text-primary-600 hover:bg-gray-50 rounded-md">
+        Support & Resources
+      </a>
+      <a href="/about" class="block px-3 py-2 text-base font-medium text-gray-700 hover:text-primary-600 hover:bg-gray-50 rounded-md">
+        About
+      </a>
+    </div>
+  </div>
+</header>
+
+<script>
+  // Mobile menu toggle
+  const mobileMenuButton = document.getElementById('mobile-menu-button');
+  const mobileMenu = document.getElementById('mobile-menu');
+  
+  mobileMenuButton?.addEventListener('click', () => {
+    const isHidden = mobileMenu?.classList.contains('hidden');
+    if (isHidden) {
+      mobileMenu?.classList.remove('hidden');
+      mobileMenuButton?.setAttribute('aria-expanded', 'true');
+    } else {
+      mobileMenu?.classList.add('hidden');
+      mobileMenuButton?.setAttribute('aria-expanded', 'false');
+    }
+  });
+  
+  // Close mobile menu when clicking outside
+  document.addEventListener('click', (event) => {
+    const target = event.target as Element;
+    if (!mobileMenuButton?.contains(target) && !mobileMenu?.contains(target)) {
+      mobileMenu?.classList.add('hidden');
+      mobileMenuButton?.setAttribute('aria-expanded', 'false');
+    }
+  });
+  
+  // Language toggle functionality
+  const languageToggle = document.getElementById('language-toggle');
+  const languageDropdown = document.getElementById('language-dropdown');
+  const languageOptions = document.querySelectorAll('.language-option');
+  
+  // Current language state
+  let currentLanguage = 'en';
+  
+  // Toggle dropdown
+  languageToggle?.addEventListener('click', () => {
+    const isHidden = languageDropdown?.classList.contains('hidden');
+    if (isHidden) {
+      languageDropdown?.classList.remove('hidden');
+      languageToggle?.setAttribute('aria-expanded', 'true');
+    } else {
+      languageDropdown?.classList.add('hidden');
+      languageToggle?.setAttribute('aria-expanded', 'false');
+    }
+  });
+  
+  // Handle language selection
+  languageOptions.forEach(option => {
+    option.addEventListener('click', (e) => {
+      const selectedLang = (e.target as HTMLElement).getAttribute('data-lang');
+      if (selectedLang) {
+        currentLanguage = selectedLang;
+        
+        // Update button text
+        if (languageToggle) {
+          languageToggle.textContent = selectedLang === 'en' ? 'EN | ES' : 'ES | EN';
+        }
+        
+        // Hide dropdown
+        languageDropdown?.classList.add('hidden');
+        languageToggle?.setAttribute('aria-expanded', 'false');
+        
+        // Show language notice (for now - in production this would trigger translation)
+        if (selectedLang === 'es') {
+          alert('Funcionalidad de español próximamente. Spanish functionality coming soon.');
+        }
+      }
+    });
+  });
+  
+  // Close language dropdown when clicking outside
+  document.addEventListener('click', (event) => {
+    const target = event.target as Element;
+    if (!languageToggle?.contains(target) && !languageDropdown?.contains(target)) {
+      languageDropdown?.classList.add('hidden');
+      languageToggle?.setAttribute('aria-expanded', 'false');
+    }
+  });
+</script>
