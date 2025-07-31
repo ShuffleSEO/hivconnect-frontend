@@ -1,5 +1,6 @@
 ---
 import { getCurrentLanguage } from '../i18n/astro-utils';
+import '../styles/global.css';
 
 export interface Props {
   title: string;
@@ -41,11 +42,6 @@ const currentLanguage = getCurrentLanguage(Astro.currentLocale);
   <meta property="twitter:description" content={description} />
   {image && <meta property="twitter:image" content={image} />}
   
-  <!-- Security Headers -->
-  <meta http-equiv="X-Content-Type-Options" content="nosniff" />
-  <meta http-equiv="X-Frame-Options" content="DENY" />
-  <meta http-equiv="X-XSS-Protection" content="1; mode=block" />
-  
   <!-- Accessibility -->
   <meta name="theme-color" content="#dc2626" />
   
@@ -53,9 +49,6 @@ const currentLanguage = getCurrentLanguage(Astro.currentLocale);
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
-  
-  <!-- Global Styles -->
-  <link rel="stylesheet" href="/src/styles/global.css" />
   
   <!-- Schema.org structured data -->
   <script type="application/ld+json">
