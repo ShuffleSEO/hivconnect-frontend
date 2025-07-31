@@ -1,0 +1,169 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/ui/Header.astro';
+import Footer from '../../components/ui/Footer.astro';
+
+const title = "Privacy Policy - HIV Connect Central NJ";
+const description = "Learn how HIV Connect Central NJ protects your privacy and handles your personal health information in compliance with HIPAA regulations.";
+---
+
+<BaseLayout title={title} description={description}>
+  <Header />
+  
+  <main id="main-content" class="flex-1">
+    <!-- Hero Section -->
+    <section class="bg-gradient-to-br from-primary-50 to-secondary-50 py-12">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-4xl mx-auto text-center">
+          <h1 class="text-4xl lg:text-5xl font-bold text-gray-900 mb-6">Privacy Policy</h1>
+          <p class="text-xl text-gray-700">
+            Your privacy and confidentiality are our highest priorities. Learn how we protect your personal health information.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Content Section -->
+    <section class="py-16">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="prose prose-lg max-w-none">
+          
+          <!-- Last Updated -->
+          <div class="bg-blue-50 border-l-4 border-blue-400 p-4 mb-8">
+            <p class="text-sm text-blue-700">
+              <strong>Last Updated:</strong> January 2025
+            </p>
+          </div>
+
+          <!-- Introduction -->
+          <h2>Our Commitment to Your Privacy</h2>
+          <p>
+            HIV Connect Central NJ is committed to protecting your privacy and maintaining the confidentiality of your personal health information. This Privacy Policy explains how we collect, use, and protect your information when you use our website and services.
+          </p>
+
+          <!-- HIPAA Compliance -->
+          <h2>HIPAA Compliance</h2>
+          <p>
+            As a healthcare service provider, we comply with the Health Insurance Portability and Accountability Act (HIPAA) and all applicable federal and state privacy laws. Your protected health information (PHI) is handled with the highest level of security and confidentiality.
+          </p>
+
+          <!-- Information We Collect -->
+          <h2>Information We Collect</h2>
+          <h3>Personal Information</h3>
+          <ul>
+            <li>Contact information (name, phone number, email address)</li>
+            <li>Demographic information (age, county of residence)</li>
+            <li>Service preferences and needs</li>
+          </ul>
+
+          <h3>Health Information</h3>
+          <ul>
+            <li>HIV status and testing history (when voluntarily provided)</li>
+            <li>Treatment and care needs</li>
+            <li>Support service requirements</li>
+          </ul>
+
+          <h3>Website Usage Information</h3>
+          <ul>
+            <li>IP address and browser information</li>
+            <li>Pages visited and time spent on site</li>
+            <li>Referral sources</li>
+          </ul>
+
+          <!-- How We Use Information -->
+          <h2>How We Use Your Information</h2>
+          <p>We use your information to:</p>
+          <ul>
+            <li>Connect you with appropriate HIV care and support services</li>
+            <li>Coordinate care between healthcare providers</li>
+            <li>Provide case management and support services</li>
+            <li>Improve our services and website functionality</li>
+            <li>Comply with reporting requirements (in aggregate, non-identifiable form)</li>
+          </ul>
+
+          <!-- Information Sharing -->
+          <h2>When We Share Information</h2>
+          <p>We may share your information only in the following circumstances:</p>
+          <ul>
+            <li><strong>With Your Consent:</strong> When you explicitly authorize us to share your information</li>
+            <li><strong>Care Coordination:</strong> With healthcare providers involved in your care (with your permission)</li>
+            <li><strong>Legal Requirements:</strong> When required by law or court order</li>
+            <li><strong>Public Health:</strong> For disease surveillance and prevention (in de-identified form)</li>
+          </ul>
+
+          <!-- Your Rights -->
+          <h2>Your Privacy Rights</h2>
+          <p>You have the right to:</p>
+          <ul>
+            <li>Access your personal health information</li>
+            <li>Request corrections to your information</li>
+            <li>Request restrictions on how your information is used</li>
+            <li>Receive confidential communications</li>
+            <li>File a complaint about our privacy practices</li>
+          </ul>
+
+          <!-- Data Security -->
+          <h2>How We Protect Your Information</h2>
+          <ul>
+            <li>Encrypted data transmission and storage</li>
+            <li>Secure access controls and authentication</li>
+            <li>Regular security audits and updates</li>
+            <li>Staff training on privacy and confidentiality</li>
+            <li>Limited access on a need-to-know basis</li>
+          </ul>
+
+          <!-- Website Cookies -->
+          <h2>Website Cookies and Tracking</h2>
+          <p>
+            Our website uses cookies to improve your browsing experience and provide personalized content. You can control cookie settings in your browser. We do not use tracking technologies to collect personal health information.
+          </p>
+
+          <!-- Third-Party Services -->
+          <h2>Third-Party Services</h2>
+          <p>
+            Our website may contain links to third-party websites or services. We are not responsible for the privacy practices of these external sites. We encourage you to review their privacy policies before providing any personal information.
+          </p>
+
+          <!-- Children's Privacy -->
+          <h2>Children's Privacy</h2>
+          <p>
+            Our services are designed for adults and emancipated minors. We do not knowingly collect personal information from children under 13 without parental consent. For minors aged 13-17, we follow applicable state laws regarding confidential healthcare services.
+          </p>
+
+          <!-- Updates to Policy -->
+          <h2>Updates to This Policy</h2>
+          <p>
+            We may update this Privacy Policy periodically to reflect changes in our practices or applicable laws. We will notify you of significant changes by posting the updated policy on our website with a new effective date.
+          </p>
+
+          <!-- Contact Information -->
+          <h2>Contact Us About Privacy</h2>
+          <p>
+            If you have questions about this Privacy Policy or wish to exercise your privacy rights, please contact us:
+          </p>
+          <div class="bg-gray-50 p-6 rounded-lg">
+            <p class="mb-2"><strong>Privacy Officer</strong></p>
+            <p class="mb-2">HIV Connect Central NJ</p>
+            <p class="mb-2">Email: <a href="mailto:privacy@hivconnectcnj.org" class="text-primary-600 hover:text-primary-700">privacy@hivconnectcnj.org</a></p>
+            <p class="mb-2">Phone: <a href="tel:18004484663" class="text-primary-600 hover:text-primary-700">1-800-HIV-INFO</a></p>
+            <p class="text-sm text-gray-600 mt-4">
+              You may also file a complaint with the U.S. Department of Health and Human Services Office for Civil Rights.
+            </p>
+          </div>
+
+          <!-- Emergency Notice -->
+          <div class="bg-error-50 border border-error-200 rounded-lg p-6 mt-8">
+            <h3 class="text-error-900 font-semibold mb-2">Emergency Situations</h3>
+            <p class="text-error-800">
+              If you are experiencing a medical emergency or are in crisis, please call 911 or go to your nearest emergency room. 
+              For mental health crisis support, call 988 (Suicide & Crisis Lifeline).
+            </p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</BaseLayout>

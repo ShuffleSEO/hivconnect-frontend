@@ -1,0 +1,76 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/ui/Header.astro';
+import Footer from '../components/ui/Footer.astro';
+
+const title = "Server Error - HIV Connect Central NJ";
+const description = "We're experiencing technical difficulties. Access HIV care and support resources across Central New Jersey.";
+---
+
+<BaseLayout title={title} description={description}>
+  <Header />
+  
+  <main id="main-content" class="flex-1 flex items-center justify-center">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+      <div class="text-center">
+        <div class="mb-8">
+          <div class="w-24 h-24 bg-error-100 rounded-full flex items-center justify-center mx-auto mb-6">
+            <svg class="w-12 h-12 text-error-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+          </div>
+          <h1 class="text-4xl lg:text-5xl font-bold text-gray-900 mb-4">Server Error</h1>
+          <p class="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
+            We're experiencing technical difficulties right now. Please try again in a few minutes, or contact us directly if you need immediate assistance.
+          </p>
+        </div>
+        
+        <!-- Emergency Contact -->
+        <div class="bg-error-50 border border-error-200 rounded-lg p-6 max-w-2xl mx-auto mb-8">
+          <h2 class="text-lg font-semibold text-error-900 mb-3">Need Immediate Help?</h2>
+          <p class="text-sm text-gray-600 mb-4">
+            Don't let technical issues prevent you from getting the care you need. Call us directly:
+          </p>
+          <div class="flex flex-col sm:flex-row gap-3 justify-center">
+            <a href="tel:988" class="bg-error-600 hover:bg-error-700 text-white px-6 py-2 rounded font-medium transition-colors">
+              Crisis Support: 988
+            </a>
+            <a href="tel:18004484663" class="bg-primary-600 hover:bg-primary-700 text-white px-6 py-2 rounded font-medium transition-colors">
+              HIV Hotline: 1-800-HIV-INFO
+            </a>
+          </div>
+        </div>
+        
+        <!-- Alternative Actions -->
+        <div class="space-y-4">
+          <h2 class="text-lg font-semibold text-gray-900 mb-4">Alternative Options:</h2>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-2xl mx-auto">
+            <div class="bg-white border border-gray-200 rounded-lg p-4">
+              <h3 class="font-medium text-gray-900 mb-2">Try Again Later</h3>
+              <p class="text-sm text-gray-600 mb-3">Our technical team is working to resolve this issue.</p>
+              <button onclick="window.location.reload()" class="btn-outline text-sm w-full">
+                Refresh Page
+              </button>
+            </div>
+            <div class="bg-white border border-gray-200 rounded-lg p-4">
+              <h3 class="font-medium text-gray-900 mb-2">Contact Support</h3>
+              <p class="text-sm text-gray-600 mb-3">Speak with someone who can help you right now.</p>
+              <a href="/contact" class="btn-primary text-sm w-full block text-center">
+                Contact Us
+              </a>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Back to Home -->
+        <div class="mt-8">
+          <a href="/" class="text-primary-600 hover:text-primary-700 font-medium">
+            ← Back to Homepage
+          </a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <Footer />
+</BaseLayout>

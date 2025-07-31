@@ -1,0 +1,92 @@
+---
+import { getCurrentLanguage, getAlternateLanguageUrls, getAvailableLanguages } from '../../i18n/astro-utils';
+
+// Get current language from Astro's built-in locale detection
+const currentLanguage = getCurrentLanguage(Astro.currentLocale);
+const currentPath = Astro.url.pathname;
+const alternateUrls = getAlternateLanguageUrls(currentPath);
+const availableLanguages = getAvailableLanguages();
+---
+
+<div class="relative language-switcher">
+  <button 
+    id="language-toggle" 
+    class="text-gray-700 hover:text-primary-600 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 rounded-md px-2 py-1"
+    aria-label="Change language"
+    aria-expanded="false"
+    aria-haspopup="true"
+  >
+    {currentLanguage === 'en' ? 'EN | ES' : 'ES | EN'}
+    <svg 
+      class="inline-block ml-1 w-4 h-4 transition-transform"
+      fill="none" 
+      stroke="currentColor" 
+      viewBox="0 0 24 24"
+      id="dropdown-arrow"
+    >
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+    </svg>
+  </button>
+
+  <div 
+    id="language-dropdown" 
+    class="hidden absolute right-0 mt-2 w-32 bg-white rounded-md shadow-lg border border-gray-200 z-50"
+  >
+    <div class="py-1" role="menu" aria-orientation="vertical">
+      {Object.entries(availableLanguages).map(([code, name]) => (
+        <a
+          href={alternateUrls[code as keyof typeof alternateUrls]}
+          class={`block w-full text-left px-4 py-2 text-sm hover:bg-gray-100 transition-colors ${
+            currentLanguage === code 
+              ? 'bg-primary-50 text-primary-700 font-medium' 
+              : 'text-gray-700'
+          }`}
+          role="menuitem"
+        >
+          {name}
+        </a>
+      ))}
+    </div>
+  </div>
+</div>
+
+<script>
+  // Language switcher functionality
+  const languageToggle = document.getElementById('language-toggle');
+  const languageDropdown = document.getElementById('language-dropdown');
+  const dropdownArrow = document.getElementById('dropdown-arrow');
+  
+  // Toggle dropdown
+  languageToggle?.addEventListener('click', () => {
+    const isHidden = languageDropdown?.classList.contains('hidden');
+    
+    if (isHidden) {
+      languageDropdown?.classList.remove('hidden');
+      languageToggle?.setAttribute('aria-expanded', 'true');
+      dropdownArrow?.classList.add('rotate-180');
+    } else {
+      languageDropdown?.classList.add('hidden');
+      languageToggle?.setAttribute('aria-expanded', 'false');
+      dropdownArrow?.classList.remove('rotate-180');
+    }
+  });
+  
+  // Close dropdown when clicking outside
+  document.addEventListener('click', (event) => {
+    const target = event.target as Element;
+    if (!languageToggle?.contains(target) && !languageDropdown?.contains(target)) {
+      languageDropdown?.classList.add('hidden');
+      languageToggle?.setAttribute('aria-expanded', 'false');
+      dropdownArrow?.classList.remove('rotate-180');
+    }
+  });
+  
+  // Close dropdown on escape key
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') {
+      languageDropdown?.classList.add('hidden');
+      languageToggle?.setAttribute('aria-expanded', 'false');
+      dropdownArrow?.classList.remove('rotate-180');
+    }
+  });
+</script>

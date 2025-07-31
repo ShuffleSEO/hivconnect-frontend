@@ -10,6 +10,29 @@ const { provider } = Astro.props;
 // Get primary location for display
 const primaryLocation = provider.locations[0];
 
+// Provider location images mapping
+const locationImages: { [key: string]: string } = {
+  'eric-chandler-health-center': '/HIV Treatment Website/Eric B. Chandler Health Center.png',
+  'zufall-health': '/HIV Treatment Website/zufall_photo.png',
+  'zufall-mobile-unit': '/HIV Treatment Website/zufall_photo.png',
+  'rwj-aids-program': '/HIV Treatment Website/RWJ Medical School AIDS Program Location.png',
+  'raritan-bay-medical-center': '/HIV Treatment Website/HMH Raritan Bay Location.png',
+  'hyacinth-aids-foundation': '/HIV Treatment Website/Hyacinth AIDS Foundation 1200.png',
+  'central-jersey-legal-services': '/HIV Treatment Website/Central Jersey Legal Services.png',
+  'planned-parenthood-nj': '/HIV Treatment Website/Planned Parenthood - New Brunswick.png',
+  'cvs-pharmacy': '/HIV Treatment Website/CVS Minute Clinic.png',
+  'nbcc': '/HIV Treatment Website/New Brunswick Counseling Center.png',
+  'somerset-treatment-services': '/HIV Treatment Website/Somerset Treatment Services.png',
+  'woodbridge-health-dept': '/HIV Treatment Website/Woodbridge Health Department .jpeg',
+  'elijahs-promise': '/HIV Treatment Website/Elijah\'s Promise Location.png',
+  'vnahg': '/HIV Treatment Website/90_eas_main.psd_with_parking.jpg',
+  'legal-services-nwj-hunterdon': '/HIV Treatment Website/Legal Services of Northwest Jersey.png',
+  'legal-services-nwj-somerset': '/HIV Treatment Website/Legal Services of Northwest Jersey (Somerset).png',
+  'mcat-transportation': '/HIV Treatment Website/Middlesex County Area Transit.png'
+};
+
+const locationImage = locationImages[provider.id];
+
 // Count available services
 const serviceCount = Object.values(provider.services).reduce((count, category) => {
   return count + Object.values(category).filter(Boolean).length;
@@ -25,7 +48,19 @@ function formatHours(hours: any) {
 }
 ---
 
-<div class="card hover:shadow-xl transition-all duration-300 border-l-4 border-primary-500">
+<div class="card hover:shadow-xl transition-all duration-300 border-l-4 border-primary-500 overflow-hidden">
+  <!-- Location Photo -->
+  {locationImage && (
+    <div class="w-full h-32 -mx-6 -mt-6 mb-4">
+      <img 
+        src={locationImage} 
+        alt={`${provider.name} location`}
+        class="w-full h-full object-cover"
+        loading="lazy"
+      />
+    </div>
+  )}
+  
   <div class="flex justify-between items-start mb-4">
     <div class="flex-1">
       <h3 class="text-xl font-semibold text-gray-900 mb-2">

@@ -20,15 +20,32 @@
     line-height: 1.2;
   }
   
-  /* Focus styles for accessibility */
+  /* Enhanced focus styles for accessibility */
   *:focus {
     @apply outline-none ring-2 ring-primary-500 ring-offset-2;
   }
   
-  /* Skip link for screen readers */
+  /* High contrast focus for interactive elements */
+  a:focus, button:focus, input:focus, select:focus, textarea:focus {
+    @apply outline-none ring-2 ring-primary-600 ring-offset-2;
+    box-shadow: 0 0 0 2px white, 0 0 0 4px #dc2626;
+  }
+  
+  /* Skip links for screen readers and keyboard navigation */
   .skip-link {
-    @apply absolute -top-10 left-4 bg-primary-600 text-white px-4 py-2 rounded;
-    @apply focus:top-4 z-50 transition-all duration-200;
+    @apply absolute -top-16 left-4 bg-primary-600 text-white px-4 py-2 rounded;
+    @apply focus:top-4 z-50 transition-all duration-200 font-semibold;
+    @apply focus:ring-4 focus:ring-white focus:ring-offset-2 focus:ring-offset-primary-600;
+  }
+  
+  /* Ensure skip links are visible when focused */
+  .skip-link:focus {
+    position: absolute !important;
+    top: 1rem !important;
+    left: 1rem !important;
+    clip: auto !important;
+    width: auto !important;
+    height: auto !important;
   }
 }
 
@@ -81,12 +98,71 @@
     }
   }
   
-  /* Reduced motion support */
+  /* Accessibility: Reduced motion support */
   @media (prefers-reduced-motion: reduce) {
     * {
       animation-duration: 0.01ms !important;
       animation-iteration-count: 1 !important;
       transition-duration: 0.01ms !important;
     }
+    
+    /* Disable parallax and transform animations */
+    *,
+    *::before,
+    *::after {
+      animation-delay: -1ms !important;
+      animation-duration: 1ms !important;
+      animation-iteration-count: 1 !important;
+      background-attachment: initial !important;
+      scroll-behavior: auto !important;
+    }
+  }
+  
+  /* High contrast mode support */
+  @media (prefers-contrast: high) {
+    .btn-primary {
+      @apply border-2 border-white;
+    }
+    
+    .skip-link:focus {
+      border: 3px solid yellow !important;
+    }
+    
+    a:focus, button:focus {
+      outline: 3px solid yellow !important;
+      outline-offset: 2px !important;
+    }
+  }
+  
+  /* Leaflet Map Customizations */
+  .leaflet-container {
+    font-family: inherit;
+  }
+
+  .custom-marker {
+    background: transparent !important;
+    border: none !important;
+  }
+
+  .leaflet-popup-content-wrapper {
+    border-radius: 8px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  }
+
+  .leaflet-popup-content {
+    margin: 0 !important;
+    line-height: 1.4;
+  }
+
+  .leaflet-popup-tip-container {
+    margin-top: -1px;
+  }
+
+  .provider-popup .leaflet-popup-content-wrapper {
+    padding: 0;
+  }
+
+  .provider-popup .leaflet-popup-content {
+    width: 280px !important;
   }
 }

@@ -1,0 +1,213 @@
+{
+  "site": {
+    "title": "HIV Connect Central NJ",
+    "tagline": "Central New Jersey",
+    "description": "Comprehensive HIV care, support, and resources across Central New Jersey"
+  },
+  "navigation": {
+    "findServices": "Find Services",
+    "getTested": "Get Tested",
+    "treatmentCare": "Treatment & Care",
+    "supportResources": "Support & Resources",
+    "about": "About",
+    "home": "Home"
+  },
+  "homepage": {
+    "hero": {
+      "title": "Find Your Path to Health and Wellness",
+      "subtitle": "Comprehensive HIV care, support, and resources across Central New Jersey. Whether you're newly diagnosed, managing HIV long-term, seeking prevention resources, or supporting someone you love, you'll find expert care and genuine community here.",
+      "confidential": "All services are confidential, and many are free regardless of insurance status."
+    },
+    "quickActions": {
+      "findCare": "Find Care Near Me",
+      "talkToSomeone": "Talk to Someone Now",
+      "scheduleTest": "Schedule Testing",
+      "getMedication": "Get Medication Help",
+      "connectSupport": "Connect with Support"
+    },
+    "serviceCategories": {
+      "title": "Comprehensive Care & Support",
+      "subtitle": "From testing to treatment, from housing to mental health support, we connect you with the services you need across Middlesex, Somerset, and Hunterdon counties.",
+      "testing": {
+        "title": "Testing & Prevention",
+        "description": "Free, confidential HIV testing with results in 20 minutes. PrEP counseling and at-home testing options available."
+      },
+      "treatment": {
+        "title": "Treatment & Care",
+        "description": "Expert medical care to help you live a full, healthy life. Same-day treatment initiation and telehealth options available."
+      },
+      "caseManagement": {
+        "title": "Case Management",
+        "description": "Personal support to connect you with everything you need. Your case manager is your advocate."
+      },
+      "housing": {
+        "title": "Housing & Financial Support",
+        "description": "Emergency housing assistance, financial support, and benefits enrollment. Safe, stable housing is healthcare."
+      }
+    },
+    "coverageArea": {
+      "title": "Serving Central New Jersey",
+      "subtitle": "HIV Connect Central NJ serves residents of Middlesex, Somerset, and Hunterdon counties",
+      "middlesex": "New Brunswick, Perth Amboy, Edison, Woodbridge, and surrounding communities",
+      "somerset": "Somerville, Franklin Township, Bridgewater, and surrounding communities",  
+      "hunterdon": "Flemington, Clinton, Lambertville, and surrounding communities"
+    },
+    "keyMessages": {
+      "title": "You Belong Here",
+      "hivManageable": {
+        "title": "HIV is manageable",
+        "description": "Modern treatment enables full, healthy lives. With proper care, people with HIV live long, healthy lives."
+      },
+      "privacyMatters": {
+        "title": "Your privacy matters",
+        "description": "All HIV-related services are strictly confidential. Your information is protected by federal and state privacy laws."
+      },
+      "careAccessible": {
+        "title": "Care is accessible",
+        "description": "Most services are available regardless of insurance status. Immigration status doesn't affect your ability to receive care."
+      }
+    },
+    "crisis": {
+      "title": "Need Help Right Now?",
+      "crisisSupport": "Crisis Support: Call 988",
+      "hivHotline": "HIV/AIDS Hotline: 1-800-HIV-INFO",
+      "crisisText": "Crisis Text: Text HOME to 741741",
+      "available": "Available 24/7. You matter. Help is available."
+    }
+  },
+  "findServices": {
+    "title": "Find HIV Care & Support Services",
+    "subtitle": "Connect with trusted providers offering comprehensive HIV care, testing, treatment, and support services across Central New Jersey.",
+    "confidentialNote": "All services are confidential. Many are free regardless of insurance status.",
+    "search": {
+      "placeholder": "Search by provider name, service, or keyword...",
+      "county": "County",
+      "allCounties": "All Counties",
+      "careNeeded": "Care Needed",
+      "routineCare": "Routine Care",
+      "urgent": "Urgent (Within Week)",
+      "emergency": "Emergency (Same Day)",
+      "servicesNeeded": "Services Needed",
+      "language": "Language",
+      "clearFilters": "Clear all filters"
+    },
+    "results": {
+      "showing": "Showing {{count}} of {{total}} providers",
+      "emergencyHelp": "Need immediate help?",
+      "emergencyText": "Call 988 for crisis support or 911 for medical emergencies"
+    },
+    "providerDirectory": {
+      "title": "Provider Directory",
+      "subtitle": "All providers listed are part of the Ryan White HIV/AIDS Program network, ensuring quality care and comprehensive services.",
+      "featuredProviders": "Featured Providers",
+      "allProviders": "All Providers"
+    },
+    "serviceInfo": {
+      "title": "Understanding HIV Services",
+      "subtitle": "Learn about the different types of HIV care and support services available to help you live your healthiest life.",
+      "hivTesting": {
+        "title": "HIV Testing",
+        "description": "Free, confidential testing with results in 20 minutes. Pre- and post-test counseling included."
+      },
+      "hivTreatment": {
+        "title": "HIV Treatment", 
+        "description": "Modern HIV treatment helps you live a full, healthy life. Same-day treatment initiation available."
+      },
+      "supportServices": {
+        "title": "Support Services",
+        "description": "Case management, mental health support, housing assistance, and more comprehensive services."
+      }
+    }
+  },
+  "provider": {
+    "contactInfo": "Contact Information",
+    "locationHours": "Location & Hours",
+    "servicesOffered": "Services Offered",
+    "eligibilityInsurance": "Eligibility & Insurance",
+    "medicalCare": "Medical Care & Treatment",
+    "supportServices": "Support Services",
+    "testingPrevention": "Testing & Prevention",
+    "phone": "Phone",
+    "email": "Email",
+    "website": "Website",
+    "telehealthAvailable": "Telehealth Available",
+    "accessPortal": "Access Portal",
+    "visitWebsite": "Visit Website",
+    "callNow": "Call Now",
+    "address": "Address",
+    "getDirections": "Get Directions",
+    "hoursOperation": "Hours of Operation",
+    "accessibilityFeatures": "Accessibility Features",
+    "insuranceAccepted": "Insurance Accepted",
+    "incomeRequirements": "Income Requirements",
+    "specialPopulations": "Special Populations Served",
+    "privacyNotice": {
+      "title": "Your Privacy Matters",
+      "description": "All HIV-related services are strictly confidential. Your information is protected by federal and state privacy laws. Immigration status does not affect your ability to receive care. Quality HIV care shouldn't depend on your ability to pay."
+    },
+    "readyToStart": {
+      "title": "Ready to Get Started?",
+      "description": "Contact {{providerName}} today to learn more about their services or schedule an appointment.",
+      "findOtherProviders": "Find Other Providers"
+    },
+    "needHelpNow": {
+      "title": "Need Help Right Now?",
+      "crisis": "Crisis: 988",
+      "hivHotline": "HIV Hotline: 1-800-HIV-INFO"
+    }
+  },
+  "common": {
+    "learnMore": "Learn More",
+    "callNow": "Call Now",
+    "viewDetails": "View Details",
+    "viewProfile": "View Profile",
+    "directions": "Directions",
+    "closed": "Closed",
+    "open": "Open",
+    "closedToday": "Closed today",
+    "available247": "Available 24/7",
+    "english": "English",
+    "spanish": "Spanish",
+    "languages": "Languages",
+    "services": "Services",
+    "accessible": "Accessible",
+    "keyServices": "Key Services Available",
+    "moreServices": "+{{count}} more services",
+    "featuredProvider": "Featured Provider",
+    "ryanWhitePart": "Ryan White Part {{part}}",
+    "counties": {
+      "middlesex": "Middlesex County",
+      "somerset": "Somerset County", 
+      "hunterdon": "Hunterdon County"
+    },
+    "days": {
+      "monday": "Monday",
+      "tuesday": "Tuesday", 
+      "wednesday": "Wednesday",
+      "thursday": "Thursday",
+      "friday": "Friday",
+      "saturday": "Saturday",
+      "sunday": "Sunday"
+    }
+  },
+  "services": {
+    "hivTesting": "HIV Testing",
+    "hivTreatment": "HIV Treatment",
+    "prepServices": "PrEP Services",
+    "caseManagement": "Case Management",
+    "mentalHealth": "Mental Health",
+    "substanceAbuse": "Substance Abuse",
+    "housingAssistance": "Housing Assistance",
+    "transportation": "Transportation",
+    "legalServices": "Legal Services",
+    "foodNutrition": "Food & Nutrition",
+    "insuranceHelp": "Insurance Help",
+    "counseling": "Counseling",
+    "prepCounseling": "PrEP Counseling",
+    "education": "Education",
+    "riskReduction": "Risk Reduction",
+    "dentalCare": "Dental Care",
+    "stdTesting": "STD Testing",
+    "specialtyCare": "Specialty Care"
+  }
+}

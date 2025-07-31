@@ -135,14 +135,16 @@ const ProviderSearch: React.FC<Props> = ({ providers }) => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
           {/* County Filter */}
           <div>
-            <label className="form-label">County</label>
+            <label htmlFor="county-filter" className="form-label">County</label>
             <select
+              id="county-filter"
               value={filters.location.county || ''}
               onChange={(e) => setFilters(prev => ({
                 ...prev,
                 location: { ...prev.location, county: e.target.value as any }
               }))}
               className="form-input"
+              aria-label="Filter by county"
             >
               <option value="">All Counties</option>
               <option value="middlesex">Middlesex County</option>
@@ -153,14 +155,16 @@ const ProviderSearch: React.FC<Props> = ({ providers }) => {
 
           {/* Urgency Filter */}
           <div>
-            <label className="form-label">Care Needed</label>
+            <label htmlFor="urgency-filter" className="form-label">Care Needed</label>
             <select
+              id="urgency-filter"
               value={filters.urgency}
               onChange={(e) => setFilters(prev => ({
                 ...prev,
                 urgency: e.target.value as any
               }))}
               className="form-input"
+              aria-label="Select urgency of care needed"
             >
               <option value="routine">Routine Care</option>
               <option value="urgent">Urgent (Within Week)</option>

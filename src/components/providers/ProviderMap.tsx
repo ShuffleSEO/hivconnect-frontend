@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import type { Provider } from '../../types/provider';
 
 interface Props {
@@ -6,203 +6,116 @@ interface Props {
   filteredProviders: Provider[];
 }
 
-declare global {
-  interface Window {
-    google: any;
-    initMap: () => void;
-  }
-}
-
 const ProviderMap: React.FC<Props> = ({ providers, filteredProviders }) => {
-  const mapRef = useRef<HTMLDivElement>(null);
-  const mapInstanceRef = useRef<any>(null);
-  const markersRef = useRef<any[]>([]);
-  const infoWindowRef = useRef<any>(null);
-  const [isScriptLoaded, setIsScriptLoaded] = useState(false);
-  const [isMapInitialized, setIsMapInitialized] = useState(false);
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [mapComponents, setMapComponents] = useState<any>(null);
 
-  // Load Google Maps script only once
   useEffect(() => {
-    if (window.google) {
-      setIsScriptLoaded(true);
-      return;
-    }
+    const loadMapComponents = async () => {
+      if (typeof window !== 'undefined' && !isLoaded) {
+        try {
+          // Import Leaflet and React Leaflet dynamically
+          const [leafletModule, reactLeafletModule] = await Promise.all([
+            import('leaflet'),
+            import('react-leaflet'),
+            import('leaflet/dist/leaflet.css')
+          ]);
 
-    const script = document.createElement('script');
-    script.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyBFw0Qbyq9zTFTd-tUY6dOWTgHz-TK7VFC&libraries=places`;
-    script.async = true;
-    script.defer = true;
-    
-    script.onload = () => {
-      setIsScriptLoaded(true);
-    };
+          const L = leafletModule.default;
 
-    script.onerror = () => {
-      console.error('Failed to load Google Maps script');
-    };
+          // Fix for default markers in React Leaflet
+          delete (L.Icon.Default.prototype as any)._getIconUrl;
+          L.Icon.Default.mergeOptions({
+            iconRetinaUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon-2x.png',
+            iconUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png',
+            shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
+          });
 
-    document.head.appendChild(script);
+          // Create custom marker icons for different service types
+          const createCustomIcon = (color: string) => {
+            return L.divIcon({
+              className: 'custom-marker',
+              html: `
+                <div style="
+                  background-color: ${color};
+                  width: 20px;
+                  height: 20px;
+                  border-radius: 50%;
+                  border: 3px solid white;
+                  box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+                "></div>
+              `,
+              iconSize: [20, 20],
+              iconAnchor: [10, 10],
+            });
+          };
 
-    return () => {
-      // Don't remove script on cleanup to prevent reloading
-    };
-  }, []);
+          // Determine service type and marker color
+          const getMarkerColor = (provider: Provider) => {
+            if (provider.services.medical_care.hiv_treatment) return '#dc2626'; // Red for treatment
+            if (provider.services.medical_care.hiv_testing) return '#2563eb'; // Blue for testing
+            if (provider.services.support_services.case_management) return '#16a34a'; // Green for support
+            return '#6b7280'; // Gray for general services
+          };
 
-  // Initialize map only once when script is loaded
-  useEffect(() => {
-    if (!isScriptLoaded || !mapRef.current || isMapInitialized) return;
-
-    try {
-      // Center on Central New Jersey
-      const centerLat = 40.4896;
-      const centerLng = -74.4519;
-
-      const mapInstance = new window.google.maps.Map(mapRef.current, {
-        zoom: 10,
-        center: { lat: centerLat, lng: centerLng },
-        styles: [
-          {
-            featureType: 'poi',
-            elementType: 'labels',
-            stylers: [{ visibility: 'off' }]
-          }
-        ]
-      });
-
-      const infoWindowInstance = new window.google.maps.InfoWindow();
-      
-      mapInstanceRef.current = mapInstance;
-      infoWindowRef.current = infoWindowInstance;
-      setIsMapInitialized(true);
-    } catch (error) {
-      console.error('Error initializing map:', error);
-    }
-  }, [isScriptLoaded, isMapInitialized]);
-
-  // Update markers when filtered providers change
-  useEffect(() => {
-    if (!mapInstanceRef.current || !infoWindowRef.current || !isMapInitialized) return;
-
-    // Cleanup function to properly remove existing markers
-    const cleanupMarkers = () => {
-      markersRef.current.forEach(marker => {
-        if (marker && typeof marker.setMap === 'function') {
-          try {
-            marker.setMap(null);
-          } catch (error) {
-            console.error('Error removing marker:', error);
-          }
+          setMapComponents({
+            MapContainer: reactLeafletModule.MapContainer,
+            TileLayer: reactLeafletModule.TileLayer,
+            Marker: reactLeafletModule.Marker,
+            Popup: reactLeafletModule.Popup,
+            createCustomIcon,
+            getMarkerColor,
+            L
+          });
+          setIsLoaded(true);
+        } catch (error) {
+          console.error('Error loading map components:', error);
         }
-      });
-      markersRef.current = [];
+      }
     };
 
-    // Clean up existing markers
-    cleanupMarkers();
+    loadMapComponents();
+  }, [isLoaded]);
 
-    // Create new markers for filtered providers
-    const newMarkers = filteredProviders.map(provider => {
-      const location = provider.locations[0];
-      if (!location.coordinates) return null;
-
-      try {
-        // Determine marker color based on services
-        let markerColor = '#dc2626'; // Default red
-        if (provider.services.medical_care.hiv_treatment) {
-          markerColor = '#dc2626'; // Red for HIV treatment
-        } else if (provider.services.prevention.hiv_testing) {
-          markerColor = '#2563eb'; // Blue for testing
-        } else if (provider.services.support_services.case_management) {
-          markerColor = '#16a34a'; // Green for support services
-        }
-
-        const marker = new window.google.maps.Marker({
-          position: location.coordinates,
-          map: mapInstanceRef.current,
-          title: provider.name,
-          icon: {
-            path: window.google.maps.SymbolPath.CIRCLE,
-            scale: 8,
-            fillColor: markerColor,
-            fillOpacity: 0.8,
-            strokeColor: '#ffffff',
-            strokeWeight: 2
-          }
-        });
-
-        // Create info window content
-        const infoContent = `
-          <div class="p-4 max-w-sm">
-            <h3 class="font-bold text-lg text-gray-900 mb-2">${provider.name}</h3>
-            <div class="space-y-2 text-sm">
-              <div class="flex items-start space-x-2">
-                <svg class="w-4 h-4 mt-0.5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
-                </svg>
-                <div>
-                  <p class="text-gray-700">${location.address}</p>
-                  <p class="text-gray-600">${location.city}, ${location.county.charAt(0).toUpperCase() + location.county.slice(1)} County</p>
-                </div>
-              </div>
-              <div class="flex items-center space-x-2">
-                <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
-                </svg>
-                <a href="tel:${provider.contact.phone}" class="text-blue-600 hover:text-blue-800">${provider.contact.phone}</a>
-              </div>
-              <div class="flex flex-wrap gap-1 mt-2">
-                ${provider.services.medical_care.hiv_treatment ? '<span class="px-2 py-1 bg-red-100 text-red-800 text-xs rounded">HIV Treatment</span>' : ''}
-                ${provider.services.prevention.hiv_testing ? '<span class="px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded">HIV Testing</span>' : ''}
-                ${provider.services.medical_care.prep_services ? '<span class="px-2 py-1 bg-green-100 text-green-800 text-xs rounded">PrEP</span>' : ''}
-                ${provider.services.support_services.case_management ? '<span class="px-2 py-1 bg-yellow-100 text-yellow-800 text-xs rounded">Case Management</span>' : ''}
-              </div>
-              <div class="flex space-x-2 mt-3">
-                <a href="tel:${provider.contact.phone}" class="bg-red-600 text-white px-3 py-1 rounded text-xs hover:bg-red-700">Call Now</a>
-                <a href="/providers/${provider.id}" class="bg-gray-600 text-white px-3 py-1 rounded text-xs hover:bg-gray-700">View Details</a>
-                <a href="https://maps.google.com/maps?daddr=${location.coordinates.lat},${location.coordinates.lng}" target="_blank" class="bg-blue-600 text-white px-3 py-1 rounded text-xs hover:bg-blue-700">Directions</a>
-              </div>
+  if (!isLoaded || !mapComponents) {
+    return (
+      <div className="bg-white rounded-lg shadow-md overflow-hidden">
+        <div className="p-4 bg-gray-50 border-b">
+          <h3 className="text-lg font-semibold text-gray-900 mb-2">Provider Locations</h3>
+          <div className="flex flex-wrap gap-4 text-sm">
+            <div className="flex items-center space-x-2">
+              <div className="w-3 h-3 rounded-full bg-red-600"></div>
+              <span className="text-gray-700">HIV Treatment</span>
+            </div>
+            <div className="flex items-center space-x-2">
+              <div className="w-3 h-3 rounded-full bg-blue-600"></div>
+              <span className="text-gray-700">HIV Testing</span>
+            </div>
+            <div className="flex items-center space-x-2">
+              <div className="w-3 h-3 rounded-full bg-green-600"></div>
+              <span className="text-gray-700">Support Services</span>
             </div>
           </div>
-        `;
+        </div>
+        <div className="w-full h-96 min-h-[400px] flex items-center justify-center bg-gray-100">
+          <div className="text-center">
+            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary-600 mx-auto mb-2"></div>
+            <p className="text-gray-600">Loading interactive map...</p>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
-        marker.addListener('click', () => {
-          infoWindowRef.current.setContent(infoContent);
-          infoWindowRef.current.open(mapInstanceRef.current, marker);
-        });
+  const { MapContainer, TileLayer, Marker, Popup, createCustomIcon, getMarkerColor } = mapComponents;
 
-        return marker;
-      } catch (error) {
-        console.error('Error creating marker:', error);
-        return null;
-      }
-    }).filter(Boolean);
+  // Calculate map bounds based on filtered providers
+  const locations = filteredProviders.flatMap(provider => 
+    provider.locations.map(location => [location.coordinates.lat, location.coordinates.lng])
+  );
 
-    markersRef.current = newMarkers;
-
-    // Adjust map bounds to fit all markers
-    if (newMarkers.length > 0) {
-      try {
-        const bounds = new window.google.maps.LatLngBounds();
-        newMarkers.forEach(marker => {
-          if (marker && marker.getPosition) {
-            bounds.extend(marker.getPosition());
-          }
-        });
-        mapInstanceRef.current.fitBounds(bounds);
-        
-        // Don't zoom in too much for single markers
-        const listener = window.google.maps.event.addListener(mapInstanceRef.current, 'idle', () => {
-          if (mapInstanceRef.current.getZoom() > 15) mapInstanceRef.current.setZoom(15);
-          window.google.maps.event.removeListener(listener);
-        });
-      } catch (error) {
-        console.error('Error adjusting map bounds:', error);
-      }
-    }
-
-    // Return cleanup function
-    return cleanupMarkers;
-  }, [filteredProviders, isMapInitialized]);
+  const defaultCenter = [40.4637, -74.5409]; // Central NJ
+  const defaultZoom = 10;
 
   return (
     <div className="bg-white rounded-lg shadow-md overflow-hidden">
@@ -223,19 +136,66 @@ const ProviderMap: React.FC<Props> = ({ providers, filteredProviders }) => {
           </div>
         </div>
       </div>
-      <div 
-        ref={mapRef} 
-        className="w-full h-96"
-        style={{ minHeight: '400px' }}
-      >
-        {!isMapInitialized && (
-          <div className="flex items-center justify-center h-full bg-gray-100">
-            <div className="text-center">
-              <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary-600 mx-auto mb-2"></div>
-              <p className="text-gray-600">Loading map...</p>
-            </div>
-          </div>
-        )}
+      
+      <div className="w-full h-96 min-h-[400px]">
+        <MapContainer
+          center={defaultCenter}
+          zoom={defaultZoom}
+          style={{ height: '100%', width: '100%' }}
+          className="leaflet-container"
+        >
+          <TileLayer
+            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+          />
+          
+          {filteredProviders.map(provider => 
+            provider.locations.map((location, locationIndex) => (
+              <Marker
+                key={`${provider.id}-${locationIndex}`}
+                position={[location.coordinates.lat, location.coordinates.lng]}
+                icon={createCustomIcon(getMarkerColor(provider))}
+              >
+                <Popup>
+                  <div className="p-2 min-w-[200px]">
+                    <h4 className="font-semibold text-gray-900 mb-2">{provider.name}</h4>
+                    <div className="text-sm text-gray-600 space-y-1 mb-3">
+                      <p><strong>Address:</strong> {location.address}</p>
+                      <p><strong>Phone:</strong> {location.phone}</p>
+                      <p><strong>Hours:</strong> {location.hours}</p>
+                    </div>
+                    
+                    {/* Services offered */}
+                    <div className="text-sm mb-3">
+                      <p className="font-medium text-gray-900 mb-1">Services:</p>
+                      <div className="flex flex-wrap gap-1">
+                        {provider.services.medical_care.hiv_treatment && (
+                          <span className="px-2 py-1 bg-red-100 text-red-800 rounded text-xs">HIV Treatment</span>
+                        )}
+                        {provider.services.medical_care.hiv_testing && (
+                          <span className="px-2 py-1 bg-blue-100 text-blue-800 rounded text-xs">HIV Testing</span>
+                        )}
+                        {provider.services.medical_care.prep_services && (
+                          <span className="px-2 py-1 bg-purple-100 text-purple-800 rounded text-xs">PrEP</span>
+                        )}
+                        {provider.services.support_services.case_management && (
+                          <span className="px-2 py-1 bg-green-100 text-green-800 rounded text-xs">Case Management</span>
+                        )}
+                      </div>
+                    </div>
+                    
+                    <a 
+                      href={`/providers/${provider.id}`}
+                      className="inline-block bg-primary-600 text-white px-3 py-1 rounded text-xs hover:bg-primary-700 transition-colors"
+                    >
+                      View Details
+                    </a>
+                  </div>
+                </Popup>
+              </Marker>
+            ))
+          )}
+        </MapContainer>
       </div>
     </div>
   );

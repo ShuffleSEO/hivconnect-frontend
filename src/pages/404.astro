@@ -1,0 +1,80 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/ui/Header.astro';
+import Footer from '../components/ui/Footer.astro';
+
+const title = "Page Not Found - HIV Connect Central NJ";
+const description = "The page you're looking for couldn't be found. Find HIV care and support resources across Central New Jersey.";
+---
+
+<BaseLayout title={title} description={description}>
+  <Header />
+  
+  <main id="main-content" class="flex-1 flex items-center justify-center">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+      <div class="text-center">
+        <div class="mb-8">
+          <div class="w-24 h-24 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-6">
+            <svg class="w-12 h-12 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+            </svg>
+          </div>
+          <h1 class="text-4xl lg:text-5xl font-bold text-gray-900 mb-4">Page Not Found</h1>
+          <p class="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
+            We couldn't find the page you're looking for. But don't worry - you can still access all the HIV care and support resources you need.
+          </p>
+        </div>
+        
+        <!-- Quick Action Buttons -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 max-w-4xl mx-auto mb-12">
+          <a href="/find-services" class="btn-primary flex items-center justify-center space-x-2 min-h-[60px]">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+            </svg>
+            <span>Find Care</span>
+          </a>
+          <a href="/get-tested" class="btn-secondary flex items-center justify-center space-x-2 min-h-[60px]">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+            </svg>
+            <span>Get Tested</span>
+          </a>
+          <a href="/treatment-care" class="btn-outline flex items-center justify-center space-x-2 min-h-[60px]">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+            </svg>
+            <span>Treatment</span>
+          </a>
+          <a href="/support-resources" class="btn-outline flex items-center justify-center space-x-2 min-h-[60px]">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+            </svg>
+            <span>Support</span>
+          </a>
+        </div>
+        
+        <!-- Emergency Contact -->
+        <div class="bg-error-50 border border-error-200 rounded-lg p-6 max-w-2xl mx-auto">
+          <h2 class="text-lg font-semibold text-error-900 mb-3">Need Immediate Help?</h2>
+          <div class="flex flex-col sm:flex-row gap-3 justify-center">
+            <a href="tel:988" class="bg-error-600 hover:bg-error-700 text-white px-6 py-2 rounded font-medium transition-colors">
+              Crisis Support: 988
+            </a>
+            <a href="tel:18004484663" class="bg-primary-600 hover:bg-primary-700 text-white px-6 py-2 rounded font-medium transition-colors">
+              HIV Hotline: 1-800-HIV-INFO
+            </a>
+          </div>
+        </div>
+        
+        <!-- Back to Home -->
+        <div class="mt-8">
+          <a href="/" class="text-primary-600 hover:text-primary-700 font-medium">
+            ← Back to Homepage
+          </a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <Footer />
+</BaseLayout>

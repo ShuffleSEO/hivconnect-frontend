@@ -1,4 +1,6 @@
 ---
+import { getCurrentLanguage } from '../i18n/astro-utils';
+
 export interface Props {
   title: string;
   description: string;
@@ -8,10 +10,11 @@ export interface Props {
 
 const { title, description, type = 'website', image } = Astro.props;
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const currentLanguage = getCurrentLanguage(Astro.currentLocale);
 ---
 
 <!DOCTYPE html>
-<html lang="en" class="h-full">
+<html lang={currentLanguage} class="h-full">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -97,43 +100,19 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 <body class="h-full flex flex-col">
   <!-- Skip to main content link for screen readers -->
   <a href="#main-content" class="skip-link">Skip to main content</a>
+  <a href="#main-navigation" class="skip-link">Skip to navigation</a>
+  <a href="#footer" class="skip-link">Skip to footer</a>
   
   <!-- Crisis/Emergency Quick Access -->
-  <div id="crisis-banner" class="bg-error-600 text-white text-center py-2 px-4 text-sm">
+  <div id="crisis-banner" class="bg-error-600 text-white text-center py-2 px-4 text-sm" role="banner" aria-label="Emergency crisis support information">
     <span class="font-medium">Crisis Support:</span>
     <a href="tel:988" class="underline hover:no-underline ml-2 font-bold">Call 988</a>
     <span class="mx-2">|</span>
     <a href="tel:18004484663" class="underline hover:no-underline">HIV/AIDS Hotline: 1-800-HIV-INFO</a>
-    <button id="quick-exit" class="ml-4 bg-error-700 hover:bg-error-800 px-3 py-1 rounded text-xs font-bold">
-      Quick Exit (ESC)
-    </button>
   </div>
   
   <slot />
   
-  <!-- Quick Exit Functionality -->
-  <script>
-    // Quick exit functionality
-    function quickExit() {
-      // Clear browsing data
-      if (typeof(Storage) !== "undefined") {
-        sessionStorage.clear();
-        localStorage.clear();
-      }
-      
-      // Replace current page in history and redirect
-      window.location.replace("https://www.weather.com");
-    }
-    
-    // ESC key listener
-    document.addEventListener('keydown', function(event) {
-      if (event.key === 'Escape') {
-        quickExit();
-      }
-    });
-    
-    // Quick exit button
-    document.getElementById('quick-exit')?.addEventListener('click', quickExit);
-  </script>
+
 </body>
 </html>

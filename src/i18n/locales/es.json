@@ -1,0 +1,213 @@
+{
+  "site": {
+    "title": "HIV Connect Central NJ",
+    "tagline": "Nueva Jersey Central",
+    "description": "Atención integral del VIH, apoyo y recursos en el centro de Nueva Jersey"
+  },
+  "navigation": {
+    "findServices": "Encontrar Servicios",
+    "getTested": "Hacerse la Prueba",
+    "treatmentCare": "Tratamiento y Atención",
+    "supportResources": "Apoyo y Recursos",
+    "about": "Acerca de",
+    "home": "Inicio"
+  },
+  "homepage": {
+    "hero": {
+      "title": "Encuentra Tu Camino Hacia la Salud y el Bienestar",
+      "subtitle": "Atención integral del VIH, apoyo y recursos en el centro de Nueva Jersey. Ya sea que tengas un diagnóstico reciente, manejes el VIH a largo plazo, busques recursos de prevención, o apoyes a alguien que amas, aquí encontrarás atención especializada y una comunidad genuina.",
+      "confidential": "Todos los servicios son confidenciales, y muchos son gratuitos independientemente del estado del seguro."
+    },
+    "quickActions": {
+      "findCare": "Encontrar Atención Cerca",
+      "talkToSomeone": "Hablar con Alguien Ahora",
+      "scheduleTest": "Programar Prueba",
+      "getMedication": "Obtener Ayuda con Medicamentos",
+      "connectSupport": "Conectar con Apoyo"
+    },
+    "serviceCategories": {
+      "title": "Atención y Apoyo Integral",
+      "subtitle": "Desde pruebas hasta tratamiento, desde vivienda hasta apoyo de salud mental, te conectamos con los servicios que necesitas en los condados de Middlesex, Somerset y Hunterdon.",
+      "testing": {
+        "title": "Pruebas y Prevención",
+        "description": "Pruebas gratuitas y confidenciales del VIH con resultados en 20 minutos. Asesoramiento de PrEP y opciones de pruebas en casa disponibles."
+      },
+      "treatment": {
+        "title": "Tratamiento y Atención",
+        "description": "Atención médica experta para ayudarte a vivir una vida plena y saludable. Iniciación de tratamiento el mismo día y opciones de telesalud disponibles."
+      },
+      "caseManagement": {
+        "title": "Gestión de Casos",
+        "description": "Apoyo personal para conectarte con todo lo que necesitas. Tu gestor de casos es tu defensor."
+      },
+      "housing": {
+        "title": "Vivienda y Apoyo Financiero",
+        "description": "Asistencia de vivienda de emergencia, apoyo financiero e inscripción en beneficios. La vivienda segura y estable es atención médica."
+      }
+    },
+    "coverageArea": {
+      "title": "Sirviendo al Centro de Nueva Jersey",
+      "subtitle": "HIV Connect Central NJ sirve a los residentes de los condados de Middlesex, Somerset y Hunterdon",
+      "middlesex": "New Brunswick, Perth Amboy, Edison, Woodbridge y comunidades circundantes",
+      "somerset": "Somerville, Franklin Township, Bridgewater y comunidades circundantes",
+      "hunterdon": "Flemington, Clinton, Lambertville y comunidades circundantes"
+    },
+    "keyMessages": {
+      "title": "Aquí Perteneces",
+      "hivManageable": {
+        "title": "El VIH es manejable",
+        "description": "El tratamiento moderno permite vidas plenas y saludables. Con la atención adecuada, las personas con VIH viven vidas largas y saludables."
+      },
+      "privacyMatters": {
+        "title": "Tu privacidad importa",
+        "description": "Todos los servicios relacionados con el VIH son estrictamente confidenciales. Tu información está protegida por las leyes de privacidad federales y estatales."
+      },
+      "careAccessible": {
+        "title": "La atención es accesible",
+        "description": "La mayoría de los servicios están disponibles independientemente del estado del seguro. El estado migratorio no afecta tu capacidad de recibir atención."
+      }
+    },
+    "crisis": {
+      "title": "¿Necesitas Ayuda Ahora Mismo?",
+      "crisisSupport": "Apoyo en Crisis: Llama al 988",
+      "hivHotline": "Línea Directa VIH/SIDA: 1-800-HIV-INFO",
+      "crisisText": "Texto de Crisis: Envía HOME al 741741",
+      "available": "Disponible 24/7. Importas. La ayuda está disponible."
+    }
+  },
+  "findServices": {
+    "title": "Encontrar Servicios de Atención y Apoyo del VIH",
+    "subtitle": "Conéctate con proveedores de confianza que ofrecen atención integral del VIH, pruebas, tratamiento y servicios de apoyo en el centro de Nueva Jersey.",
+    "confidentialNote": "Todos los servicios son confidenciales. Muchos son gratuitos independientemente del estado del seguro.",
+    "search": {
+      "placeholder": "Buscar por nombre del proveedor, servicio o palabra clave...",
+      "county": "Condado",
+      "allCounties": "Todos los Condados",
+      "careNeeded": "Atención Necesaria",
+      "routineCare": "Atención de Rutina",
+      "urgent": "Urgente (Dentro de la Semana)",
+      "emergency": "Emergencia (Mismo Día)",
+      "servicesNeeded": "Servicios Necesarios",
+      "language": "Idioma",
+      "clearFilters": "Limpiar todos los filtros"
+    },
+    "results": {
+      "showing": "Mostrando {{count}} de {{total}} proveedores",
+      "emergencyHelp": "¿Necesitas ayuda inmediata?",
+      "emergencyText": "Llama al 988 para apoyo en crisis o al 911 para emergencias médicas"
+    },
+    "providerDirectory": {
+      "title": "Directorio de Proveedores",
+      "subtitle": "Todos los proveedores listados son parte de la red del Programa Ryan White de VIH/SIDA, asegurando atención de calidad y servicios integrales.",
+      "featuredProviders": "Proveedores Destacados",
+      "allProviders": "Todos los Proveedores"
+    },
+    "serviceInfo": {
+      "title": "Entendiendo los Servicios del VIH",
+      "subtitle": "Aprende sobre los diferentes tipos de atención del VIH y servicios de apoyo disponibles para ayudarte a vivir tu vida más saludable.",
+      "hivTesting": {
+        "title": "Pruebas del VIH",
+        "description": "Pruebas gratuitas y confidenciales con resultados en 20 minutos. Asesoramiento antes y después de la prueba incluido."
+      },
+      "hivTreatment": {
+        "title": "Tratamiento del VIH",
+        "description": "El tratamiento moderno del VIH te ayuda a vivir una vida plena y saludable. Iniciación de tratamiento el mismo día disponible."
+      },
+      "supportServices": {
+        "title": "Servicios de Apoyo",
+        "description": "Gestión de casos, apoyo de salud mental, asistencia de vivienda y más servicios integrales."
+      }
+    }
+  },
+  "provider": {
+    "contactInfo": "Información de Contacto",
+    "locationHours": "Ubicación y Horarios",
+    "servicesOffered": "Servicios Ofrecidos",
+    "eligibilityInsurance": "Elegibilidad y Seguro",
+    "medicalCare": "Atención Médica y Tratamiento",
+    "supportServices": "Servicios de Apoyo",
+    "testingPrevention": "Pruebas y Prevención",
+    "phone": "Teléfono",
+    "email": "Correo Electrónico",
+    "website": "Sitio Web",
+    "telehealthAvailable": "Telesalud Disponible",
+    "accessPortal": "Acceder al Portal",
+    "visitWebsite": "Visitar Sitio Web",
+    "callNow": "Llamar Ahora",
+    "address": "Dirección",
+    "getDirections": "Obtener Direcciones",
+    "hoursOperation": "Horarios de Operación",
+    "accessibilityFeatures": "Características de Accesibilidad",
+    "insuranceAccepted": "Seguro Aceptado",
+    "incomeRequirements": "Requisitos de Ingresos",
+    "specialPopulations": "Poblaciones Especiales Atendidas",
+    "privacyNotice": {
+      "title": "Tu Privacidad Importa",
+      "description": "Todos los servicios relacionados con el VIH son estrictamente confidenciales. Tu información está protegida por las leyes de privacidad federales y estatales. El estado migratorio no afecta tu capacidad de recibir atención. La atención de calidad del VIH no debería depender de tu capacidad de pago."
+    },
+    "readyToStart": {
+      "title": "¿Listo para Comenzar?",
+      "description": "Contacta a {{providerName}} hoy para aprender más sobre sus servicios o programar una cita.",
+      "findOtherProviders": "Encontrar Otros Proveedores"
+    },
+    "needHelpNow": {
+      "title": "¿Necesitas Ayuda Ahora Mismo?",
+      "crisis": "Crisis: 988",
+      "hivHotline": "Línea VIH: 1-800-HIV-INFO"
+    }
+  },
+  "common": {
+    "learnMore": "Aprender Más",
+    "callNow": "Llamar Ahora",
+    "viewDetails": "Ver Detalles",
+    "viewProfile": "Ver Perfil",
+    "directions": "Direcciones",
+    "closed": "Cerrado",
+    "open": "Abierto",
+    "closedToday": "Cerrado hoy",
+    "available247": "Disponible 24/7",
+    "english": "Inglés",
+    "spanish": "Español",
+    "languages": "Idiomas",
+    "services": "Servicios",
+    "accessible": "Accesible",
+    "keyServices": "Servicios Clave Disponibles",
+    "moreServices": "+{{count}} servicios más",
+    "featuredProvider": "Proveedor Destacado",
+    "ryanWhitePart": "Ryan White Parte {{part}}",
+    "counties": {
+      "middlesex": "Condado de Middlesex",
+      "somerset": "Condado de Somerset",
+      "hunterdon": "Condado de Hunterdon"
+    },
+    "days": {
+      "monday": "Lunes",
+      "tuesday": "Martes",
+      "wednesday": "Miércoles",
+      "thursday": "Jueves",
+      "friday": "Viernes",
+      "saturday": "Sábado",
+      "sunday": "Domingo"
+    }
+  },
+  "services": {
+    "hivTesting": "Pruebas del VIH",
+    "hivTreatment": "Tratamiento del VIH",
+    "prepServices": "Servicios PrEP",
+    "caseManagement": "Gestión de Casos",
+    "mentalHealth": "Salud Mental",
+    "substanceAbuse": "Abuso de Sustancias",
+    "housingAssistance": "Asistencia de Vivienda",
+    "transportation": "Transporte",
+    "legalServices": "Servicios Legales",
+    "foodNutrition": "Comida y Nutrición",
+    "insuranceHelp": "Ayuda con Seguro",
+    "counseling": "Asesoramiento",
+    "prepCounseling": "Asesoramiento PrEP",
+    "education": "Educación",
+    "riskReduction": "Reducción de Riesgo",
+    "dentalCare": "Atención Dental",
+    "stdTesting": "Pruebas de ETS",
+    "specialtyCare": "Atención Especializada"
+  }
+}

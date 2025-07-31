@@ -2,9 +2,9 @@
 // Footer component with essential links and compliance information
 ---
 
-<footer class="bg-gray-900 text-white mt-auto">
+<footer id="footer" class="bg-gray-900 text-white mt-auto" role="contentinfo" aria-label="Site footer with contact information and links">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-    <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+    <div class="grid grid-cols-1 md:grid-cols-5 gap-8">
       <!-- Organization Info -->
       <div class="col-span-1 md:col-span-2">
         <div class="flex items-center space-x-3 mb-4">
@@ -14,45 +14,56 @@
             </svg>
           </div>
           <div>
-            <h2 class="text-xl font-bold">HIV Connect Central NJ</h2>
-            <p class="text-gray-300 text-sm">Middlesex Somerset Hunterdon Transitional Grant Area</p>
+            <h2 class="text-xl font-bold">HIV Connect</h2>
+            <p class="text-gray-300 text-sm">Central New Jersey</p>
           </div>
         </div>
         <p class="text-gray-300 mb-4 max-w-md">
-          Connecting people to comprehensive HIV care, support, and resources across Central New Jersey. 
+          Connecting people to comprehensive HIV care, support, and resources across Middlesex, Somerset, and Hunterdon counties. 
           All services are confidential and many are free regardless of insurance status.
         </p>
-        <div class="flex space-x-4">
-          <a href="tel:988" class="bg-error-600 hover:bg-error-700 px-4 py-2 rounded font-medium transition-colors">
+        <div class="flex flex-wrap gap-3">
+          <a href="tel:988" class="bg-error-600 hover:bg-error-700 px-4 py-2 rounded font-medium transition-colors text-sm">
             Crisis: 988
           </a>
-          <a href="tel:18004484663" class="bg-primary-600 hover:bg-primary-700 px-4 py-2 rounded font-medium transition-colors">
+          <a href="tel:18004484663" class="bg-primary-600 hover:bg-primary-700 px-4 py-2 rounded font-medium transition-colors text-sm">
             HIV Info: 1-800-HIV-INFO
           </a>
         </div>
       </div>
       
-      <!-- Quick Links -->
+      <!-- Testing & Prevention -->
       <div>
-        <h3 class="text-lg font-semibold mb-4">Quick Links</h3>
+        <h3 class="text-lg font-semibold mb-4">Testing & Prevention</h3>
         <ul class="space-y-2">
-          <li><a href="/find-services" class="text-gray-300 hover:text-white transition-colors">Find Services</a></li>
-          <li><a href="/get-tested" class="text-gray-300 hover:text-white transition-colors">Get Tested</a></li>
-          <li><a href="/treatment-care" class="text-gray-300 hover:text-white transition-colors">Treatment & Care</a></li>
-          <li><a href="/support-resources" class="text-gray-300 hover:text-white transition-colors">Support & Resources</a></li>
-          <li><a href="/emergency-services" class="text-gray-300 hover:text-white transition-colors">Emergency Services</a></li>
+          <li><a href="/get-tested" class="text-gray-300 hover:text-white transition-colors">HIV Testing</a></li>
+          <li><a href="/treatment-care#prep" class="text-gray-300 hover:text-white transition-colors">PrEP Services</a></li>
+          <li><a href="/get-tested#std-testing" class="text-gray-300 hover:text-white transition-colors">STD Testing</a></li>
+          <li><a href="/get-tested#at-home" class="text-gray-300 hover:text-white transition-colors">At-Home Testing</a></li>
         </ul>
       </div>
       
-      <!-- Resources -->
+      <!-- Treatment & Care -->
       <div>
-        <h3 class="text-lg font-semibold mb-4">Resources</h3>
+        <h3 class="text-lg font-semibold mb-4">Treatment & Care</h3>
         <ul class="space-y-2">
-          <li><a href="/ryan-white-programs" class="text-gray-300 hover:text-white transition-colors">Ryan White Programs</a></li>
-          <li><a href="/financial-assistance" class="text-gray-300 hover:text-white transition-colors">Financial Assistance</a></li>
-          <li><a href="/insurance-help" class="text-gray-300 hover:text-white transition-colors">Insurance Help</a></li>
-          <li><a href="/support-groups" class="text-gray-300 hover:text-white transition-colors">Support Groups</a></li>
-          <li><a href="/educational-materials" class="text-gray-300 hover:text-white transition-colors">Educational Materials</a></li>
+          <li><a href="/treatment-care" class="text-gray-300 hover:text-white transition-colors">HIV Treatment</a></li>
+          <li><a href="/find-services" class="text-gray-300 hover:text-white transition-colors">Find Providers</a></li>
+          <li><a href="/treatment-care#telehealth" class="text-gray-300 hover:text-white transition-colors">Telehealth</a></li>
+          <li><a href="/treatment-care#same-day" class="text-gray-300 hover:text-white transition-colors">Same-Day Care</a></li>
+        </ul>
+      </div>
+      
+      <!-- Support & Resources -->
+      <div>
+        <h3 class="text-lg font-semibold mb-4">Support Services</h3>
+        <ul class="space-y-2">
+          <li><a href="/support-resources" class="text-gray-300 hover:text-white transition-colors">Case Management</a></li>
+          <li><a href="/support-resources#housing" class="text-gray-300 hover:text-white transition-colors">Housing Assistance</a></li>
+          <li><a href="/support-resources#mental-health" class="text-gray-300 hover:text-white transition-colors">Mental Health</a></li>
+          <li><a href="/support-resources#financial" class="text-gray-300 hover:text-white transition-colors">Financial Support</a></li>
+          <li><a href="/about" class="text-gray-300 hover:text-white transition-colors">About Us</a></li>
+          <li><a href="/contact" class="text-gray-300 hover:text-white transition-colors">Contact</a></li>
         </ul>
       </div>
     </div>
@@ -89,6 +100,12 @@
       <div class="text-center mt-6 text-sm text-gray-400">
         <p>&copy; 2025 HIV Connect Central NJ. Funded by the Ryan White HIV/AIDS Program.</p>
         <p class="mt-1">This website is supported by the Health Resources and Services Administration (HRSA).</p>
+        <p class="mt-2">
+          Made with <span class="text-primary-400">♪</span> by 
+          <a href="https://shuffleseo.com" target="_blank" rel="noopener noreferrer" class="text-primary-400 hover:text-primary-300 transition-colors">
+            Shuffle SEO
+          </a>
+        </p>
       </div>
     </div>
   </div>
