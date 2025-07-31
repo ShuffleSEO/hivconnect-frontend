@@ -1,0 +1,248 @@
+---
+// Accessibility Statement page for HIV Connect Central NJ
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const title = 'Accessibility Statement | HIV Connect Central NJ';
+const description = 'HIV Connect Central NJ is committed to ensuring digital accessibility for people with disabilities. Learn about our accessibility features, compliance efforts, and how to request accommodations.';
+---
+
+<BaseLayout title={title} description={description}>
+  <main id="main-content" class="flex-1">
+    <!-- Hero Section -->
+    <section class="bg-gradient-to-br from-primary-600 to-primary-800 text-white py-16" role="banner">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h1 class="text-4xl md:text-5xl font-bold mb-6">Accessibility Statement</h1>
+        <p class="text-xl text-primary-100 leading-relaxed">
+          HIV Connect Central NJ is committed to ensuring our website and services are accessible to everyone, regardless of ability or technology used.
+        </p>
+      </div>
+    </section>
+
+    <!-- Main Content -->
+    <section class="py-16 px-4 sm:px-6 lg:px-8">
+      <div class="max-w-4xl mx-auto">
+        
+        <!-- Our Commitment Section -->
+        <div class="mb-12">
+          <h2 class="text-3xl font-bold text-gray-900 mb-6">Our Commitment to Accessibility</h2>
+          <div class="prose prose-lg max-w-none text-gray-700 leading-relaxed">
+            <p class="mb-6">
+              HIV Connect Central NJ believes that everyone deserves equal access to vital HIV/AIDS information, testing, treatment, and support resources. We are committed to providing a website that is accessible to the widest possible audience, regardless of circumstances and abilities.
+            </p>
+            <p class="mb-6">
+              We continuously work to improve the accessibility and usability of our website and, in doing so, adhere to available standards and guidelines including the <strong>Web Content Accessibility Guidelines (WCAG) 2.1 Level AA</strong> and <strong>Section 508 of the Rehabilitation Act</strong>.
+            </p>
+          </div>
+        </div>
+
+        <!-- Accessibility Features Section -->
+        <div class="mb-12">
+          <h2 class="text-3xl font-bold text-gray-900 mb-6">Accessibility Features</h2>
+          <div class="grid md:grid-cols-2 gap-8">
+            
+            <!-- Navigation & Structure -->
+            <div class="bg-gray-50 p-6 rounded-lg">
+              <h3 class="text-xl font-semibold text-gray-900 mb-4 flex items-center">
+                <svg class="w-6 h-6 mr-3 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                </svg>
+                Navigation & Structure
+              </h3>
+              <ul class="space-y-2 text-gray-700">
+                <li>Skip navigation links for screen readers</li>
+                <li>Logical heading structure (H1-H6)</li>
+                <li>Descriptive page titles and meta descriptions</li>
+                <li>ARIA landmarks and labels</li>
+                <li>Consistent navigation across all pages</li>
+              </ul>
+            </div>
+
+            <!-- Visual Design -->
+            <div class="bg-gray-50 p-6 rounded-lg">
+              <h3 class="text-xl font-semibold text-gray-900 mb-4 flex items-center">
+                <svg class="w-6 h-6 mr-3 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                </svg>
+                Visual Design
+              </h3>
+              <ul class="space-y-2 text-gray-700">
+                <li>High contrast color schemes (4.5:1 minimum ratio)</li>
+                <li>Scalable text that can be enlarged up to 200%</li>
+                <li>Descriptive alt text for all images</li>
+                <li>Clear focus indicators for keyboard navigation</li>
+                <li>Support for prefers-reduced-motion settings</li>
+              </ul>
+            </div>
+
+            <!-- Keyboard & Interaction -->
+            <div class="bg-gray-50 p-6 rounded-lg">
+              <h3 class="text-xl font-semibold text-gray-900 mb-4 flex items-center">
+                <svg class="w-6 h-6 mr-3 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 11c0 3.517-1.009 6.799-2.753 9.571m-3.44-2.04l.054-.09A13.916 13.916 0 008 11a4 4 0 118 0c0 1.017-.07 2.019-.203 3m-2.118 6.844A21.88 21.88 0 0015.171 17m3.839 1.132c.645-2.266.99-4.659.99-7.132A8 8 0 008 4.07M3 15.364c.64-1.319 1-2.8 1-4.364 0-1.457.39-2.823 1.07-4" />
+                </svg>
+                Keyboard & Interaction
+              </h3>
+              <ul class="space-y-2 text-gray-700">
+                <li>Full keyboard navigation support</li>
+                <li>Visible focus indicators on all interactive elements</li>
+                <li>Consistent tab order throughout the site</li>
+                <li>No keyboard traps or inaccessible content</li>
+                <li>Touch-friendly interactive elements (44px minimum)</li>
+              </ul>
+            </div>
+
+            <!-- Content & Language -->
+            <div class="bg-gray-50 p-6 rounded-lg">
+              <h3 class="text-xl font-semibold text-gray-900 mb-4 flex items-center">
+                <svg class="w-6 h-6 mr-3 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-1l-4 4z" />
+                </svg>
+                Content & Language
+              </h3>
+              <ul class="space-y-2 text-gray-700">
+                <li>Clear, plain language content</li>
+                <li>Bilingual support (English and Spanish)</li>
+                <li>Defined abbreviations and acronyms</li>
+                <li>Error identification and suggestions</li>
+                <li>Meaningful link text and button labels</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Standards Compliance -->
+        <div class="mb-12 bg-blue-50 border-l-4 border-blue-500 p-6">
+          <h2 class="text-2xl font-bold text-gray-900 mb-4">Standards & Compliance</h2>
+          <div class="text-gray-700 leading-relaxed">
+            <p class="mb-4">
+              This website has been designed and developed to conform to:
+            </p>
+            <ul class="list-disc list-inside space-y-2 mb-4">
+              <li><strong>WCAG 2.1 Level AA</strong> - Web Content Accessibility Guidelines</li>
+              <li><strong>Section 508</strong> - U.S. federal accessibility requirements</li>
+              <li><strong>ADA Title III</strong> - Americans with Disabilities Act compliance</li>
+              <li><strong>HIPAA Privacy Rule</strong> - Healthcare information protection</li>
+            </ul>
+            <p>
+              We regularly test our website with assistive technologies including screen readers (NVDA, JAWS, VoiceOver), keyboard navigation, and automated accessibility testing tools.
+            </p>
+          </div>
+        </div>
+
+        <!-- Alternative Access Methods -->
+        <div class="mb-12">
+          <h2 class="text-3xl font-bold text-gray-900 mb-6">Alternative Ways to Access Information</h2>
+          <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-6">
+            <p class="text-gray-700 mb-4">
+              If you encounter barriers while using our website or need information in an alternative format, we provide several ways to access our services:
+            </p>
+            <div class="grid md:grid-cols-2 gap-6">
+              <div>
+                <h3 class="text-lg font-semibold text-gray-900 mb-3">Phone Support</h3>
+                <ul class="space-y-2 text-gray-700">
+                  <li><strong>Crisis Support:</strong> <a href="tel:988" class="text-primary-600 hover:text-primary-800 font-medium">988</a></li>
+                  <li><strong>HIV/AIDS Hotline:</strong> <a href="tel:18004484663" class="text-primary-600 hover:text-primary-800 font-medium">1-800-HIV-INFO</a></li>
+                </ul>
+              </div>
+              <div>
+                <h3 class="text-lg font-semibold text-gray-900 mb-3">In-Person Services</h3>
+                <p class="text-gray-700">
+                  All our partner healthcare providers offer in-person consultations and can provide materials in accessible formats upon request.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Known Limitations -->
+        <div class="mb-12">
+          <h2 class="text-3xl font-bold text-gray-900 mb-6">Known Limitations & Ongoing Improvements</h2>
+          <div class="text-gray-700 leading-relaxed">
+            <p class="mb-4">
+              We are continuously working to improve the accessibility of our website. Current areas of focus include:
+            </p>
+            <ul class="list-disc list-inside space-y-2 mb-6">
+              <li>Enhancing screen reader compatibility for complex interactive elements</li>
+              <li>Improving voice navigation support</li>
+              <li>Expanding multilingual content beyond English and Spanish</li>
+              <li>Optimizing performance for assistive technologies</li>
+            </ul>
+            <p class="bg-gray-50 p-4 rounded border-l-4 border-primary-500">
+              <strong>Note:</strong> Some third-party content (such as embedded maps or external forms) may not be fully accessible. We work with our partners to ensure alternative access methods are available for all essential information and services.
+            </p>
+          </div>
+        </div>
+
+        <!-- Contact & Feedback -->
+        <div class="bg-primary-50 border border-primary-200 rounded-lg p-8">
+          <h2 class="text-3xl font-bold text-gray-900 mb-6">Accessibility Support & Feedback</h2>
+          
+          <div class="mb-6">
+            <p class="text-gray-700 mb-4 text-lg">
+              Your feedback helps us improve accessibility for everyone. If you encounter any accessibility barriers, need assistance, or have suggestions for improvement, please contact us:
+            </p>
+          </div>
+
+          <!-- Contact Methods -->
+          <div class="grid md:grid-cols-2 gap-6 mb-6">
+            <div class="bg-white p-6 rounded-lg shadow-sm">
+              <h3 class="text-xl font-semibold text-gray-900 mb-4">Accessibility Coordinator</h3>
+              <div class="space-y-3 text-gray-700">
+                <div class="flex items-center">
+                  <svg class="w-5 h-5 mr-3 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26c.3.16.67.16.97 0L19 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                  </svg>
+                  <a href="mailto:accessibility@hivconnectcnj.org" class="text-primary-600 hover:text-primary-800">accessibility@hivconnectcnj.org</a>
+                </div>
+                <div class="flex items-center">
+                  <svg class="w-5 h-5 mr-3 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                  </svg>
+                  <span>(732) 745-7714</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="bg-white p-6 rounded-lg shadow-sm">
+              <h3 class="text-xl font-semibold text-gray-900 mb-4">Response Time</h3>
+              <div class="text-gray-700 space-y-3">
+                <p>We are committed to responding to accessibility concerns promptly:</p>
+                <ul class="list-disc list-inside space-y-1">
+                  <li><strong>Urgent issues:</strong> Within 24 hours</li>
+                  <li><strong>General inquiries:</strong> Within 3 business days</li>
+                  <li><strong>Complex requests:</strong> Within 10 business days</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- Accommodation Requests -->
+          <div class="bg-white p-6 rounded-lg shadow-sm">
+            <h3 class="text-xl font-semibold text-gray-900 mb-4">Requesting Accommodations</h3>
+            <p class="text-gray-700 mb-4">
+              When contacting us about accessibility, please provide:
+            </p>
+            <ul class="list-disc list-inside space-y-2 text-gray-700">
+              <li>A description of the specific barrier you encountered</li>
+              <li>The page or section where the issue occurred</li>
+              <li>The assistive technology you were using (if applicable)</li>
+              <li>Your preferred format for receiving information</li>
+              <li>Your contact information for follow-up</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Last Updated -->
+        <div class="mt-12 pt-8 border-t border-gray-200 text-center">
+          <p class="text-gray-600">
+            This accessibility statement was last reviewed and updated on <strong>January 2025</strong>.
+            <br>
+            We review and update this statement annually or as significant changes are made to our website.
+          </p>
+        </div>
+
+      </div>
+    </section>
+  </main>
+</BaseLayout>

@@ -1,0 +1,15 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PlanningCouncilForm from '../../components/forms/PlanningCouncilForm';
+---
+
+<BaseLayout
+  title="Planning Council Membership Application | MSHTGA"
+  description="Apply for membership on the Middlesex-Somerset-Hunterdon Transitional Grant Area Ryan White Part A HIV/AIDS Health Services Planning Council"
+>
+  <main class="min-h-screen bg-gray-50 py-12">
+    <div class="container mx-auto px-4">
+      <PlanningCouncilForm client:load />
+    </div>
+  </main>
+</BaseLayout>
