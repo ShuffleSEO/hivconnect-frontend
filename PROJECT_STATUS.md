@@ -43,6 +43,35 @@
 
 ---
 
+## Project Management & Tracking
+
+### Linear Integration ✅ (Added Dec 9, 2025)
+
+**Status**: Active and integrated with development workflow
+
+The project now uses Linear for issue tracking, task management, and client communication via the Linear MCP server.
+
+**Key Information**:
+- **Team**: Shuffle Studio (ID: `9fe49653-ca9a-4541-8eee-3b2ecbcaff5f`)
+- **Project**: HIV Connect Central NJ (2021-Present)
+- **Current Issue**: SHU-9 - Client Testing Follow-up & Support (Due: Dec 13, 2025)
+- **Linear URL**: https://linear.app/shuffle-studio
+
+**Workflow**:
+- Daily progress updates in issue comments
+- Git commits reference Linear issue IDs (e.g., `[SHU-9]`)
+- Weekly sync between PROJECT_TODO.md and Linear issues
+- Client communication tracked in Linear for transparency
+
+**Documentation**:
+- Full integration guide: `/LINEAR_INTEGRATION.md`
+- Quick reference: `/LINEAR_QUICK_REF.md`
+- Comprehensive plan: `.claude/plans/staged-foraging-scott.md`
+
+**MCP Tools Available**: 21 tools for managing issues, comments, projects, teams, labels, and more directly from Claude Code.
+
+---
+
 ## What's Working
 
 ### ✅ Frontend (Astro + Cloudflare Pages)
