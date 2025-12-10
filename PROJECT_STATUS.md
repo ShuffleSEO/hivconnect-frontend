@@ -1,9 +1,11 @@
 # HIV Connect Central NJ - Project Status
 
-**Last Updated**: December 5, 2025
-**Frontend Repository**: https://github.com/kevinshuffle/hivconnect-frontend
-**Backend Repository**: https://github.com/kevinshuffle/hivconnect-backend
+**Last Updated**: December 10, 2025
+**Frontend Repository**: https://github.com/ShuffleSEO/hivconnect-frontend
+**Backend Repository**: https://github.com/ShuffleSEO/hivconnect-backend
 **CTO**: Kevin / Shuffle SEO
+
+**📋 Linear Tracking**: [SHU-9 - Client Testing Follow-up & Support](https://linear.app/shuffle-studio/issue/SHU-9)
 
 ---
 
@@ -13,10 +15,16 @@
 
 | Component | Status | URL | Deployment Method |
 |-----------|--------|-----|-------------------|
-| **Frontend** | ✅ Live | https://hivconnect-frontend.pages.dev | Cloudflare Pages (Git auto-deploy) |
-| **Backend** | ✅ Live | https://hivconnect-backend.shuffle-seo.workers.dev | Cloudflare Workers (GitHub Actions) |
+| **Frontend** | ✅ Live | https://hivconnect-frontend.pages.dev | Cloudflare Pages (GitHub Actions auto-deploy) |
+| **Backend** | ✅ Live | https://hivconnect-backend.shuffle-seo.workers.dev | Cloudflare Workers (GitHub Actions auto-deploy) |
 | **Admin UI** | ✅ Live | https://hivconnect-backend.shuffle-seo.workers.dev/admin | PayloadCMS Admin Panel |
 | **Database** | ✅ Live | Cloudflare D1 (production) | Managed via PayloadCMS migrations |
+
+**Latest Infrastructure Updates (Dec 10, 2025)**:
+- ✅ Fixed auto-deployment after repository transfer to ShuffleSEO org
+- ✅ Backend database migrations now run automatically on deploy
+- ✅ Frontend properly deployed as Cloudflare Pages (not Worker)
+- ✅ Both repos use GitHub Actions for CI/CD
 
 ### Architecture Overview
 
@@ -450,6 +458,91 @@ When continuing this project:
 3. **Review recent commits** on both repos
 4. **Test automatic rebuilds** by updating a provider
 5. **Check logs** for any errors or warnings
+
+---
+
+## Session History
+
+### December 10, 2025 - Infrastructure Troubleshooting & Deployment Fixes
+
+**Duration**: ~3 hours
+**Focus**: Fixed broken auto-deployment and infrastructure issues after repository transfer
+
+#### Problems Encountered
+
+1. **Cloudflare Pages Auto-Deployment Broken**
+   - Repo transferred from `kevinshuffle/*` to `ShuffleSEO/*`
+   - GitHub integration lost connection
+   - Manual deployments working, but no auto-deploy on push
+
+2. **Frontend Build Failures (HTTP 500 Errors)**
+   - FAQs and Pages API endpoints returning 500
+   - Database tables missing (migrations never ran)
+   - Build process failed during SSG data fetching
+
+3. **Frontend Deploying as Worker (Not Pages)**
+   - Site deploying to `.workers.dev` domain (Worker)
+   - Showing "Hello world" instead of actual site
+   - Cloudflare treating static site as Worker code
+
+#### Solutions Implemented
+
+**Backend Fixes** (Repository: `ShuffleSEO/hivconnect-backend`):
+- Created database migration: `20251210_014000_add_faqs_pages_collections.ts`
+- Updated `.github/workflows/deploy.yml` to run migrations before deployment
+- Fixed `CLOUDFLARE_ENV` variable (was set to "production" but should be empty for root config)
+- Commits: `5360618`, `f8af214`, `d7ac496`
+
+**Frontend Fixes** (Repository: `ShuffleSEO/hivconnect-frontend`):
+- Added error handling to pages that fetch API data at build time
+- Created GitHub Actions workflow: `.github/workflows/deploy.yml`
+- Added `PUBLIC_API_URL` environment variable to build step
+- Created proper Cloudflare **Pages** project (not Worker)
+- Commits: `cbcaaf5`, `b0fdd74`, `6af619f`
+
+#### Results
+
+✅ **All systems operational**:
+- Backend API: All endpoints returning HTTP 200
+- Frontend: Deployed to correct Pages URL (https://hivconnect-frontend.pages.dev/)
+- Auto-deployment: Both repos auto-deploy on push to `main` via GitHub Actions
+- Build time: ~45 seconds for both frontend and backend
+
+#### Key Learnings
+
+1. **Cloudflare Pages vs Workers**: Critical difference
+   - Pages = Static site hosting (uses `wrangler pages deploy`)
+   - Workers = Serverless functions (uses `wrangler deploy`)
+   - Don't mix the two!
+
+2. **Database Migrations**: Must run before code deployment
+   - Add migration step to CI/CD workflow
+   - Use `CLOUDFLARE_ENV=''` (empty) for production in wrangler.jsonc root config
+
+3. **Build-Time API Fetches**: Need error handling
+   - SSG pages fail hard if API is unreachable
+   - Always wrap API calls in try/catch with empty state fallback
+
+4. **GitHub Repo Transfer**: Breaks integrations
+   - Cloudflare Pages GitHub integration disconnects
+   - GitHub Actions secrets persist correctly
+   - Git remote URLs auto-redirect
+
+#### Files Modified
+
+**Backend**:
+- `.github/workflows/deploy.yml` - Added migration step, fixed environment variables
+- `src/migrations/20251210_014000_add_faqs_pages_collections.ts` - New migration for FAQs and Pages
+
+**Frontend**:
+- `src/pages/faq/index.astro` - Added error handling for API failures
+- `src/pages/resources/index.astro` - Added error handling for API failures
+- `src/pages/[slug].astro` - Added error handling for API failures
+- `.github/workflows/deploy.yml` - New auto-deployment workflow with `PUBLIC_API_URL`
+
+#### Linear Updates
+
+Updated [SHU-9](https://linear.app/shuffle-studio/issue/SHU-9) with comprehensive comment documenting all infrastructure fixes.
 
 ---
 
