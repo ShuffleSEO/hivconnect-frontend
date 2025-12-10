@@ -173,8 +173,6 @@ export default function PlanningCouncilForm() {
 
         // Transform flat formData into nested structure for PayloadCMS
         const payloadData = {
-          firstName: formData.firstName,
-          lastName: formData.lastName,
           status: 'pending',
           personalInfo: {
             firstName: formData.firstName,
