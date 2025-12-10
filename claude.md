@@ -1,9 +1,37 @@
 # HIV Connect Central NJ - Project Context & Implementation Guide
 
-**Last Updated**: December 2, 2025
-**Project Repository**: https://github.com/jukeboxjay/mshtga
+**Last Updated**: December 9, 2025
+**Project Repository (Frontend)**: https://github.com/ShuffleSEO/hivconnect-frontend
+**Project Repository (Backend)**: https://github.com/ShuffleSEO/hivconnect-backend
+**Linear Project**: https://linear.app/shuffle-studio/project/active-client-delivery-q4-2025
 **Prepared for**: Kevin / Shuffle SEO CTO
 **Purpose**: Complete context document for AI assistants and developers
+
+---
+
+## 🎯 Project Management - Linear First
+
+**IMPORTANT**: This project uses Linear for all active work tracking, task management, and progress updates.
+
+- **Linear Project**: Active Client Delivery - Q4 2025
+- **Parent Issue**: [SHU-9 - Client Testing Follow-up & Support](https://linear.app/shuffle-studio/issue/SHU-9)
+- **Team**: Shuffle Studio (`9fe49653-ca9a-4541-8eee-3b2ecbcaff5f`)
+
+**Markdown Files (Documentation Only)**:
+- `CLAUDE.md` - This file: Complete project context and technical documentation
+- `PROJECT_STATUS.md` - Current deployment status, architecture overview
+- `SESSION_*.md` - Session summaries for historical reference
+- `DEPLOYMENT.md` - Deployment procedures and infrastructure
+
+**Linear is the Single Source of Truth** for:
+- ✅ Active tasks and sub-issues
+- ✅ Progress tracking and status updates
+- ✅ Blockers and decisions needed
+- ✅ Client communication and deliverables
+- ✅ Time estimates and priorities
+- ✅ Git commit references and deployment tracking
+
+See [Linear Integration & Workflow](#linear-integration--workflow) section below for details.
 
 ---
 
@@ -18,8 +46,9 @@
 7. [Environment Setup](#environment-setup)
 8. [File Location Reference](#file-location-reference)
 9. [QA Checklists](#qa-checklists)
-10. [Development Workflow](#development-workflow)
-11. [Next Steps](#next-steps)
+10. [Linear Integration & Workflow](#linear-integration--workflow)
+11. [Development Workflow](#development-workflow)
+12. [Next Steps](#next-steps)
 
 ---
 
@@ -41,14 +70,38 @@ HIV Connect Central NJ is a comprehensive web platform for the Middlesex-Somerse
 - **CEO**: José / Shuffle SEO
 - **End Users**: People living with HIV/AIDS, caregivers, service providers, community members
 
-### Current State (as of Dec 2025)
-✅ **Production Astro Frontend**: 17 pages built and deployed on Netlify
-✅ **Provider Directory**: 15 providers with comprehensive data (hardcoded in TypeScript)
-✅ **Forms**: Contact form and multi-step Planning Council application (Netlify Forms)
-✅ **i18n**: Full bilingual support (English/Spanish)
-✅ **Accessibility**: WCAG-compliant with comprehensive a11y features
-✅ **Security**: Proper HTTP headers, CSP, HTTPS enforcement
-⏳ **Backend**: Not yet implemented (this document outlines the plan)
+### Current State (as of Dec 9, 2025)
+
+**✅ PRODUCTION DEPLOYED**:
+- **Backend**: PayloadCMS 3.65.0 on Cloudflare Workers ([hivconnect-backend.shuffle-seo.workers.dev](https://hivconnect-backend.shuffle-seo.workers.dev/admin))
+- **Frontend**: Astro 5 on Cloudflare Pages ([hivconnectcnj.org](https://hivconnectcnj.org))
+- **Database**: Cloudflare D1 (SQLite)
+- **Storage**: Cloudflare R2 (PDFs and media)
+- **Auto-Rebuild**: Frontend rebuilds in 2-3 minutes when CMS content changes
+
+**Collections (8 Active)**:
+- ✅ Providers (17 active providers)
+- ✅ Resources (with internal PDF / external link support)
+- ✅ Blog (for news and updates)
+- ✅ PDF Library (versioned documents)
+- ✅ FAQs (6 categories) - *Added Dec 9*
+- ✅ Pages (custom content pages) - *Added Dec 9*
+- ✅ Tags (shared across collections)
+- ✅ Media (R2 uploads)
+
+**Globals (1)**:
+- ✅ Site Settings (hotline, logo, footer links, etc.)
+
+**Frontend Pages (20+ pages)**:
+- ✅ All original 17 pages
+- ✅ /faq - FAQ page with accordion UI - *Added Dec 9*
+- ✅ /resources - External resources page - *Added Dec 9*
+- ✅ /[slug] - Dynamic custom pages route - *Added Dec 9*
+
+**Current Focus (Linear SHU-9)**:
+- ✅ 4/8 sub-issues complete (50% progress)
+- ⏸️ 2/8 blocked (Events/Calendar decision, Membership Application clarification)
+- 📅 2/8 deferred to 2026 (Full Events System, Site Search)
 
 ### Target Architecture (2026 Stack)
 - **Frontend**: Astro 5 (SSG/hybrid) → Cloudflare Pages
@@ -1761,6 +1814,302 @@ mshtga-backend/ (Backend Repository)
 
 ---
 
+## Linear Integration & Workflow
+
+**As of December 9, 2025, all active work and task tracking for this project is managed in Linear.**
+
+### Overview
+
+This project uses the **Linear MCP (Model Context Protocol) Server** integrated with Claude Code, allowing AI assistants to:
+- Read and update issue status
+- Create comments with progress updates
+- Track sub-issues and dependencies
+- Link Git commits to Linear issues
+- Manage labels and priorities
+
+### Linear Workspace Structure
+
+**Team**: Shuffle Studio
+- **Team ID**: `9fe49653-ca9a-4541-8eee-3b2ecbcaff5f`
+- **Icon**: Dashboard
+
+**Project**: Active Client Delivery - Q4 2025
+- **Project ID**: `8497394b-d4bf-4e25-95e4-e0b1ee1cc2d5`
+
+**Parent Issue**: SHU-9 - Client Testing Follow-up & Support
+- **Issue ID**: `2269be2d-d5ca-4e6d-a88f-60c6bbe40df9`
+- **URL**: https://linear.app/shuffle-studio/issue/SHU-9
+- **Due Date**: December 13, 2025
+- **Status**: In Progress (4/8 sub-issues complete - 50%)
+
+### Issue Status Workflow
+
+**Available Statuses**:
+- **Backlog** (unstarted) - Issue not yet prioritized
+- **Todo** (unstarted) - Ready to start, dependencies met
+- **In Progress** (started) - Actively being worked on
+- **In Review** (started) - Awaiting review or client feedback
+- **Done** (completed) - Fully complete and deployed
+- **Canceled** (canceled) - No longer needed
+- **Duplicate** (canceled) - Duplicate of another issue
+
+**Status Transitions**:
+```
+Backlog → Todo → In Progress → In Review → Done
+                      ↓
+                  Canceled (if not needed)
+```
+
+### Key Labels for HIV Connect
+
+- `Client-Delivery` - Active client builds and fixes
+- `Follow-Up` - Awaiting external response
+- `This-Week` - Must complete by Friday
+- `🔴 Active Client` - Paying retainer or active engagement
+- `💵 MRR` - Monthly recurring revenue
+- `🔄 Migration` - WordPress to modern stack
+- `Cloudflare` - Uses Cloudflare infrastructure
+
+### Daily Workflow with Linear
+
+**1. Morning Standup** (via Linear):
+   - Review "In Progress" issues
+   - Add daily plan comment to active issues
+   - Move priority items from "Backlog" to "Todo"
+
+**2. During Development**:
+   - Update issue status: Backlog → Todo → In Progress
+   - Add progress comments with completed tasks
+   - Reference Linear IDs in Git commits: `[SHU-XXX]`
+   - Document blockers immediately in comments
+
+**3. End of Day**:
+   - Add progress comment with summary
+   - Move completed issues to "Done"
+   - Update parent issue (SHU-9) with overall progress
+
+**4. Weekly Review** (Fridays):
+   - Close completed issues
+   - Review blocked issues
+   - Plan next week's priorities
+   - Sync with PROJECT_STATUS.md (documentation only)
+
+### Linear MCP Tools Available
+
+**Issue Management**:
+- `mcp__linear-server__get_issue` - Get issue details by ID
+- `mcp__linear-server__list_issues` - List with filters
+- `mcp__linear-server__create_issue` - Create new issues
+- `mcp__linear-server__update_issue` - Update status, assignee, etc.
+
+**Comments**:
+- `mcp__linear-server__list_comments` - Read issue comments
+- `mcp__linear-server__create_comment` - Add progress updates
+
+**Organization**:
+- `mcp__linear-server__list_teams` - List teams
+- `mcp__linear-server__list_projects` - List projects
+- `mcp__linear-server__list_users` - List workspace users
+- `mcp__linear-server__list_cycles` - List team cycles
+
+**Labels & Status**:
+- `mcp__linear-server__list_issue_labels` - Available labels
+- `mcp__linear-server__create_issue_label` - Create labels
+- `mcp__linear-server__list_issue_statuses` - Workflow statuses
+
+**Documentation**:
+- `mcp__linear-server__search_documentation` - Search Linear docs
+
+### Git Integration with Linear
+
+**Branch Naming** (Linear auto-generates):
+```
+kevin/shu-9-hiv-connect-client-testing-follow-up-support
+```
+
+**Commit Message Format** (include Linear ID):
+```
+[SHU-XXX] Brief description of change
+
+Detailed explanation:
+- What changed
+- Why it changed
+- How to test
+
+Related: SHU-XXX (for related issues)
+Part of: SHU-9 (for parent issue)
+
+🤖 Generated with [Claude Code](https://claude.com/claude-code)
+
+Co-Authored-By: Claude <noreply@anthropic.com>
+```
+
+**Examples**:
+```
+[SHU-203] Add FAQ collection and page
+
+Backend Changes:
+- Created FAQs.ts collection with 6 categories
+- Added auto-rebuild hooks
+
+Frontend Changes:
+- Created /faq page with accordion UI
+- Added fetchFAQs() API utility
+
+Part of: SHU-9 (Client Testing Follow-up & Support)
+```
+
+**Auto-Linking**:
+- Mention `SHU-XXX` in commit → Linear automatically links commit
+- Use `Closes SHU-XXX` → Auto-closes issue on merge to main
+- Use `Related SHU-XXX` → Links without closing
+
+### Comment Templates
+
+**Progress Update**:
+```markdown
+## Progress Update - [Date]
+
+**Completed**:
+- ✅ Task 1 description
+- ✅ Task 2 description
+
+**In Progress**:
+- 🔄 Task 3 (50% complete)
+
+**Blockers**:
+- ⏸️ Waiting on [person/decision]
+
+**Next Steps**:
+- Start Task 4
+- Follow up with [person]
+
+**Links**:
+- Commit: [hash] (auto-linked if [SHU-XXX] in message)
+- Deployment: [URL]
+```
+
+**Implementation Complete**:
+```markdown
+## ✅ Implementation Complete
+
+**Status**: [Feature name] fully implemented and deployed
+
+### Backend Implementation (commit `abc123`)
+- Created [collection/feature]
+- Key changes: [list]
+
+### Frontend Implementation (commit `def456`)
+- Created [pages/components]
+- Key changes: [list]
+
+### ✅ Acceptance Criteria (All Met)
+- ✅ Criterion 1
+- ✅ Criterion 2
+
+### Known Limitations
+- [List any known issues or deferred work]
+
+### Next Steps
+- [What comes next]
+
+### Git References
+- Backend: [commit URL]
+- Frontend: [commit URL]
+```
+
+### Client Communication via Linear
+
+**SHU-9 Type Issues** (client-visible):
+- Keep descriptions client-friendly
+- Use checklists for transparency
+- Add comments for progress updates
+- Tag with `Follow-Up` when awaiting client response
+- Set due dates aligned with client expectations
+- Include testing URLs and access info (in secure comments)
+
+**Internal Issues**:
+- Technical descriptions are fine
+- Reference code paths and files
+- Include debugging notes
+- Link to technical documentation
+
+### Linear vs. Markdown Files
+
+**Linear** (Single Source of Truth for Active Work):
+- ✅ Current tasks and priorities
+- ✅ Progress tracking
+- ✅ Blockers and decisions
+- ✅ Time estimates
+- ✅ Client deliverables
+- ✅ Git commit links
+
+**Markdown Files** (Documentation Only):
+- `CLAUDE.md` - Project context and technical docs
+- `PROJECT_STATUS.md` - Deployment status, architecture
+- `SESSION_*.md` - Historical session summaries
+- `DEPLOYMENT.md` - Deployment procedures
+- `PROJECT_TODO.md` - **DEPRECATED** (use Linear instead)
+
+### Transition from MD to Linear
+
+**Before (Pre-Dec 9, 2025)**:
+- PROJECT_TODO.md had 150+ tasks across 6 phases
+- Mixed tracking between MD files and Linear
+- No central progress visibility
+
+**After (Dec 9, 2025 onwards)**:
+- All active tasks tracked in Linear
+- MD files for documentation only
+- Single source of truth in Linear
+- Real-time progress visibility
+- Better client communication
+
+### Benefits of Linear Integration
+
+**For Development**:
+- ✅ Real-time progress tracking
+- ✅ Automatic Git commit linking
+- ✅ Dependency management (parent/child issues)
+- ✅ Time tracking (estimates vs. actuals)
+- ✅ Context preservation in comments
+
+**For Client Communication**:
+- ✅ Transparent progress visibility
+- ✅ Clear deliverables with checklists
+- ✅ Status updates in one place
+- ✅ Easy handoff documentation
+
+**For Team Collaboration**:
+- ✅ Clear task ownership
+- ✅ Workload visibility
+- ✅ Handoff documentation
+- ✅ Knowledge retention
+
+**For Project Management**:
+- ✅ Velocity tracking
+- ✅ Bottleneck identification
+- ✅ Scope management
+- ✅ Timeline tracking
+
+### Current SHU-9 Sub-Issues
+
+**✅ Completed (4/8 - 50%)**:
+1. SHU-203 - FAQ Collection + Page
+2. SHU-205 - Navigation Restructure
+3. SHU-206 - External Resources Page
+4. SHU-204 - Pages Collection
+
+**⏸️ Blocked - Need Decisions (2/8)**:
+5. SHU-202 - Events/Calendar (BLOCKER - blocking launch)
+6. SHU-207 - Membership Application (needs clarification)
+
+**📅 Deferred to 2026 (2/8)**:
+7. SHU-208 - Full Events System (~$2K value)
+8. SHU-209 - Site Search (~$800 value)
+
+---
+
 ## Development Workflow
 
 ### Branching Model
@@ -1904,47 +2253,80 @@ Fixes #56
 
 ## Next Steps
 
-### Immediate Tasks (This Week)
+**🎯 All active tasks are tracked in Linear**: https://linear.app/shuffle-studio/issue/SHU-9
 
-1. **Backend Repository Setup**:
-   - [ ] Create new GitHub repository: `mshtga-backend`
-   - [ ] Initialize PayloadCMS project
-   - [ ] Set up Cloudflare account and resources
+The following goals provide context, but **Linear is the single source of truth** for current priorities and status.
 
-2. **Cloudflare Infrastructure**:
-   - [ ] Create R2 buckets (staging + production)
-   - [ ] Create D1 databases (staging + production)
-   - [ ] Configure wrangler.toml
+### Immediate Tasks (This Week - Dec 9-13, 2025)
 
-3. **Collection Definition**:
-   - [ ] Define Providers collection (match TypeScript types)
-   - [ ] Define Resources collection
-   - [ ] Define Blog collection
-   - [ ] Define PDF Library collection
-   - [ ] Define Globals collection
+**See Linear SHU-9 for details**:
+
+**Option A - Address Blockers** (Recommended):
+- SHU-202: José + Kevin decide Events/Calendar approach
+- SHU-207: José clarify Membership Application with Terri
+- Implement based on decisions
+
+**Option B - Content Population** (Can do in parallel):
+- Add 10-15 FAQs to test FAQ page
+- Add 10-15 external resources (POZ, HRSA, CDC, etc.)
+- Create sample Planning Council page
+- Client training on new features
+
+**Option C - Production Readiness**:
+- Install Lexical rich text renderer for FAQ/Pages
+- Add i18n translation keys for navigation labels
+- Final QA and testing
+- Performance optimization
 
 ### Short-Term Goals (Next 2-3 Weeks)
 
-- [ ] Complete Phase 1: Backend Setup
-- [ ] Complete Phase 2: Data Migration
-- [ ] Start Phase 3: Frontend Integration
-- [ ] Deploy backend to staging environment
-- [ ] Test API endpoints thoroughly
+**Tracked in Linear** - Major milestones:
+- Complete all SHU-9 sub-issues (currently 4/8 done)
+- Resolve Events/Calendar blocker
+- Launch site to production
+- Client handoff and training
 
-### Medium-Term Goals (Next 1-2 Months)
+### Medium-Term Goals (Q1 2026)
 
-- [ ] Complete Phase 3: Frontend Integration
-- [ ] Complete Phase 4: New Features (blog, resources)
-- [ ] Complete Phase 5: Infrastructure & Deployment
-- [ ] Launch to production
+**Will create Linear issues when ready**:
+- Content population (providers, resources, blog posts)
+- Client self-service enablement
+- Performance optimization
+- Analytics implementation
 
-### Long-Term Goals (2026)
+### Long-Term Goals (2026+)
 
-- [ ] Complete Phase 6: v2 Scaffolding
-- [ ] Implement Events and Calendar features
-- [ ] Implement Volunteer/Donor Centers
-- [ ] Implement Impact Dashboard
-- [ ] Implement Analytics tracking
+**Deferred Linear issues** (SHU-208, SHU-209, future):
+- Full Events System with registration (~$2K value)
+- Site Search with Pagefind (~$800 value)
+- Volunteer/Donor Centers
+- Impact Dashboard
+- Advanced analytics tracking
+
+---
+
+## ⚠️ Important: Using Linear
+
+**For all active work**:
+1. Check Linear first: https://linear.app/shuffle-studio/issue/SHU-9
+2. Update issue status as you work
+3. Add progress comments daily
+4. Reference Linear IDs in Git commits: `[SHU-XXX]`
+5. Mark issues "Done" when complete
+
+**This CLAUDE.md file is for**:
+- Project context and background
+- Technical architecture documentation
+- Environment setup instructions
+- Development workflow guidelines
+- Historical reference
+
+**This CLAUDE.md file is NOT for**:
+- Active task tracking (use Linear)
+- Progress updates (use Linear comments)
+- Blockers and decisions (use Linear)
+- Time estimates (use Linear)
+- Current priorities (use Linear)
 
 ---
 
@@ -1952,32 +2334,43 @@ Fixes #56
 
 **For Future Claude Sessions**:
 
-This section will be updated after each major session to document progress and blockers.
+This section provides a quick overview of the project's current state and recent progress. **For detailed task tracking, always check Linear first** (https://linear.app/shuffle-studio/issue/SHU-9).
 
-### Last Session: December 2, 2025
+### Last Session: December 9, 2025
 
-**Completed**:
-- ✅ Comprehensive project scan
-- ✅ Analyzed all existing documentation
-- ✅ Created this `claude.md` file with complete project context
+**Completed (All Quick Wins - 4/8 SHU-9 Sub-Issues)**:
+- ✅ SHU-203: FAQ Collection + Page (2-3 hours)
+- ✅ SHU-205: Navigation Restructure (1-2 hours)
+- ✅ SHU-206: External Resources Page (1-2 hours)
+- ✅ SHU-204: Pages Collection (3-4 hours)
+- ✅ Transitioned all project tracking to Linear
+- ✅ Updated CLAUDE.md with Linear integration details
 
-**Current Status**:
-- Frontend is production-ready on Netlify
-- Backend has not been started yet
-- Ready to begin Phase 1: Backend Setup
+**Deployments**:
+- ✅ Backend: PayloadCMS on Cloudflare Workers (production)
+- ✅ Frontend: Astro on Cloudflare Pages (production)
+- ✅ 8 collections active: Providers, Resources, Blog, PDFLibrary, FAQs, Pages, Tags, Media
+- ✅ Auto-rebuild system working (2-3 min on content changes)
 
-**Next Tasks**:
-- Create backend repository
-- Set up Cloudflare infrastructure
-- Define PayloadCMS collections
+**Current Status (50% Complete)**:
+- Linear SHU-9: 4/8 sub-issues done
+- All in-scope quick wins delivered
+- 2 sub-issues blocked (Events/Calendar, Membership Application)
+- 2 sub-issues deferred to 2026 (Full Events, Site Search)
 
-**Blockers**:
-- None currently
+**Current Blockers**:
+- 🔴 **SHU-202 (Events/Calendar)**: Blocking launch - client requirement, needs José + Kevin decision
+- 🟡 **SHU-207 (Membership Application)**: Needs José to clarify requirements with Terri
 
-**Questions for Kevin**:
-1. Confirm repository structure preference (monorepo vs. separate repos)
-2. Confirm Cloudflare as primary hosting platform
-3. Confirm timeline expectations for Phase 1-2
+**Next Tasks** (see Linear for details):
+- Option A: Address blockers (José + Kevin discuss Events, José clarify Membership)
+- Option B: Content population (add FAQs, resources, sample pages)
+- Option C: Production readiness (rich text renderer, final QA)
+
+**Where to Find Active Work**:
+- **Linear**: https://linear.app/shuffle-studio/issue/SHU-9 (Single source of truth)
+- **Git Commits**: Reference `[SHU-XXX]` in commit messages
+- **This File**: Documentation and context only (not for active tracking)
 
 ---
 
