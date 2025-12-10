@@ -25,6 +25,8 @@ jobs:
 
       - name: Build static site
         run: npm run build
+        env:
+          PUBLIC_API_URL: https://hivconnect-backend.shuffle-seo.workers.dev/api
 
       - name: Deploy to Cloudflare Pages
         uses: cloudflare/wrangler-action@v3
