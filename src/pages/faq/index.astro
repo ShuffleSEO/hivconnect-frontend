@@ -5,7 +5,17 @@ import Footer from '../../components/ui/Footer.astro';
 import { fetchFAQsByCategory } from '../../lib/api';
 
 // Fetch FAQs grouped by category
-const faqsByCategory = await fetchFAQsByCategory('english'); // TODO: Add language detection
+// Handle API failures gracefully during build time
+let faqsByCategory: Record<string, any[]> = {};
+let apiError = false;
+
+try {
+  faqsByCategory = await fetchFAQsByCategory('english'); // TODO: Add language detection
+} catch (error) {
+  console.warn('Failed to fetch FAQs during build, will show empty state:', error);
+  apiError = true;
+  faqsByCategory = {}; // Empty object for empty state
+}
 
 const title = "Frequently Asked Questions";
 const description = "Find answers to common questions about HIV testing, treatment, services, and resources in Central New Jersey.";

@@ -5,7 +5,17 @@ import Footer from '../../components/ui/Footer.astro';
 import { fetchResourcesByCategory } from '../../lib/api';
 
 // Fetch external resources grouped by category
-const resourcesByCategory = await fetchResourcesByCategory('external_link', 'english'); // TODO: Add language detection
+// Handle API failures gracefully during build time
+let resourcesByCategory: Record<string, any[]> = {};
+let apiError = false;
+
+try {
+  resourcesByCategory = await fetchResourcesByCategory('external_link', 'english'); // TODO: Add language detection
+} catch (error) {
+  console.warn('Failed to fetch resources during build, will show empty state:', error);
+  apiError = true;
+  resourcesByCategory = {}; // Empty object for empty state
+}
 
 const title = "HIV/AIDS Resources & Information";
 const description = "External resources, educational materials, and helpful links from trusted organizations for HIV/AIDS information, support, and advocacy.";

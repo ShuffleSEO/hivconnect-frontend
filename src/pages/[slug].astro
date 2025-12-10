@@ -14,8 +14,8 @@ export async function getStaticPaths() {
       props: { page },
     }));
   } catch (error) {
-    console.error('Error generating static paths for pages:', error);
-    return [];
+    console.warn('Failed to fetch pages during build, no dynamic pages will be generated:', error);
+    return []; // Return empty array - no dynamic pages generated
   }
 }
 
