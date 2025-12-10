@@ -2,7 +2,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Header from '../../components/ui/Header.astro';
 import Footer from '../../components/ui/Footer.astro';
-import { fetchFAQsByCategory } from '../../lib/api';
+import { fetchFAQsByCategory, extractTextFromLexical } from '../../lib/api';
 
 // Fetch FAQs grouped by category
 // Handle API failures gracefully during build time
@@ -96,9 +96,7 @@ const categoryLabels: Record<string, string> = {
                     </summary>
 
                     <div class="faq-answer p-6 pt-0 text-gray-700 prose prose-sm max-w-none">
-                      <!-- Rich text answer - would need a rich text renderer here -->
-                      <!-- For now, rendering as plain text. In production, use a Lexical or similar renderer -->
-                      <div set:html={JSON.stringify(faq.answer)} />
+                      <p>{extractTextFromLexical(faq.answer)}</p>
                     </div>
                   </details>
                 ))}

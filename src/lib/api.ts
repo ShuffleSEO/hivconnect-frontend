@@ -8,12 +8,35 @@ export interface FAQ {
   id: number;
   question: string;
   slug: string;
-  answer: any; // Rich text content
+  answer: any; // Rich text content (Lexical format)
   category: string;
   order: number;
   language: 'english' | 'spanish' | 'both';
   tags?: Array<{ id: number; name: string }>;
   status: 'draft' | 'published' | 'archived';
+}
+
+// Helper function to extract plain text from Lexical rich text format
+export function extractTextFromLexical(lexicalData: any): string {
+  if (!lexicalData || !lexicalData.root || !lexicalData.root.children) {
+    return '';
+  }
+
+  let text = '';
+  const processNode = (node: any): void => {
+    if (node.type === 'text') {
+      text += node.text;
+    } else if (node.children && Array.isArray(node.children)) {
+      node.children.forEach((child: any) => processNode(child));
+      // Add paragraph breaks
+      if (node.type === 'paragraph' && text && !text.endsWith('\n\n')) {
+        text += '\n\n';
+      }
+    }
+  };
+
+  lexicalData.root.children.forEach((child: any) => processNode(child));
+  return text.trim();
 }
 
 interface FAQResponse {
