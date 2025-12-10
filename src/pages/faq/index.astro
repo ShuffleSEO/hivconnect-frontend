@@ -1,0 +1,198 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/ui/Header.astro';
+import Footer from '../../components/ui/Footer.astro';
+import { fetchFAQsByCategory } from '../../lib/api';
+
+// Fetch FAQs grouped by category
+const faqsByCategory = await fetchFAQsByCategory('english'); // TODO: Add language detection
+
+const title = "Frequently Asked Questions";
+const description = "Find answers to common questions about HIV testing, treatment, services, and resources in Central New Jersey.";
+
+// Category labels for display
+const categoryLabels: Record<string, string> = {
+  'general': 'General Information',
+  'services': 'Services & Programs',
+  'planning-council': 'Planning Council',
+  'resources': 'Resources & Support',
+  'testing': 'HIV Testing',
+  'treatment': 'Treatment & Care',
+};
+---
+
+<BaseLayout title={title} description={description}>
+  <Header />
+
+  <main id="main-content" class="flex-1">
+    <!-- Hero Section -->
+    <section class="relative bg-gradient-to-br from-primary-600 to-secondary-600 py-16">
+      <div class="absolute inset-0 opacity-30">
+        <img
+          src="/HIV Treatment Website/Shutterstock Pictures/shutterstock_576882187.jpg"
+          alt=""
+          class="w-full h-full object-cover"
+          loading="eager"
+        />
+      </div>
+      <div class="absolute inset-0 bg-black bg-opacity-50"></div>
+      <div class="absolute inset-0 bg-gradient-to-b from-black/30 via-black/40 to-black/50"></div>
+
+      <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-4xl mx-auto">
+          <h1 class="text-4xl lg:text-5xl font-bold text-white mb-6 drop-shadow-lg">
+            Frequently Asked Questions
+          </h1>
+          <p class="text-xl lg:text-2xl text-white mb-8 drop-shadow-md">
+            Get answers to common questions about HIV/AIDS services, testing, treatment, and support resources.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ Content -->
+    <section class="py-16 bg-gray-50">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        {Object.keys(faqsByCategory).length === 0 ? (
+          <div class="text-center py-12">
+            <p class="text-xl text-gray-600">
+              No FAQs available at this time. Please check back soon or <a href="/contact" class="text-primary-600 hover:text-primary-700 underline">contact us</a> with your questions.
+            </p>
+          </div>
+        ) : (
+          Object.entries(faqsByCategory).map(([category, faqs]) => (
+            <div class="mb-12">
+              <h2 class="text-2xl lg:text-3xl font-bold text-gray-900 mb-6 pb-3 border-b-2 border-primary-600">
+                {categoryLabels[category] || category}
+              </h2>
+
+              <div class="space-y-4">
+                {faqs.map((faq, index) => (
+                  <details
+                    class="faq-item bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300 hover:shadow-lg"
+                    key={faq.id}
+                  >
+                    <summary class="faq-question cursor-pointer p-6 font-semibold text-gray-900 text-lg flex items-center justify-between hover:bg-gray-50 transition-colors duration-200">
+                      <span class="pr-8">{faq.question}</span>
+                      <svg
+                        class="faq-icon w-6 h-6 text-primary-600 flex-shrink-0 transition-transform duration-300"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                        aria-hidden="true"
+                      >
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                      </svg>
+                    </summary>
+
+                    <div class="faq-answer p-6 pt-0 text-gray-700 prose prose-sm max-w-none">
+                      <!-- Rich text answer - would need a rich text renderer here -->
+                      <!-- For now, rendering as plain text. In production, use a Lexical or similar renderer -->
+                      <div set:html={JSON.stringify(faq.answer)} />
+                    </div>
+                  </details>
+                ))}
+              </div>
+            </div>
+          ))
+        )}
+
+        <!-- Contact CTA -->
+        <div class="mt-16 bg-white rounded-lg shadow-lg p-8 text-center">
+          <h2 class="text-2xl font-bold text-gray-900 mb-4">
+            Can't Find Your Answer?
+          </h2>
+          <p class="text-gray-600 mb-6">
+            Our team is here to help. Contact us directly and we'll get back to you as soon as possible.
+          </p>
+          <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <a href="/contact" class="btn-primary">
+              Contact Us
+            </a>
+            <a href="tel:732-937-5288" class="btn-outline">
+              Call Us: (732) 937-5288
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</BaseLayout>
+
+<style>
+  /* FAQ Accordion Styling */
+  .faq-item[open] .faq-icon {
+    transform: rotate(180deg);
+  }
+
+  .faq-item summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .faq-item summary {
+    list-style: none;
+  }
+
+  .faq-item[open] summary {
+    border-bottom: 1px solid #e5e7eb;
+    margin-bottom: 1.5rem;
+  }
+
+  /* Smooth height transition for accordion */
+  .faq-answer {
+    animation: slideDown 0.3s ease-out;
+  }
+
+  @keyframes slideDown {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Prose styling for rich text content */
+  .prose {
+    line-height: 1.75;
+  }
+
+  .prose p {
+    margin-bottom: 1rem;
+  }
+
+  .prose ul, .prose ol {
+    margin-left: 1.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .prose li {
+    margin-bottom: 0.5rem;
+  }
+
+  .prose a {
+    color: #dc2626;
+    text-decoration: underline;
+  }
+
+  .prose a:hover {
+    color: #991b1b;
+  }
+
+  .prose strong {
+    font-weight: 600;
+    color: #111827;
+  }
+
+  .prose h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-top: 1.5rem;
+    margin-bottom: 0.75rem;
+    color: #111827;
+  }
+</style>

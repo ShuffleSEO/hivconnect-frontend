@@ -3,6 +3,60 @@ import type { Provider } from '../types/provider';
 
 const API_BASE_URL = import.meta.env.PUBLIC_API_URL || 'http://localhost:3000/api';
 
+// FAQ type definitions
+export interface FAQ {
+  id: number;
+  question: string;
+  slug: string;
+  answer: any; // Rich text content
+  category: string;
+  order: number;
+  language: 'english' | 'spanish' | 'both';
+  tags?: Array<{ id: number; name: string }>;
+  status: 'draft' | 'published' | 'archived';
+}
+
+interface FAQResponse {
+  docs: FAQ[];
+  totalDocs: number;
+  limit: number;
+  totalPages: number;
+  page: number;
+  hasNextPage: boolean;
+}
+
+// Resource type definitions
+export interface Resource {
+  id: number;
+  title: string;
+  slug: string;
+  description: any; // Rich text content
+  category: string;
+  pdfFile?: {
+    id: number;
+    url: string;
+    filename: string;
+    mimeType: string;
+    filesize: number;
+  };
+  externalLink?: string;
+  linkType: 'internal_pdf' | 'external_link';
+  tags?: Array<{ id: number; name: string }>;
+  language: 'english' | 'spanish' | 'both';
+  featured: boolean;
+  publishedDate: string;
+  status: 'draft' | 'published' | 'archived';
+}
+
+interface ResourceResponse {
+  docs: Resource[];
+  totalDocs: number;
+  limit: number;
+  totalPages: number;
+  page: number;
+  hasNextPage: boolean;
+}
+
 // PayloadCMS provider structure (from backend)
 interface PayloadProvider {
   id: number;
@@ -228,4 +282,123 @@ export async function fetchProviderBySlug(slug: string): Promise<Provider | null
     console.error(`Error fetching provider ${slug}:`, error);
     return null;
   }
+}
+
+// Fetch all published FAQs, sorted by order and category
+export async function fetchFAQs(language: 'english' | 'spanish' | 'both' = 'english'): Promise<FAQ[]> {
+  try {
+    const allFAQs: FAQ[] = [];
+    let page = 1;
+    let hasMore = true;
+
+    // Fetch all pages, filtering for published FAQs only
+    while (hasMore) {
+      // Build language filter - show FAQs that match language or are marked as 'both'
+      const languageFilter = language === 'both'
+        ? ''
+        : `&where[or][0][language][equals]=${language}&where[or][1][language][equals]=both`;
+
+      const response = await fetch(
+        `${API_BASE_URL}/faqs?where[status][equals]=published${languageFilter}&limit=100&page=${page}&sort=order`
+      );
+
+      if (!response.ok) {
+        throw new Error(`Failed to fetch FAQs: ${response.statusText}`);
+      }
+
+      const data: FAQResponse = await response.json();
+      allFAQs.push(...data.docs);
+
+      hasMore = data.hasNextPage;
+      page++;
+    }
+
+    return allFAQs;
+  } catch (error) {
+    console.error('Error fetching FAQs:', error);
+    throw error;
+  }
+}
+
+// Fetch FAQs grouped by category
+export async function fetchFAQsByCategory(language: 'english' | 'spanish' | 'both' = 'english'): Promise<Record<string, FAQ[]>> {
+  const faqs = await fetchFAQs(language);
+
+  // Group FAQs by category
+  return faqs.reduce((grouped, faq) => {
+    const category = faq.category;
+    if (!grouped[category]) {
+      grouped[category] = [];
+    }
+    grouped[category].push(faq);
+    return grouped;
+  }, {} as Record<string, FAQ[]>);
+}
+
+// Fetch all published resources
+export async function fetchResources(
+  linkType?: 'internal_pdf' | 'external_link',
+  language: 'english' | 'spanish' | 'both' = 'english'
+): Promise<Resource[]> {
+  try {
+    const allResources: Resource[] = [];
+    let page = 1;
+    let hasMore = true;
+
+    // Build filters
+    const linkTypeFilter = linkType ? `&where[linkType][equals]=${linkType}` : '';
+    const languageFilter = language === 'both'
+      ? ''
+      : `&where[or][0][language][equals]=${language}&where[or][1][language][equals]=both`;
+
+    // Fetch all pages, filtering for published resources
+    while (hasMore) {
+      const response = await fetch(
+        `${API_BASE_URL}/resources?where[status][equals]=published${linkTypeFilter}${languageFilter}&limit=100&page=${page}&sort=-publishedDate`
+      );
+
+      if (!response.ok) {
+        throw new Error(`Failed to fetch resources: ${response.statusText}`);
+      }
+
+      const data: ResourceResponse = await response.json();
+      allResources.push(...data.docs);
+
+      hasMore = data.hasNextPage;
+      page++;
+    }
+
+    return allResources;
+  } catch (error) {
+    console.error('Error fetching resources:', error);
+    throw error;
+  }
+}
+
+// Fetch only external link resources (for External Resources page)
+export async function fetchExternalResources(language: 'english' | 'spanish' | 'both' = 'english'): Promise<Resource[]> {
+  return fetchResources('external_link', language);
+}
+
+// Fetch only PDF resources (for PDF Library page)
+export async function fetchPDFResources(language: 'english' | 'spanish' | 'both' = 'english'): Promise<Resource[]> {
+  return fetchResources('internal_pdf', language);
+}
+
+// Fetch resources grouped by category
+export async function fetchResourcesByCategory(
+  linkType?: 'internal_pdf' | 'external_link',
+  language: 'english' | 'spanish' | 'both' = 'english'
+): Promise<Record<string, Resource[]>> {
+  const resources = await fetchResources(linkType, language);
+
+  // Group resources by category
+  return resources.reduce((grouped, resource) => {
+    const category = resource.category;
+    if (!grouped[category]) {
+      grouped[category] = [];
+    }
+    grouped[category].push(resource);
+    return grouped;
+  }, {} as Record<string, Resource[]>);
 }

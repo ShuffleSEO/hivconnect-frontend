@@ -1,0 +1,211 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/ui/Header.astro';
+import Footer from '../../components/ui/Footer.astro';
+import { fetchResourcesByCategory } from '../../lib/api';
+
+// Fetch external resources grouped by category
+const resourcesByCategory = await fetchResourcesByCategory('external_link', 'english'); // TODO: Add language detection
+
+const title = "HIV/AIDS Resources & Information";
+const description = "External resources, educational materials, and helpful links from trusted organizations for HIV/AIDS information, support, and advocacy.";
+
+// Category labels and icons
+const categoryInfo: Record<string, { label: string; icon: string; description: string }> = {
+  'testing': {
+    label: 'Testing Resources',
+    icon: 'M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01',
+    description: 'Find HIV testing sites, home testing kits, and testing information'
+  },
+  'treatment': {
+    label: 'Treatment & Care',
+    icon: 'M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z',
+    description: 'Medical treatment information, medication guides, and care resources'
+  },
+  'support': {
+    label: 'Support Services',
+    icon: 'M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z',
+    description: 'Support groups, counseling, and community services'
+  },
+  'prevention': {
+    label: 'Prevention & PrEP',
+    icon: 'M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z',
+    description: 'Prevention strategies, PrEP information, and risk reduction'
+  },
+  'legal': {
+    label: 'Legal Support',
+    icon: 'M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3',
+    description: 'Legal rights, advocacy, and legal assistance resources'
+  },
+  'financial': {
+    label: 'Financial Assistance',
+    icon: 'M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z',
+    description: 'Financial aid programs, medication assistance, and insurance help'
+  },
+  'housing': {
+    label: 'Housing Resources',
+    icon: 'M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6',
+    description: 'Housing assistance, emergency shelter, and rental support'
+  },
+  'other': {
+    label: 'Other Resources',
+    icon: 'M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253',
+    description: 'Additional helpful resources and information'
+  },
+};
+---
+
+<BaseLayout title={title} description={description}>
+  <Header />
+
+  <main id="main-content" class="flex-1">
+    <!-- Hero Section -->
+    <section class="relative bg-gradient-to-br from-primary-600 to-secondary-600 py-16">
+      <div class="absolute inset-0 opacity-30">
+        <img
+          src="/HIV Treatment Website/Shutterstock Pictures/shutterstock_576882187.jpg"
+          alt=""
+          class="w-full h-full object-cover"
+          loading="eager"
+        />
+      </div>
+      <div class="absolute inset-0 bg-black bg-opacity-50"></div>
+      <div class="absolute inset-0 bg-gradient-to-b from-black/30 via-black/40 to-black/50"></div>
+
+      <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-4xl mx-auto">
+          <h1 class="text-4xl lg:text-5xl font-bold text-white mb-6 drop-shadow-lg">
+            HIV/AIDS Resources & Information
+          </h1>
+          <p class="text-xl lg:text-2xl text-white mb-8 drop-shadow-md">
+            Trusted external resources from leading organizations, advocacy groups, and educational institutions.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Resources Content -->
+    <section class="py-16 bg-gray-50">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {Object.keys(resourcesByCategory).length === 0 ? (
+          <div class="text-center py-12">
+            <div class="w-16 h-16 bg-gray-200 rounded-full flex items-center justify-center mx-auto mb-4">
+              <svg class="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+              </svg>
+            </div>
+            <p class="text-xl text-gray-600 mb-6">
+              Resources are currently being added. Please check back soon!
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+              <a href="/find-services" class="btn-primary">
+                Find Local Services
+              </a>
+              <a href="/contact" class="btn-outline">
+                Contact Us
+              </a>
+            </div>
+          </div>
+        ) : (
+          Object.entries(resourcesByCategory).map(([category, resources]) => {
+            const info = categoryInfo[category] || categoryInfo['other'];
+            return (
+              <div class="mb-16">
+                <div class="flex items-center mb-8">
+                  <div class="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center mr-4">
+                    <svg class="w-6 h-6 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={info.icon} />
+                    </svg>
+                  </div>
+                  <div>
+                    <h2 class="text-2xl lg:text-3xl font-bold text-gray-900">
+                      {info.label}
+                    </h2>
+                    <p class="text-gray-600 mt-1">
+                      {info.description}
+                    </p>
+                  </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {resources.map((resource) => (
+                    <a
+                      href={resource.externalLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="resource-card bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 p-6 flex flex-col group"
+                    >
+                      <div class="flex items-start justify-between mb-3">
+                        <h3 class="text-lg font-semibold text-gray-900 group-hover:text-primary-600 transition-colors">
+                          {resource.title}
+                        </h3>
+                        <svg class="w-5 h-5 text-gray-400 group-hover:text-primary-600 flex-shrink-0 ml-2 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                        </svg>
+                      </div>
+
+                      {/* Rich text description - simplified for MVP */}
+                      <p class="text-gray-600 text-sm mb-4 flex-grow line-clamp-3">
+                        {/* TODO: Add rich text renderer */}
+                        {typeof resource.description === 'string' ? resource.description : 'Click to learn more about this resource.'}
+                      </p>
+
+                      <div class="flex items-center text-sm text-primary-600 font-medium group-hover:text-primary-700">
+                        <span>Visit Website</span>
+                        <svg class="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                        </svg>
+                      </div>
+                    </a>
+                  ))}
+                </div>
+              </div>
+            );
+          })
+        )}
+      </div>
+    </section>
+
+    <!-- Need Help CTA -->
+    <section class="bg-white py-16">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <h2 class="text-3xl font-bold text-gray-900 mb-4">
+          Need Personal Assistance?
+        </h2>
+        <p class="text-xl text-gray-600 mb-8">
+          Our case managers can help you find and access the resources you need.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a href="/find-services" class="btn-primary">
+            Find Local Services
+          </a>
+          <a href="/contact" class="btn-secondary">
+            Contact Us
+          </a>
+          <a href="tel:732-937-5288" class="btn-outline">
+            Call: (732) 937-5288
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</BaseLayout>
+
+<style>
+  .resource-card {
+    border: 1px solid #e5e7eb;
+  }
+
+  .resource-card:hover {
+    border-color: #dc2626;
+  }
+
+  .line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+</style>
