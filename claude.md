@@ -2133,63 +2133,109 @@ Part of: SHU-9 (Client Testing Follow-up & Support)
 
 ## Development Workflow
 
+### Git & GitHub Permissions
+
+**IMPORTANT**: Kevin has granted Claude Code permission to commit and push to GitHub autonomously.
+
+**Guidelines for Auto-Commit/Push**:
+
+✅ **DO auto-commit and push** in these scenarios:
+- Completed features with all tests passing
+- Bug fixes that are ready for production
+- Documentation updates
+- Configuration changes that don't break functionality
+- After deploying changes (keep git in sync with deployments)
+- When work is at a natural stopping point and tests pass
+- Migrations that have been successfully applied
+
+❌ **ASK before committing** in these scenarios:
+- Breaking changes or major refactors
+- Changes that require user configuration
+- Experimental or unfinished features
+- When multiple implementation approaches are possible
+
+**Commit Best Practices**:
+- Use clear, descriptive commit messages with Linear IDs ([SHU-XXX])
+- Follow conventional commit format
+- Include "what changed" and "why" in commit body
+- Reference Linear issues in commits
+- Include co-authorship tag
+
+**Push Timing**:
+- Push immediately after committing (keep remote in sync)
+- Don't batch up multiple commits before pushing
+- Push after each logical unit of work is complete
+
+**Auto-Commit Policy** (Effective December 11, 2025):
+- Claude Code has permission to commit and push without asking
+- Use judgment: commit when work is complete and stable
+- Document what was committed in the response to user
+- User trusts Claude Code to make good decisions on commit timing
+
 ### Branching Model
 
 ```
-main (production)
-  ├── dev (staging)
-  │   ├── feature/provider-migration
-  │   ├── feature/blog-pages
-  │   └── feature/resource-library
+main (production only)
+  ├── feature/event-maps
+  ├── feature/new-collection
   └── hotfix/security-patch
 ```
 
 **Branch Rules**:
-- `main` = production, protected, requires PR review by Kevin
-- `dev` = staging, auto-deploys to staging environment
-- `feature/*` = feature branches, created from `dev`, merged back to `dev`
-- `hotfix/*` = urgent fixes, created from `main`, merged to both `main` and `dev`
+- `main` = production, all commits deploy to live site
+- `feature/*` = feature branches, created from `main`, merged back to `main`
+- `hotfix/*` = urgent fixes, created from `main`, merged back to `main`
+- **No dev/staging branches** (per deployment policy)
+
+**Workflow**:
+1. Create feature branch from `main`
+2. Develop and test locally
+3. Commit and push feature branch (or push directly to `main` for small changes)
+4. Deploy to production when ready
+5. Frontend auto-rebuilds via webhook when backend content changes
 
 ### Pull Request Process
 
-1. **Developer creates feature branch**:
+**Note**: PRs are optional for this project. Can push directly to `main` for most changes.
+
+**When to use PRs** (optional):
+- Major architectural changes
+- Breaking changes
+- When you want code review before deploying
+
+**Simple workflow** (most common):
+1. Make changes on `main` or feature branch
+2. Test locally
+3. Commit and push to `main`
+4. Changes deploy to production
+5. Frontend auto-rebuilds if backend content changed
+
+**PR workflow** (when needed):
+1. **Create feature branch**:
    ```bash
-   git checkout dev
-   git pull origin dev
-   git checkout -b feature/provider-migration
+   git checkout main
+   git pull origin main
+   git checkout -b feature/new-feature
    ```
 
-2. **Developer implements feature**:
+2. **Implement feature**:
    - Write code
-   - Write tests (if applicable)
-   - Update documentation
    - Test locally
+   - Update documentation
 
-3. **Developer creates PR**:
+3. **Create PR**:
    - Push branch to GitHub
-   - Create PR from `feature/provider-migration` to `dev`
-   - Fill out PR template:
-     - What changed?
-     - Why did it change?
-     - How to test?
-     - Screenshots (if UI changes)
+   - Create PR from `feature/new-feature` to `main`
+   - Fill out PR template with description
 
-4. **Kevin reviews PR**:
-   - Check code quality
-   - Check adherence to best practices
-   - Test functionality in review environment
+4. **Review** (if needed):
+   - Kevin reviews if significant changes
    - Approve or request changes
 
-5. **Merge to dev**:
+5. **Merge to main**:
    - Squash and merge (clean history)
-   - Auto-deploy to staging
-   - Test in staging environment
-
-6. **Merge to main** (for production release):
-   - Create PR from `dev` to `main`
-   - Kevin reviews and approves
-   - Merge to `main`
-   - Auto-deploy to production
+   - Delete feature branch
+   - Changes deploy to production
 
 ### Commit Message Format
 
