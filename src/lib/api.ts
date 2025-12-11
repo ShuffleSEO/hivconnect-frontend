@@ -522,3 +522,150 @@ export async function fetchPageBySlug(slug: string): Promise<Page | null> {
     return null;
   }
 }
+
+// Event type definitions
+export interface Event {
+  id: number;
+  title: string;
+  slug: string;
+  description: any; // Rich text content (Lexical format)
+  featuredImage?: {
+    id: number;
+    url: string;
+    alt?: string;
+  };
+  startDate: string;
+  endDate?: string;
+  location: {
+    type: 'in-person' | 'virtual' | 'hybrid';
+    venueName?: string;
+    address?: string;
+    city?: string;
+    state?: string;
+    zipCode?: string;
+    virtualLink?: string;
+  };
+  coordinates?: {
+    lat: number | null;
+    lng: number | null;
+  };
+  contactEmail?: string;
+  contactPhone?: string;
+  rsvpLink?: string;
+  category: string;
+  tags?: Array<{ id: number; name: string }>;
+  status: 'draft' | 'published' | 'cancelled';
+  featured: boolean;
+  createdAt: string;
+  updatedAt: string;
+}
+
+interface EventResponse {
+  docs: Event[];
+  totalDocs: number;
+  limit: number;
+  totalPages: number;
+  page: number;
+  hasNextPage: boolean;
+}
+
+// Fetch all published events
+export async function fetchEvents(
+  includeUpcoming: boolean = true,
+  includePast: boolean = false
+): Promise<Event[]> {
+  try {
+    const allEvents: Event[] = [];
+    let page = 1;
+    let hasMore = true;
+
+    // Build date filter based on flags
+    const now = new Date().toISOString();
+    let dateFilter = '';
+
+    if (includeUpcoming && !includePast) {
+      // Only upcoming events
+      dateFilter = `&where[startDate][greater_than_equal]=${now}`;
+    } else if (!includeUpcoming && includePast) {
+      // Only past events
+      dateFilter = `&where[startDate][less_than]=${now}`;
+    }
+    // If both true or both false, fetch all events (no date filter)
+
+    // Fetch all pages, filtering for published events only
+    while (hasMore) {
+      const response = await fetch(
+        `${API_BASE_URL}/events?where[status][equals]=published${dateFilter}&limit=100&page=${page}&sort=startDate`
+      );
+
+      if (!response.ok) {
+        throw new Error(`Failed to fetch events: ${response.statusText}`);
+      }
+
+      const data: EventResponse = await response.json();
+      allEvents.push(...data.docs);
+
+      hasMore = data.hasNextPage;
+      page++;
+    }
+
+    return allEvents;
+  } catch (error) {
+    console.error('Error fetching events:', error);
+    throw error;
+  }
+}
+
+// Fetch upcoming events only
+export async function fetchUpcomingEvents(): Promise<Event[]> {
+  return fetchEvents(true, false);
+}
+
+// Fetch past events only
+export async function fetchPastEvents(): Promise<Event[]> {
+  return fetchEvents(false, true);
+}
+
+// Fetch featured events
+export async function fetchFeaturedEvents(): Promise<Event[]> {
+  try {
+    const now = new Date().toISOString();
+    const response = await fetch(
+      `${API_BASE_URL}/events?where[status][equals]=published&where[featured][equals]=true&where[startDate][greater_than_equal]=${now}&limit=10&sort=startDate`
+    );
+
+    if (!response.ok) {
+      throw new Error(`Failed to fetch featured events: ${response.statusText}`);
+    }
+
+    const data: EventResponse = await response.json();
+    return data.docs;
+  } catch (error) {
+    console.error('Error fetching featured events:', error);
+    throw error;
+  }
+}
+
+// Fetch a single event by slug (only if published)
+export async function fetchEventBySlug(slug: string): Promise<Event | null> {
+  try {
+    const response = await fetch(
+      `${API_BASE_URL}/events?where[slug][equals]=${slug}&where[status][equals]=published&limit=1`
+    );
+
+    if (!response.ok) {
+      throw new Error(`Failed to fetch event: ${response.statusText}`);
+    }
+
+    const data: EventResponse = await response.json();
+
+    if (data.docs.length === 0) {
+      return null;
+    }
+
+    return data.docs[0];
+  } catch (error) {
+    console.error(`Error fetching event ${slug}:`, error);
+    return null;
+  }
+}
