@@ -9,6 +9,38 @@
 
 **Per explicit client directive**: This project does NOT use staging environments.
 
+### ⚠️ DO NOT CREATE NEW DEPLOYMENTS
+
+**NEVER create**:
+- ❌ New Cloudflare Pages projects for HIV Connect
+- ❌ New Cloudflare Workers for HIV Connect
+- ❌ Staging/dev/test environments
+- ❌ Additional D1 databases or R2 buckets
+
+**There is ONLY ONE backend and ONE frontend**:
+- Backend: `hivconnect-backend-production` (Cloudflare Worker)
+- Frontend: `hivconnect-frontend` (Cloudflare Pages)
+
+**If you need to deploy**, ALWAYS use:
+- Frontend: `CLOUDFLARE_ACCOUNT_ID=77936f7f1fecd5df8504adaf96fad1fb npx wrangler pages deploy dist --project-name=hivconnect-frontend`
+- Backend: `CLOUDFLARE_ENV=production pnpm run deploy:app`
+
+### Historical Note: Two-Backend Mistake (FIXED December 17, 2025)
+
+**What Happened**: Accidentally created TWO workers:
+- `hivconnect-backend` (staging - 10 deployments) - **DELETED**
+- `hivconnect-backend-production` (production - 3 deployments) - **KEPT**
+
+**Root Cause**: Deploying without `CLOUDFLARE_ENV=production` created the staging worker.
+
+**Fix Applied**:
+1. Deleted `hivconnect-backend` worker completely
+2. Updated all config files to reference production worker only
+3. Standardized environment variables to `PUBLIC_PAYLOAD_URL`
+4. Created this documentation to prevent recurrence
+
+**Lesson**: ALWAYS include `CLOUDFLARE_ENV=production` when deploying backend.
+
 ### Environments
 
 | Environment | Status | Purpose |
@@ -24,6 +56,31 @@
 - **CMS Admin**: https://hivconnect-backend-production.shuffle-seo.workers.dev/admin
 - **Database**: Cloudflare D1 (`hivconnect-db-production`)
 - **Storage**: Cloudflare R2 (`hivconnect-media-production`)
+
+### Environment Variable Standard
+
+**Frontend** (`/mshtga/.env`):
+```bash
+# ⚠️ IMPORTANT: This is the ONLY backend for HIV Connect
+PUBLIC_PAYLOAD_URL=https://hivconnect-backend-production.shuffle-seo.workers.dev
+```
+
+**Backend** (`/mshtga-backend-workers/wrangler.jsonc`):
+```json
+{
+  "vars": {
+    "PAYLOAD_PUBLIC_SERVER_URL": "https://hivconnect-backend-production.shuffle-seo.workers.dev"
+  }
+}
+```
+
+**Code Pattern** (all frontend files):
+```typescript
+const PAYLOAD_URL = import.meta.env.PUBLIC_PAYLOAD_URL || 'https://hivconnect-backend-production.shuffle-seo.workers.dev';
+const API_BASE_URL = `${PAYLOAD_URL}/api`;
+```
+
+**NEVER use**: `PUBLIC_API_URL`, `BACKEND_URL`, or other variations. Always use `PUBLIC_PAYLOAD_URL`.
 
 ---
 
