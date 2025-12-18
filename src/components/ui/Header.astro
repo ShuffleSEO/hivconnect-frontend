@@ -55,7 +55,7 @@ try {
           if (hasChildren) {
             // Dropdown menu item
             return (
-              <div class="relative dropdown-container" data-dropdown>
+              <div class="relative dropdown-container py-1" data-dropdown>
                 <button
                   class="text-gray-700 hover:text-primary-600 px-3 py-2 text-sm font-medium transition-colors flex items-center gap-1"
                   aria-expanded="false"
@@ -66,7 +66,7 @@ try {
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
                   </svg>
                 </button>
-                <div class="dropdown-menu absolute left-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 hidden" role="menu">
+                <div class="dropdown-menu absolute left-0 top-full w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 hidden" role="menu">
                   <div class="py-1">
                     {item.children.map((child: any) => (
                       <a
