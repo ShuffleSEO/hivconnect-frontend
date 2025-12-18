@@ -169,7 +169,8 @@ export default function PlanningCouncilForm() {
     if (validateStep(currentStep)) {
       try {
         // Get API base URL from environment
-        const API_BASE_URL = import.meta.env.PUBLIC_API_URL || 'https://hivconnect-backend.shuffle-seo.workers.dev/api';
+        const PAYLOAD_URL = import.meta.env.PUBLIC_PAYLOAD_URL || 'https://hivconnect-backend-production.shuffle-seo.workers.dev';
+        const API_BASE_URL = `${PAYLOAD_URL}/api`;
 
         // Transform flat formData into nested structure for PayloadCMS
         const payloadData = {

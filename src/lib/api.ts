@@ -1,7 +1,9 @@
 // API utilities for fetching data from PayloadCMS backend
 import type { Provider } from '../types/provider';
 
-const API_BASE_URL = import.meta.env.PUBLIC_API_URL || 'http://localhost:3000/api';
+// Use PUBLIC_PAYLOAD_URL (without /api suffix) for the base URL
+const PAYLOAD_URL = import.meta.env.PUBLIC_PAYLOAD_URL || 'https://hivconnect-backend-production.shuffle-seo.workers.dev';
+const API_BASE_URL = `${PAYLOAD_URL}/api`;
 
 // FAQ type definitions
 export interface FAQ {

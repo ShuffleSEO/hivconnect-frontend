@@ -8,7 +8,8 @@ import EventMap from '../../components/events/EventMap';
 export async function getStaticPaths() {
   try {
     // Fetch all published events (upcoming and past) for static generation
-    const API_BASE_URL = import.meta.env.PUBLIC_API_URL || 'https://hivconnect-backend.shuffle-seo.workers.dev/api';
+    const PAYLOAD_URL = import.meta.env.PUBLIC_PAYLOAD_URL || 'https://hivconnect-backend-production.shuffle-seo.workers.dev';
+    const API_BASE_URL = `${PAYLOAD_URL}/api`;
 
     const response = await fetch(
       `${API_BASE_URL}/events?where[status][equals]=published&limit=1000`
